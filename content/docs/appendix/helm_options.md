@@ -62,3 +62,57 @@ ui:
 ```
 
 ## Gargantua
+
+|Key|Default|Purpose|
+|---|-------|-------|
+|`gargantua.image`|`hobbyfarm/gargantua:[version]`|Image used for Gargantua|
+|`gargantua.logLevel`|`"0"`|Log level of Gargantua|
+|`gargantua.dynamicBaseNamePrefix`|`"dynamic"`|Name prefix for VMs provisioned using dynamic method|
+|`gargantua.scheduledBaseNamePrefix`|`"scheduled"`|Name prefix for VMs provisioned ahead of time (scheduled)|
+|`gargantua.apiPort`|`80`|The port on which Gargantua's API should be served|
+|`gargantua.webhook.containerPort`|`444`|Container port for CRD conversion webhook|
+|`gargantua.webhook.servicePort`|`443`|Service port for CRD conversion webhook. :warning:|
+
+ > :warning: This port should remain 443. See [this link](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#deploy-the-conversion-webhook-service) for more information.
+
+## Guacamole
+
+|Key|Default|Purpose|
+|---|-------|-------|
+|`guac.image`|undefined|Image used when deploying guac server for Windows RDP|
+
+## Shell
+
+|Key|Default|Purpose|
+|---|-------|-------|
+|`shell.replicas`|`1`|Number of replicas of the shell service to run|
+
+## Ingress
+
+|Key|Default|Purpose|
+|---|-------|-------|
+|`ingress.enabled`|`false`|Enable ingress
+|`ingress.annotations`|`{}`|Additional annotations for ingress|
+|`ingress.tls.enabled`|`true`|Enable TLS on ingress|
+|`ingress.tls.secrets.backend`|`backend-tls-secret`|TLS secret for backend ingress|
+|`ingress.tls.secrets.admin`|`admin-tls-secret`|TLS secret for admin ui ingress|
+|`ingress.tls.secrets.ui`|`ui-tls-secret`|TLS secret for ui ingress|
+
+## Seed
+
+> Seed will be deprecated in a future version, to be replaced with examples. 
+
+|Key|Default|Purpose|
+|---|-------|-------|
+|`seed.enabled`|`false`|Provides some preseed data (example resources)|
+
+## Terraform
+
+
+> :warning::warning::warning: Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues. 
+
+The options are not documented here as it is strongly inadvisable to use Terraform. Please instead use a provider-specific operator for VM provisioning. 
+
+## RancherVM
+
+> :warning::warning::warning: RancherVM is old, old, old, and seriously deprecated. Do not use this. It will be removed in a future version. 
