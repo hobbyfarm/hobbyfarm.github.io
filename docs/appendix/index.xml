@@ -1,0 +1,281 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm Documentation – Appendix</title><link>http://example.org/docs/appendix/</link><description>Recent content in Appendix on HobbyFarm Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/docs/appendix/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Helm Options</title><link>http://example.org/docs/appendix/helm_options/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/appendix/helm_options/</guid><description>
+&lt;p>This page contains a reference of the options available in the HobbyFarm Helm chart.&lt;/p>
+&lt;h2 id="admin-ui-options">Admin UI Options&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>admin.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/admin-ui:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for admin-ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.configMapName&lt;/code>&lt;/td>
+&lt;td>&lt;code>admin-config&lt;/code>&lt;/td>
+&lt;td>ConfigMap used to configure admin ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.title&lt;/code>&lt;/td>
+&lt;td>HobbyFarm Administration&lt;/td>
+&lt;td>Title of admin ui as seen in browser&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.favicon&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/favicon.png&lt;/code>&lt;/td>
+&lt;td>Path to the favicon to use for admin ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/rancher-labs-stacked-color.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo image as seen on admin ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.background&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/vault.jpg&lt;/code>&lt;/td>
+&lt;td>Path to large background image as seen on admin ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/logo.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo as seen in upper right corner of admin ui&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="ui-options">UI Options&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ui.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/ui:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.configMapName&lt;/code>&lt;/td>
+&lt;td>&lt;code>ui-config&lt;/code>&lt;/td>
+&lt;td>ConfigMap usedf to configure ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.title&lt;/code>&lt;/td>
+&lt;td>HobbyFarm Learn&lt;/td>
+&lt;td>Title of ui as seen in browser&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.favicon&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/favicon.png&lt;/code>&lt;/td>
+&lt;td>Path to the favicon to use for ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.login.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/rancher-labs-stacked-color.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo image as seen on ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.login.background&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/login_container_farm.svg&lt;/code>&lt;/td>
+&lt;td>Path to large background image as seen on ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/logo.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo as seen in upper right corner of ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.about.title&lt;/code>&lt;/td>
+&lt;td>&lt;code>About HobbyFarm&lt;/code>&lt;/td>
+&lt;td>Title of the about dropdown in ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.about.body&lt;/code>&lt;/td>
+&lt;td>`HobbyFarm is a browser-based technology training tool developed at github.com/hobbyfarm&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="uiconfigaboutbuttons">&lt;code>ui.config.about.buttons&lt;/code>&lt;/h3>
+&lt;p>This list allows for specification of custom buttons in the About modal of the HobbyFarm UI.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ui&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">about&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">buttons&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Example Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://github.com/hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Example Title 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://github.com/hobbyfarm/hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uiconfigcustom">&lt;code>ui.config.custom&lt;/code>&lt;/h3>
+&lt;p>This heredoc allows for specification of custom CSS to be applied to the UI.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ui&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">custom&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> .custom-css {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> background: none;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> }&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="gargantua">Gargantua&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gargantua.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/gargantua:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for Gargantua&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.logLevel&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;0&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Log level of Gargantua&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.dynamicBaseNamePrefix&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;dynamic&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Name prefix for VMs provisioned using dynamic method&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.scheduledBaseNamePrefix&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;scheduled&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Name prefix for VMs provisioned ahead of time (scheduled)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.apiPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>80&lt;/code>&lt;/td>
+&lt;td>The port on which Gargantua&amp;rsquo;s API should be served&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.webhook.containerPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>444&lt;/code>&lt;/td>
+&lt;td>Container port for CRD conversion webhook&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.webhook.servicePort&lt;/code>&lt;/td>
+&lt;td>&lt;code>443&lt;/code>&lt;/td>
+&lt;td>Service port for CRD conversion webhook. ⚠️&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>⚠️ This port should remain 443. See &lt;a href="https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#deploy-the-conversion-webhook-service">this link&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="guacamole">Guacamole&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>guac.image&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Image used when deploying guac server for Windows RDP&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="shell">Shell&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>shell.replicas&lt;/code>&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;td>Number of replicas of the shell service to run&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="ingress">Ingress&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ingress.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Enable ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;td>Additional annotations for ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;td>Enable TLS on ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.backend&lt;/code>&lt;/td>
+&lt;td>&lt;code>backend-tls-secret&lt;/code>&lt;/td>
+&lt;td>TLS secret for backend ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.admin&lt;/code>&lt;/td>
+&lt;td>&lt;code>admin-tls-secret&lt;/code>&lt;/td>
+&lt;td>TLS secret for admin ui ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.ui&lt;/code>&lt;/td>
+&lt;td>&lt;code>ui-tls-secret&lt;/code>&lt;/td>
+&lt;td>TLS secret for ui ingress&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="seed">Seed&lt;/h2>
+&lt;blockquote>
+&lt;p>Seed will be deprecated in a future version, to be replaced with examples.&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>seed.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Provides some preseed data (example resources)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="terraform">Terraform&lt;/h2>
+&lt;blockquote>
+&lt;p>⚠️⚠️⚠️ Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.&lt;/p>
+&lt;/blockquote>
+&lt;p>The options are not documented here as it is strongly inadvisable to use Terraform. Please instead use a provider-specific operator for VM provisioning.&lt;/p>
+&lt;h2 id="ranchervm">RancherVM&lt;/h2>
+&lt;blockquote>
+&lt;p>⚠️⚠️⚠️ RancherVM is old, old, old, and seriously deprecated. Do not use this. It will be removed in a future version.&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

@@ -1,0 +1,498 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm Documentation – HobbyFarm Documentation</title><link>http://example.org/docs/</link><description>Recent content on HobbyFarm Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/docs/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Prerequisites</title><link>http://example.org/docs/setup/prerequisites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/prerequisites/</guid><description>
+&lt;p>Generally speaking, all that is required to run HobbyFarm is a Kubernetes cluster with an ingress controller installed.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>HobbyFarm Version&lt;/th>
+&lt;th>Supported Kubernetes Version (up to)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>v2.0.1&lt;/td>
+&lt;td>v1.24.x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v2.0.0&lt;/td>
+&lt;td>v1.24.x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v1.0x&lt;/td>
+&lt;td>v1.23.x&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="helm">Helm&lt;/h2>
+&lt;p>Helm 3+ is required for installing HobbyFarm.&lt;/p>
+&lt;h2 id="rbac">RBAC&lt;/h2>
+&lt;p>In order to install HobbyFarm, it is required that you use an account with the following permissions:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>API Group&lt;/th>
+&lt;th>Resource&lt;/th>
+&lt;th>Verbs&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>apiextensions.k8s.io&lt;/td>
+&lt;td>CustomResourceDefinitions&lt;/td>
+&lt;td>Get, Create, Update&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>apps&lt;/td>
+&lt;td>Deployments&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>core&lt;/td>
+&lt;td>ConfigMaps, Secrets, Services&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>networking.k8s.io&lt;/td>
+&lt;td>Ingresses&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rbac.authorization.k8s.io&lt;/td>
+&lt;td>ClusterRoles, ClusterRoleBindings, Roles, RoleBindings&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>It is easiest to use a &lt;code>ClusterAdmin&lt;/code> account to accomplish the above, but if you need to use a specific role, here is a definition for your convenience.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">ClusterRole&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-install&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">rules&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;apiextensions.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;customresourcedefinitions&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;apps&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;deployments&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;configmaps&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;secrets&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;services&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;networking.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;ingresses&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;rbac.authorization.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;clusterroles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;clusterrolebindings&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;roles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;rolebindings&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Installation</title><link>http://example.org/docs/setup/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/installation/</guid><description>
+&lt;h2 id="1---add-helm-repository">1 - Add Helm Repository&lt;/h2>
+&lt;p>Add the required Helm repository:&lt;/p>
+&lt;p>&lt;code>helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm&lt;/code>&lt;/p>
+&lt;h2 id="2---examine-hostnames-and-prepare-certificates">2 - Examine hostnames and prepare Certificates&lt;/h2>
+&lt;p>HobbyFarm requires four domains to serve its traffic:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Domain Example&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>api.your-hobbyfarm.com&lt;/td>
+&lt;td>API &amp;amp; Controller Hosting&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>admin.your-hobbyfarm.com&lt;/td>
+&lt;td>Administrative Interface&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>learn.your-hobbyfarm.com&lt;/td>
+&lt;td>End-User Learning Interface&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>shell.your-hobbyfarm.com&lt;/td>
+&lt;td>WebSocket Shell Endpoint&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Prior to installation of HobbyFarm you will need to create these entries in your DNS server(s) and point them to your load balancer, ingress endpoint, etc. Documentation of that process is outside the scope of this document.&lt;/p>
+&lt;blockquote>
+&lt;p>You are not required to adhere to these specifix prefixes (e.g. api, admin). You may choose your own.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>⚠️ While it &lt;em>may&lt;/em> work to host HobbyFarm at multiple sub-paths (e.g. your-hobbyfarm.io/learn) this is not currently a tested configuration.&lt;/p>
+&lt;/blockquote>
+&lt;p>HobbyFarm uses ingress for its web traffic and if TLS is enabled it will make use of certificates referenced via the ingress resource. You can specify the secret(s) that contains the key and certificate via the following &lt;code>values.yaml&lt;/code> keys:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">tls&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">secrets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">backend-tls-secret &lt;/span> &lt;span style="color:#75715e"># replace with your own&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin-tls-secret &lt;/span> &lt;span style="color:#75715e"># can be the same for each&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">ui-tls-secret &lt;/span> &lt;span style="color:#75715e"># e.g. if you are using *.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hostnames&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">api.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">shell.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">learn.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Please ensure that each certificate corresponds to the correct hostname as specified in &lt;code>values.yaml&lt;/code>. For example, if you define a secret (as named in the example above) of &lt;code>backend-tls-secret&lt;/code>, make sure the certificate in this secret is valid for &lt;code>api.your-hobbyfarm.com&lt;/code>. Wildcard certificates &lt;em>are&lt;/em> acceptable.&lt;/p>
+&lt;h2 id="2---customize-values-file">2 - Customize Values File&lt;/h2>
+&lt;p>There are several options available in the &lt;code>values.yaml&lt;/code> file for this helm chart. Please refer to the &lt;a href="appendix/helm_options.md">helm options&lt;/a> document for a full reference of these values.&lt;/p>
+&lt;h2 id="3---create-namespace">3 - Create Namespace&lt;/h2>
+&lt;p>Create a namespace of your choice in which to install HobbyFarm. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create namespace hobbyfarm-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4---install-hobbyfarm">4 - Install HobbyFarm&lt;/h2>
+&lt;p>Install HobbyFarm using a values file that you have created, or by specifying your chosen options using Helm&amp;rsquo;s &lt;code>--set&lt;/code> flags.&lt;/p>
+&lt;p>For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set ingress.tls.enabled&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5---complete">5 - Complete&lt;/h2>
+&lt;p>Installation should be complete at this point. Please proceed to &lt;a href="setup/post_install.md">post-install setup&lt;/a>.&lt;/p></description></item><item><title>Docs: Post-Install Setup</title><link>http://example.org/docs/setup/post_install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/post_install/</guid><description>
+&lt;h2 id="initial-admin-user">Initial Admin User&lt;/h2>
+&lt;p>The initial admin username is &lt;code>admin&lt;/code> and password is &lt;code>hobbyfarm&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ Make sure to change the password after your initial login.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="initial-vm-template">Initial VM Template&lt;/h2>
+&lt;p>Before you can provision virtual machines, you must first define a &lt;code>VirtualMachineTemplate&lt;/code>. A virtual machine template is a provider-agnostic representation of a template for a VM. It is used to schedule resources across different providers using a common definition.&lt;/p>
+&lt;p>See &lt;a href="http://example.org/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
+&lt;h2 id="heading">&lt;/h2></description></item><item><title>Docs: Environment</title><link>http://example.org/docs/architecture/resources/environment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/environment/</guid><description>
+&lt;p>An &lt;code>Environment&lt;/code> defines specific implementation details on how HobbyFarm connects to a provider for scheduling virtual machines. An environment resource contains configuration information such as where provider credentials are stored, what image to use when creating a VM, or how much capacity a provider has for a specific type of VM.&lt;/p>
+&lt;p>Here&amp;rsquo;s an example environment manifest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">sample-environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">burst_capable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">burst_count_capacity&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">capacity_mode&lt;/span>: &lt;span style="color:#ae81ff">count&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">count_capacity&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">500&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">display_name&lt;/span>: &lt;span style="color:#ae81ff">sample-environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment_specifics&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cred_secret&lt;/span>: &lt;span style="color:#ae81ff">sample-environment-creds&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">region&lt;/span>: &lt;span style="color:#ae81ff">us-east-1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">subnet-09823djk&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vpc_security_group_id&lt;/span>: &lt;span style="color:#ae81ff">sg-09823iwedlijqd39&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">provider&lt;/span>: &lt;span style="color:#ae81ff">aws&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">template_mapping&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ami-098230498234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">size&lt;/span>: &lt;span style="color:#ae81ff">t3.medium&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ws_endpoint&lt;/span>: &lt;span style="color:#ae81ff">ws.your-hobbyfarm.io&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="burst_capable">&lt;code>burst_capable&lt;/code>&lt;/h3>
+&lt;p>Bursting was the original name given to HobbyFarm&amp;rsquo;s capability to dynamically provision VMs. Setting &lt;code>spec.burst_capable&lt;/code> to &lt;code>true&lt;/code> on an environment means that this environment is tolerant of dynamically created VMs.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. External provisioners generally do not distinguish between ahead-of-time (AOT) provisioning and dynamic or on-demand provisioning. Thus an environment may not need to define this property at all. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/236">https://github.com/hobbyfarm/hobbyfarm/issues/236&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="burst_count_capacity">&lt;code>burst_count_capacity&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]int&lt;/code> designed to inform HobbyFarm how much capacity is available for dynamic provisioning in an environment. For dynamic provisioning to work, administrators need to set a count of the number of provisionable VM templates in this map.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. It is confusing to set the capacity of an environment in two locations. Further, removal of the concept of &amp;ldquo;bursting&amp;rdquo; from HobbyFarm may render this field useless. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/236">https://github.com/hobbyfarm/hobbyfarm/issues/236&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="capacity_mode">&lt;code>capacity_mode&lt;/code>&lt;/h3>
+&lt;p>Possible values: &lt;code>count&lt;/code> and &lt;code>resource&lt;/code>&lt;/p>
+&lt;p>The capacity mode of an environment determines whether HobbyFarm schedules VMs based on how many VMs are already provisioned, or how much consumption there is of the basic resources (cpu, memory, storage).&lt;/p>
+&lt;p>Practical usage almost always sets the value of this field to &lt;code>count&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on the &lt;code>count&lt;/code> strategy and do not utilize &lt;code>resource&lt;/code>. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/237">https://github.com/hobbyfarm/hobbyfarm/issues/237&lt;/a>.&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: Helm Options</title><link>http://example.org/docs/appendix/helm_options/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/appendix/helm_options/</guid><description>
+&lt;p>This page contains a reference of the options available in the HobbyFarm Helm chart.&lt;/p>
+&lt;h2 id="admin-ui-options">Admin UI Options&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>admin.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/admin-ui:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for admin-ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.configMapName&lt;/code>&lt;/td>
+&lt;td>&lt;code>admin-config&lt;/code>&lt;/td>
+&lt;td>ConfigMap used to configure admin ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.title&lt;/code>&lt;/td>
+&lt;td>HobbyFarm Administration&lt;/td>
+&lt;td>Title of admin ui as seen in browser&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.favicon&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/favicon.png&lt;/code>&lt;/td>
+&lt;td>Path to the favicon to use for admin ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/rancher-labs-stacked-color.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo image as seen on admin ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.background&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/vault.jpg&lt;/code>&lt;/td>
+&lt;td>Path to large background image as seen on admin ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/logo.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo as seen in upper right corner of admin ui&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="ui-options">UI Options&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ui.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/ui:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.configMapName&lt;/code>&lt;/td>
+&lt;td>&lt;code>ui-config&lt;/code>&lt;/td>
+&lt;td>ConfigMap usedf to configure ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.title&lt;/code>&lt;/td>
+&lt;td>HobbyFarm Learn&lt;/td>
+&lt;td>Title of ui as seen in browser&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.favicon&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/favicon.png&lt;/code>&lt;/td>
+&lt;td>Path to the favicon to use for ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.login.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/rancher-labs-stacked-color.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo image as seen on ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.login.background&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/login_container_farm.svg&lt;/code>&lt;/td>
+&lt;td>Path to large background image as seen on ui login page&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/logo.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo as seen in upper right corner of ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.about.title&lt;/code>&lt;/td>
+&lt;td>&lt;code>About HobbyFarm&lt;/code>&lt;/td>
+&lt;td>Title of the about dropdown in ui&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.about.body&lt;/code>&lt;/td>
+&lt;td>`HobbyFarm is a browser-based technology training tool developed at github.com/hobbyfarm&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="uiconfigaboutbuttons">&lt;code>ui.config.about.buttons&lt;/code>&lt;/h3>
+&lt;p>This list allows for specification of custom buttons in the About modal of the HobbyFarm UI.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ui&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">about&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">buttons&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Example Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://github.com/hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Example Title 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://github.com/hobbyfarm/hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uiconfigcustom">&lt;code>ui.config.custom&lt;/code>&lt;/h3>
+&lt;p>This heredoc allows for specification of custom CSS to be applied to the UI.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ui&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">custom&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> .custom-css {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> background: none;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> }&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="gargantua">Gargantua&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gargantua.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/gargantua:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for Gargantua&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.logLevel&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;0&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Log level of Gargantua&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.dynamicBaseNamePrefix&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;dynamic&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Name prefix for VMs provisioned using dynamic method&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.scheduledBaseNamePrefix&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;scheduled&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Name prefix for VMs provisioned ahead of time (scheduled)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.apiPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>80&lt;/code>&lt;/td>
+&lt;td>The port on which Gargantua&amp;rsquo;s API should be served&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.webhook.containerPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>444&lt;/code>&lt;/td>
+&lt;td>Container port for CRD conversion webhook&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.webhook.servicePort&lt;/code>&lt;/td>
+&lt;td>&lt;code>443&lt;/code>&lt;/td>
+&lt;td>Service port for CRD conversion webhook. ⚠️&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>⚠️ This port should remain 443. See &lt;a href="https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#deploy-the-conversion-webhook-service">this link&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="guacamole">Guacamole&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>guac.image&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Image used when deploying guac server for Windows RDP&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="shell">Shell&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>shell.replicas&lt;/code>&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;td>Number of replicas of the shell service to run&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="ingress">Ingress&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ingress.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Enable ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;td>Additional annotations for ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;td>Enable TLS on ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.backend&lt;/code>&lt;/td>
+&lt;td>&lt;code>backend-tls-secret&lt;/code>&lt;/td>
+&lt;td>TLS secret for backend ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.admin&lt;/code>&lt;/td>
+&lt;td>&lt;code>admin-tls-secret&lt;/code>&lt;/td>
+&lt;td>TLS secret for admin ui ingress&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.ui&lt;/code>&lt;/td>
+&lt;td>&lt;code>ui-tls-secret&lt;/code>&lt;/td>
+&lt;td>TLS secret for ui ingress&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="seed">Seed&lt;/h2>
+&lt;blockquote>
+&lt;p>Seed will be deprecated in a future version, to be replaced with examples.&lt;/p>
+&lt;/blockquote>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>seed.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Provides some preseed data (example resources)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="terraform">Terraform&lt;/h2>
+&lt;blockquote>
+&lt;p>⚠️⚠️⚠️ Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.&lt;/p>
+&lt;/blockquote>
+&lt;p>The options are not documented here as it is strongly inadvisable to use Terraform. Please instead use a provider-specific operator for VM provisioning.&lt;/p>
+&lt;h2 id="ranchervm">RancherVM&lt;/h2>
+&lt;blockquote>
+&lt;p>⚠️⚠️⚠️ RancherVM is old, old, old, and seriously deprecated. Do not use this. It will be removed in a future version.&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
+&lt;p>A &lt;code>VirtualMachineTemplate&lt;/code> is a provider-agnostic representation of a template for a VM. It allows HobbyFarm to schedule resources across multiple providers while providing a common definition for content creators.&lt;/p>
+&lt;p>Here&amp;rsquo;s a sample virtual machine manifest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">VirtualMachineTemplate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Example VMTemplate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-2204&lt;/span> &lt;span style="color:#75715e"># general reference, not specific identifier&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cpu&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">memory&lt;/span>: &lt;span style="color:#ae81ff">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">storage&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a &lt;code>t3.medium&lt;/code> whereas in Azure it may correspond to &lt;code>Standard_D2_v2&lt;/code>. It is up to each &lt;code>Environment&lt;/code> to determine how to implement a &lt;code>VirtualMachineTemplate&lt;/code>.&lt;/p></description></item></channel></rss>

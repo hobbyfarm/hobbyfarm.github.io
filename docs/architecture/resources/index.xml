@@ -1,0 +1,61 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm Documentation – Resources</title><link>http://example.org/docs/architecture/resources/</link><description>Recent content in Resources on HobbyFarm Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/docs/architecture/resources/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Environment</title><link>http://example.org/docs/architecture/resources/environment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/environment/</guid><description>
+&lt;p>An &lt;code>Environment&lt;/code> defines specific implementation details on how HobbyFarm connects to a provider for scheduling virtual machines. An environment resource contains configuration information such as where provider credentials are stored, what image to use when creating a VM, or how much capacity a provider has for a specific type of VM.&lt;/p>
+&lt;p>Here&amp;rsquo;s an example environment manifest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">sample-environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">burst_capable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">burst_count_capacity&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">capacity_mode&lt;/span>: &lt;span style="color:#ae81ff">count&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">count_capacity&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">500&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">display_name&lt;/span>: &lt;span style="color:#ae81ff">sample-environment&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">environment_specifics&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cred_secret&lt;/span>: &lt;span style="color:#ae81ff">sample-environment-creds&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">region&lt;/span>: &lt;span style="color:#ae81ff">us-east-1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">subnet&lt;/span>: &lt;span style="color:#ae81ff">subnet-09823djk&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vpc_security_group_id&lt;/span>: &lt;span style="color:#ae81ff">sg-09823iwedlijqd39&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">provider&lt;/span>: &lt;span style="color:#ae81ff">aws&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">template_mapping&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ami-098230498234&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">size&lt;/span>: &lt;span style="color:#ae81ff">t3.medium&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ws_endpoint&lt;/span>: &lt;span style="color:#ae81ff">ws.your-hobbyfarm.io&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="burst_capable">&lt;code>burst_capable&lt;/code>&lt;/h3>
+&lt;p>Bursting was the original name given to HobbyFarm&amp;rsquo;s capability to dynamically provision VMs. Setting &lt;code>spec.burst_capable&lt;/code> to &lt;code>true&lt;/code> on an environment means that this environment is tolerant of dynamically created VMs.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. External provisioners generally do not distinguish between ahead-of-time (AOT) provisioning and dynamic or on-demand provisioning. Thus an environment may not need to define this property at all. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/236">https://github.com/hobbyfarm/hobbyfarm/issues/236&lt;/a>.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="burst_count_capacity">&lt;code>burst_count_capacity&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]int&lt;/code> designed to inform HobbyFarm how much capacity is available for dynamic provisioning in an environment. For dynamic provisioning to work, administrators need to set a count of the number of provisionable VM templates in this map.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. It is confusing to set the capacity of an environment in two locations. Further, removal of the concept of &amp;ldquo;bursting&amp;rdquo; from HobbyFarm may render this field useless. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/236">https://github.com/hobbyfarm/hobbyfarm/issues/236&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="capacity_mode">&lt;code>capacity_mode&lt;/code>&lt;/h3>
+&lt;p>Possible values: &lt;code>count&lt;/code> and &lt;code>resource&lt;/code>&lt;/p>
+&lt;p>The capacity mode of an environment determines whether HobbyFarm schedules VMs based on how many VMs are already provisioned, or how much consumption there is of the basic resources (cpu, memory, storage).&lt;/p>
+&lt;p>Practical usage almost always sets the value of this field to &lt;code>count&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on the &lt;code>count&lt;/code> strategy and do not utilize &lt;code>resource&lt;/code>. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/237">https://github.com/hobbyfarm/hobbyfarm/issues/237&lt;/a>.&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
+&lt;p>A &lt;code>VirtualMachineTemplate&lt;/code> is a provider-agnostic representation of a template for a VM. It allows HobbyFarm to schedule resources across multiple providers while providing a common definition for content creators.&lt;/p>
+&lt;p>Here&amp;rsquo;s a sample virtual machine manifest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">VirtualMachineTemplate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Example VMTemplate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-2204&lt;/span> &lt;span style="color:#75715e"># general reference, not specific identifier&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cpu&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">memory&lt;/span>: &lt;span style="color:#ae81ff">4096&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">storage&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a &lt;code>t3.medium&lt;/code> whereas in Azure it may correspond to &lt;code>Standard_D2_v2&lt;/code>. It is up to each &lt;code>Environment&lt;/code> to determine how to implement a &lt;code>VirtualMachineTemplate&lt;/code>.&lt;/p></description></item></channel></rss>

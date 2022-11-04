@@ -1,0 +1,158 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm Documentation – Setup</title><link>http://example.org/docs/setup/</link><description>Recent content in Setup on HobbyFarm Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/docs/setup/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Prerequisites</title><link>http://example.org/docs/setup/prerequisites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/prerequisites/</guid><description>
+&lt;p>Generally speaking, all that is required to run HobbyFarm is a Kubernetes cluster with an ingress controller installed.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>HobbyFarm Version&lt;/th>
+&lt;th>Supported Kubernetes Version (up to)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>v2.0.1&lt;/td>
+&lt;td>v1.24.x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v2.0.0&lt;/td>
+&lt;td>v1.24.x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>v1.0x&lt;/td>
+&lt;td>v1.23.x&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="helm">Helm&lt;/h2>
+&lt;p>Helm 3+ is required for installing HobbyFarm.&lt;/p>
+&lt;h2 id="rbac">RBAC&lt;/h2>
+&lt;p>In order to install HobbyFarm, it is required that you use an account with the following permissions:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>API Group&lt;/th>
+&lt;th>Resource&lt;/th>
+&lt;th>Verbs&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>apiextensions.k8s.io&lt;/td>
+&lt;td>CustomResourceDefinitions&lt;/td>
+&lt;td>Get, Create, Update&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>apps&lt;/td>
+&lt;td>Deployments&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>core&lt;/td>
+&lt;td>ConfigMaps, Secrets, Services&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>networking.k8s.io&lt;/td>
+&lt;td>Ingresses&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rbac.authorization.k8s.io&lt;/td>
+&lt;td>ClusterRoles, ClusterRoleBindings, Roles, RoleBindings&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>It is easiest to use a &lt;code>ClusterAdmin&lt;/code> account to accomplish the above, but if you need to use a specific role, here is a definition for your convenience.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">ClusterRole&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-install&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">rules&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;apiextensions.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;customresourcedefinitions&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;apps&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;deployments&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;configmaps&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;secrets&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;services&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;networking.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;ingresses&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;rbac.authorization.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;clusterroles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;clusterrolebindings&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;roles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;rolebindings&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Installation</title><link>http://example.org/docs/setup/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/installation/</guid><description>
+&lt;h2 id="1---add-helm-repository">1 - Add Helm Repository&lt;/h2>
+&lt;p>Add the required Helm repository:&lt;/p>
+&lt;p>&lt;code>helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm&lt;/code>&lt;/p>
+&lt;h2 id="2---examine-hostnames-and-prepare-certificates">2 - Examine hostnames and prepare Certificates&lt;/h2>
+&lt;p>HobbyFarm requires four domains to serve its traffic:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Domain Example&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>api.your-hobbyfarm.com&lt;/td>
+&lt;td>API &amp;amp; Controller Hosting&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>admin.your-hobbyfarm.com&lt;/td>
+&lt;td>Administrative Interface&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>learn.your-hobbyfarm.com&lt;/td>
+&lt;td>End-User Learning Interface&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>shell.your-hobbyfarm.com&lt;/td>
+&lt;td>WebSocket Shell Endpoint&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Prior to installation of HobbyFarm you will need to create these entries in your DNS server(s) and point them to your load balancer, ingress endpoint, etc. Documentation of that process is outside the scope of this document.&lt;/p>
+&lt;blockquote>
+&lt;p>You are not required to adhere to these specifix prefixes (e.g. api, admin). You may choose your own.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>⚠️ While it &lt;em>may&lt;/em> work to host HobbyFarm at multiple sub-paths (e.g. your-hobbyfarm.io/learn) this is not currently a tested configuration.&lt;/p>
+&lt;/blockquote>
+&lt;p>HobbyFarm uses ingress for its web traffic and if TLS is enabled it will make use of certificates referenced via the ingress resource. You can specify the secret(s) that contains the key and certificate via the following &lt;code>values.yaml&lt;/code> keys:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">tls&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">secrets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">backend-tls-secret &lt;/span> &lt;span style="color:#75715e"># replace with your own&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin-tls-secret &lt;/span> &lt;span style="color:#75715e"># can be the same for each&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">ui-tls-secret &lt;/span> &lt;span style="color:#75715e"># e.g. if you are using *.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hostnames&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">api.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">shell.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">learn.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Please ensure that each certificate corresponds to the correct hostname as specified in &lt;code>values.yaml&lt;/code>. For example, if you define a secret (as named in the example above) of &lt;code>backend-tls-secret&lt;/code>, make sure the certificate in this secret is valid for &lt;code>api.your-hobbyfarm.com&lt;/code>. Wildcard certificates &lt;em>are&lt;/em> acceptable.&lt;/p>
+&lt;h2 id="2---customize-values-file">2 - Customize Values File&lt;/h2>
+&lt;p>There are several options available in the &lt;code>values.yaml&lt;/code> file for this helm chart. Please refer to the &lt;a href="appendix/helm_options.md">helm options&lt;/a> document for a full reference of these values.&lt;/p>
+&lt;h2 id="3---create-namespace">3 - Create Namespace&lt;/h2>
+&lt;p>Create a namespace of your choice in which to install HobbyFarm. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create namespace hobbyfarm-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="4---install-hobbyfarm">4 - Install HobbyFarm&lt;/h2>
+&lt;p>Install HobbyFarm using a values file that you have created, or by specifying your chosen options using Helm&amp;rsquo;s &lt;code>--set&lt;/code> flags.&lt;/p>
+&lt;p>For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set ingress.tls.enabled&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5---complete">5 - Complete&lt;/h2>
+&lt;p>Installation should be complete at this point. Please proceed to &lt;a href="setup/post_install.md">post-install setup&lt;/a>.&lt;/p></description></item><item><title>Docs: Post-Install Setup</title><link>http://example.org/docs/setup/post_install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/post_install/</guid><description>
+&lt;h2 id="initial-admin-user">Initial Admin User&lt;/h2>
+&lt;p>The initial admin username is &lt;code>admin&lt;/code> and password is &lt;code>hobbyfarm&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ Make sure to change the password after your initial login.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="initial-vm-template">Initial VM Template&lt;/h2>
+&lt;p>Before you can provision virtual machines, you must first define a &lt;code>VirtualMachineTemplate&lt;/code>. A virtual machine template is a provider-agnostic representation of a template for a VM. It is used to schedule resources across different providers using a common definition.&lt;/p>
+&lt;p>See &lt;a href="http://example.org/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
+&lt;h2 id="heading">&lt;/h2></description></item></channel></rss>
