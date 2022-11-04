@@ -25,7 +25,7 @@ Prior to installation of HobbyFarm you will need to create these entries in your
 
 > You are not required to adhere to these specifix prefixes (e.g. api, admin). You may choose your own. 
 
-> While it *may* work to host HobbyFarm at multiple sub-paths (e.g. your-hobbyfarm.io/learn) this is not currently a tested configuration. 
+> :warning: While it *may* work to host HobbyFarm at multiple sub-paths (e.g. your-hobbyfarm.io/learn) this is not currently a tested configuration. 
 
 HobbyFarm uses ingress for its web traffic and if TLS is enabled it will make use of certificates referenced via the ingress resource. You can specify the secret(s) that contains the key and certificate via the following `values.yaml` keys:
 
@@ -48,3 +48,25 @@ Please ensure that each certificate corresponds to the correct hostname as speci
 ## 2 - Customize Values File
 
 There are several options available in the `values.yaml` file for this helm chart. Please refer to the [helm options](appendix/helm_options.md) document for a full reference of these values. 
+
+## 3 - Create Namespace
+
+Create a namespace of your choice in which to install HobbyFarm. For example:
+
+```bash
+kubectl create namespace hobbyfarm-system
+```
+
+## 4 - Install HobbyFarm 
+
+Install HobbyFarm using a values file that you have created, or by specifying your chosen options using Helm's `--set` flags.
+
+For example:
+
+```bash
+helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set ingress.tls.enabled=true
+```
+
+## 5 - Complete
+
+Installation should be complete at this point. Please proceed to [post-install setup](setup/post_install.md).
