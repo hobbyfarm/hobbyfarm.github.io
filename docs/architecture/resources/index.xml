@@ -42,7 +42,28 @@
 &lt;p>Practical usage almost always sets the value of this field to &lt;code>count&lt;/code>.&lt;/p>
 &lt;blockquote>
 &lt;p>This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on the &lt;code>count&lt;/code> strategy and do not utilize &lt;code>resource&lt;/code>. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/237">https://github.com/hobbyfarm/hobbyfarm/issues/237&lt;/a>.&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
+&lt;/blockquote>
+&lt;h3 id="count_capacity">&lt;code>count_capacity&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]int&lt;/code> designed to inform HobbyFarm about the capacity of the environment for a particular VM template. Each key in this map is the name of the VM template, and the value is the number of total VMs of that type that the environment can support.&lt;/p>
+&lt;p>For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">count_capacity&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">100&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The above example indicates that at any given point in time, the environment can support up to 100 total &lt;code>example-template&lt;/code> VMs.&lt;/p>
+&lt;p>This map should be set according to what resources an environment has. Take care to account for multiple templates and totals that will affect the amount of instances, cpu, memory, etc. that are consumed in the provider.&lt;/p>
+&lt;h3 id="display_name">&lt;code>display_name&lt;/code>&lt;/h3>
+&lt;p>Display name for the environment.&lt;/p>
+&lt;h3 id="environment_specifics">&lt;code>environment_specifics&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]string&lt;/code> designed to inform HobbyFarm about specific values for the environment. Entries in this map are utilized by VM provisioners for purposes such as security group ID, VPC, etc. The keys defined here are specific to the provisioner in use for the environment. Each provisioner may have specific values that are required.&lt;/p>
+&lt;h3 id="provider">&lt;code>provider&lt;/code>&lt;/h3>
+&lt;p>This field is used to determine what provisioner should be utilized for an environment.&lt;/p>
+&lt;p>The logic behind this field is somewhat complicated due to the original use of only Terraform for VM provisioning. The field originally informed HobbyFarm what Terraform module to use when provisioning.&lt;/p>
+&lt;p>With the advent of external provisioners this field now determines what external provisioner is used. When used in combination with the annotation &lt;code>hobbyfarm.io/provisioner: external&lt;/code>, a matching external provisioner (to the &lt;code>provider&lt;/code> field) will be used.&lt;/p>
+&lt;h3 id="template_mapping">&lt;code>template_mapping&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]string&lt;/code> allowing administrators to configure specific values for each VM template in use in the environment. Some common uses of this map are for elements such as instance size or AMI.&lt;/p>
+&lt;p>The keys defined here are specific to the provisioner in use for the environment. Each provisioner may have specific values that are required.&lt;/p>
+&lt;h3 id="ws_endpoint">&lt;code>ws_endpoint&lt;/code>&lt;/h3>
+&lt;p>This field defines which websocket (shell) endpoint should be used by end-user clients to open a shell to VMs provisioned in this environment. This field may be used in situations where a specific shell server needs to be utilized. An example of this may be an environment where the shell server needs to be in a DMZ in order to access VMs that are otherwise isolated from the main HobbyFarm install.&lt;/p></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
 &lt;p>A &lt;code>VirtualMachineTemplate&lt;/code> is a provider-agnostic representation of a template for a VM. It allows HobbyFarm to schedule resources across multiple providers while providing a common definition for content creators.&lt;/p>
 &lt;p>Here&amp;rsquo;s a sample virtual machine manifest:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
