@@ -31,7 +31,7 @@ A VM template is merely a representation of a possible VM implementation by a pr
 
 Identifier for the VM template. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
 
-> This field is deprecated and will be removed in a future release of HobbyFarm.
+> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
 
 ### `name`
 
