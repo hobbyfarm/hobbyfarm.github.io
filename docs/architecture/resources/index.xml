@@ -27,7 +27,7 @@
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
 &lt;p>Identifier for the course. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
 &lt;blockquote>
-&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
 &lt;p>Display name for the course as shown in both the end-user UI and admin UI. This field should be base64 encoded.&lt;/p>
@@ -151,7 +151,7 @@
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
 &lt;p>Identifier for the scenario. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
 &lt;blockquote>
-&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
 &lt;p>Display name for the scenario as shown in both the end-user UI and admin UI. This field should be base64 encoded.&lt;/p>
@@ -192,7 +192,7 @@
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
 &lt;p>Identifier for the user. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
 &lt;blockquote>
-&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="email">&lt;code>email&lt;/code>&lt;/h3>
 &lt;p>This field determines the username for the user. During original development of HobbyFarm it was assumed that all users would login using an email address and password. However, no validation in HobbyFarm or any UI forces an email to be used for this field.&lt;/p>
@@ -221,7 +221,7 @@
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
 &lt;p>Identifier for the VM template. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
 &lt;blockquote>
-&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
 &lt;/blockquote>
 &lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
 &lt;p>Display name for the VM template.&lt;/p>
