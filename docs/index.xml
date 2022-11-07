@@ -155,7 +155,61 @@
 &lt;h2 id="initial-vm-template">Initial VM Template&lt;/h2>
 &lt;p>Before you can provision virtual machines, you must first define a &lt;code>VirtualMachineTemplate&lt;/code>. A virtual machine template is a provider-agnostic representation of a template for a VM. It is used to schedule resources across different providers using a common definition.&lt;/p>
 &lt;p>See &lt;a href="http://example.org/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
-&lt;h2 id="heading">&lt;/h2></description></item><item><title>Docs: Environment</title><link>http://example.org/docs/architecture/resources/environment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/environment/</guid><description>
+&lt;h2 id="heading">&lt;/h2></description></item><item><title>Docs: Course</title><link>http://example.org/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/course/</guid><description>
+&lt;p>A course is a collection of scenarios meant to be consumed as a single unit or as a series of individual sessions (configurable). A course is useful in situations where you want to group related learnings together or provide a day&amp;rsquo;s worth of curriculum to students who can retain their VMs from scenario to scenario.&lt;/p>
+&lt;p>Here&amp;rsquo;s an example course:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Course&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-course&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-course&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">RXhhbXBsZSBDb3Vyc2UK&lt;/span> &lt;span style="color:#75715e"># &amp;#34;Example Course&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#ae81ff">VGhpcyBpcyBhbiBleGFtcGxlIGNvdXJzZQo=&lt;/span> &lt;span style="color:#75715e"># &amp;#34;This is an example course&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">scenarios&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">scenario-one&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">scenario-two&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">categories&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">cool-courses&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">day-one-content&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">virtual_machines&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">machine01&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-2004&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cluster01&lt;/span>: &lt;span style="color:#ae81ff">sles-15-sp4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keepalive_duration&lt;/span>: &lt;span style="color:#ae81ff">90m&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pause_duration&lt;/span>: &lt;span style="color:#ae81ff">4h&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pauseable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keep_vm&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
+&lt;p>Identifier for the course. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
+&lt;blockquote>
+&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
+&lt;p>Display name for the course as shown in both the end-user UI and admin UI. This field should be base64 encoded.&lt;/p>
+&lt;h3 id="description">&lt;code>description&lt;/code>&lt;/h3>
+&lt;p>A brief description of the course shown under the title in the end-user UI. This field should be base64 encoded.&lt;/p>
+&lt;h3 id="scenarios">&lt;code>scenarios&lt;/code>&lt;/h3>
+&lt;p>This field defines the scenarios that comprise the course. Scenarios are displayed in the order they are defined in this list. Each entry in this list is the &lt;code>name&lt;/code> (&lt;code>id&lt;/code>) of the scenario.&lt;/p>
+&lt;h3 id="categories">&lt;code>categories&lt;/code>&lt;/h3>
+&lt;p>This field lists categories to which the course belongs. Categories are used in the UI to group scenarios with common elements together.&lt;/p>
+&lt;h3 id="virtual_machines">&lt;code>virtual_machines&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]string&lt;/code> listing each virtual machine that is required for the course. The key is the name of the VM (as used in both the end-user UI &lt;em>and&lt;/em> the variable content in the steps), and the value is the VM template which &amp;ldquo;backs&amp;rdquo; that VM.&lt;/p>
+&lt;p>This field must define all VMs which are used for the scenarios that this course contains. A scenario may fail to execute if the course does not define a matching VM in this map for that scenario.&lt;/p>
+&lt;h3 id="keepalive_duration">&lt;code>keepalive_duration&lt;/code>&lt;/h3>
+&lt;p>This field defines the duration of time after which a user&amp;rsquo;s VMs can be destroyed by HobbyFarm upon user inactivity. In other words, if a user becomes inactive (their instance of the end-user UI stops sending pings to the server) this is the duration of time HobbyFarm will wait before reclaiming their resources.&lt;/p>
+&lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
+&lt;h3 id="pause_duration">&lt;code>pause_duration&lt;/code>&lt;/h3>
+&lt;p>This field defines the duration of time a user is able to pause their session. The end-user UI contains a button that allows (if enabled) a user to stop the keepalive countdown. This permits the user to take actions that otherwise may result in VM teardown, such as closing their laptop or disconnecting their Internet connection. If a user pauses their session, HobbyFarm will wait until this duration expires before once again reenabling the keepalive duration. Thus the maximum time a user can be paused &lt;em>and&lt;/em> inactive is the sum of &lt;code>keepalive_duration&lt;/code> and &lt;code>pause_duration&lt;/code>.&lt;/p>
+&lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
+&lt;h3 id="pauseable">&lt;code>pauseable&lt;/code>&lt;/h3>
+&lt;p>This field determines whether an end-user may pause their session. &lt;code>true&lt;/code> enables the pausing of sessions, &lt;code>false&lt;/code> disables it.&lt;/p>
+&lt;p>This toggle only applies to sessions that are using this course.&lt;/p>
+&lt;h3 id="keep_vm">&lt;code>keep_vm&lt;/code>&lt;/h3>
+&lt;p>This field defines whether HobbyFarm should spawn VMs independently for each scenario in the course, or a &amp;ldquo;persistent&amp;rdquo; set of VMs that live for the duration of the course and are reused in each scenario.&lt;/p>
+&lt;p>Setting this field to &lt;code>true&lt;/code> causes HobbyFarm to create persistent VMs that live for the life of the course.&lt;/p>
+&lt;p>Setting this field to &lt;code>false&lt;/code> causes HobbyFarm to spawn (or claim, depending on provisioning method) unique VMs for each scenario.&lt;/p></description></item><item><title>Docs: Environment</title><link>http://example.org/docs/architecture/resources/environment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/environment/</guid><description>
 &lt;p>An &lt;code>Environment&lt;/code> defines specific implementation details on how HobbyFarm connects to a provider for scheduling virtual machines. An environment resource contains configuration information such as where provider credentials are stored, what image to use when creating a VM, or how much capacity a provider has for a specific type of VM.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example environment manifest:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
@@ -500,7 +554,90 @@
 &lt;h2 id="ranchervm">RancherVM&lt;/h2>
 &lt;blockquote>
 &lt;p>⚠️⚠️⚠️ RancherVM is old, old, old, and seriously deprecated. Do not use this. It will be removed in a future version.&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
+&lt;/blockquote></description></item><item><title>Docs: Scenario</title><link>http://example.org/docs/architecture/resources/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/scenario/</guid><description>
+&lt;p>Scenarios are the main content resource in HobbyFarm. They contain a series of steps which are presented to the end-user during a session. Scenarios also configure what VM templates are necessary for use of the scenario.&lt;/p>
+&lt;p>Here&amp;rsquo;s an example scenario:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Scenario&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-scenario&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-scenario&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">RXhhbXBsZSBTY2VuYXJpbwo=&lt;/span> &lt;span style="color:#75715e"># &amp;#34;Example Scenario&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#ae81ff">VGhpcyBpcyBhbiBleGFtcGxlIHNjZW5hcmlvCg==&lt;/span> &lt;span style="color:#75715e"># &amp;#34;This is an example scenario&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">U3RlcCAxCg==&lt;/span> &lt;span style="color:#75715e"># &amp;#34;Step 1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">content&lt;/span>: &lt;span style="color:#ae81ff">VGhpcyBpcyB0aGUgY29udGVudCBmb3Igc3RlcCAxCg==&lt;/span> &lt;span style="color:#75715e"># &amp;#34;This is the content for step 1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">U3RlcCAyCg==&lt;/span> &lt;span style="color:#75715e"># &amp;#34;Step 2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">content&lt;/span>: &lt;span style="color:#ae81ff">VGhpcyBpcyB0aGUgY29udGVudCBmb3Igc3RlcCAyCg==&lt;/span> &lt;span style="color:#75715e"># &amp;#34;This is the content for step 2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">categories&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">learning&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">cloud-native&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tags&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">cool-scenario&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">example&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">great-content&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">virtual_machines&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">machine01&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-2004&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cluster01&lt;/span>: &lt;span style="color:#ae81ff">sles-15-sp4&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keepalive_duration&lt;/span>: &lt;span style="color:#ae81ff">90m &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pause_duration&lt;/span>: &lt;span style="color:#ae81ff">4h&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pauseable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
+&lt;p>Identifier for the scenario. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
+&lt;blockquote>
+&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
+&lt;p>Display name for the scenario as shown in both the end-user UI and admin UI. This field should be base64 encoded.&lt;/p>
+&lt;h3 id="description">&lt;code>description&lt;/code>&lt;/h3>
+&lt;p>A brief description of the scenario shown under the title in the end-user UI. This field should be base64 encoded.&lt;/p>
+&lt;h3 id="steps">&lt;code>steps&lt;/code>&lt;/h3>
+&lt;p>This field contains a list of steps which (in order) are the steps displayed to the end-user. Each step is an object containing two fields, &lt;code>title&lt;/code> and &lt;code>content&lt;/code>. The value of each of these fields should be base64-encoded.&lt;/p>
+&lt;h3 id="categories">&lt;code>categories&lt;/code>&lt;/h3>
+&lt;p>This field lists categories to which the scenario belongs. Categories are used in the UI to group scenarios with common elements together.&lt;/p>
+&lt;h3 id="tags">&lt;code>tags&lt;/code>&lt;/h3>
+&lt;p>This field lists tags applied to the scenario. Tags are used in the admin UI to quickly search for scenarios matching desired content.&lt;/p>
+&lt;h3 id="virtual_machines">&lt;code>virtual_machines&lt;/code>&lt;/h3>
+&lt;p>This field is a &lt;code>map[string]string&lt;/code> listing each virtual machine that is required for the scenario. The key is the name of the VM (as used in both the end-user UI &lt;em>and&lt;/em> the variable content in the steps), and the value is the VM template which &amp;ldquo;backs&amp;rdquo; that VM.&lt;/p>
+&lt;h3 id="keepalive_duration">&lt;code>keepalive_duration&lt;/code>&lt;/h3>
+&lt;p>This field defines the duration of time after which a user&amp;rsquo;s VMs can be destroyed by HobbyFarm upon user inactivity. In other words, if a user becomes inactive (their instance of the end-user UI stops sending pings to the server) this is the duration of time HobbyFarm will wait before reclaiming their resources.&lt;/p>
+&lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
+&lt;h3 id="pause_duration">&lt;code>pause_duration&lt;/code>&lt;/h3>
+&lt;p>This field defines the duration of time a user is able to pause their session. The end-user UI contains a button that allows (if enabled) a user to stop the keepalive countdown. This permits the user to take actions that otherwise may result in VM teardown, such as closing their laptop or disconnecting their Internet connection. If a user pauses their session, HobbyFarm will wait until this duration expires before once again reenabling the keepalive duration. Thus the maximum time a user can be paused &lt;em>and&lt;/em> inactive is the sum of &lt;code>keepalive_duration&lt;/code> and &lt;code>pause_duration&lt;/code>.&lt;/p>
+&lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
+&lt;h3 id="pauseable">&lt;code>pauseable&lt;/code>&lt;/h3>
+&lt;p>This field determines whether an end-user may pause their session. &lt;code>true&lt;/code> enables the pausing of sessions, &lt;code>false&lt;/code> disables it.&lt;/p>
+&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: User</title><link>http://example.org/docs/architecture/resources/user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/user/</guid><description>
+&lt;p>Users are represented in HobbyFarm via the &lt;code>User&lt;/code> resource.&lt;/p>
+&lt;p>Here&amp;rsquo;s an example of that resource:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">User&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-user&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-user&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">email&lt;/span>: &lt;span style="color:#ae81ff">user@example.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">$6p$01$LJsdflisn3d9jrlkjdf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_codes&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">event01&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">demo99&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;p>Most user accounts are created through registration via the end-user UI. You should only need to manually create or adjust accounts for users that need access to the admin UI.&lt;/p>
+&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
+&lt;p>Identifier for the user. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
+&lt;blockquote>
+&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="email">&lt;code>email&lt;/code>&lt;/h3>
+&lt;p>This field determines the username for the user. During original development of HobbyFarm it was assumed that all users would login using an email address and password. However, no validation in HobbyFarm or any UI forces an email to be used for this field.&lt;/p>
+&lt;p>&lt;em>Therefore it is acceptable to treat this field as a synonym for username.&lt;/em>&lt;/p>
+&lt;h3 id="password">&lt;code>password&lt;/code>&lt;/h3>
+&lt;p>This is the bcrypt&amp;rsquo;ed password of the user. This field is set when a user registers in the end-user UI. It can be changed via the admin UI.&lt;/p>
+&lt;h3 id="access_codes">&lt;code>access_codes&lt;/code>&lt;/h3>
+&lt;p>These are the access codes (not resource names, but actual codes) that the user has entered in the end-user UI. If matched to an access code these will grant access to content in HobbyFarm.&lt;/p></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
 &lt;p>A &lt;code>VirtualMachineTemplate&lt;/code> is a provider-agnostic representation of a template for a VM. It allows HobbyFarm to schedule resources across multiple providers while providing a common definition for content creators.&lt;/p>
 &lt;p>Here&amp;rsquo;s a sample virtual machine manifest:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
