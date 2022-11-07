@@ -211,9 +211,25 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Example VMTemplate&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ubuntu-2204&lt;/span> &lt;span style="color:#75715e"># general reference, not specific identifier&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ami-08921390234098&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cpu&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">memory&lt;/span>: &lt;span style="color:#ae81ff">4096&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">storage&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a &lt;code>t3.medium&lt;/code> whereas in Azure it may correspond to &lt;code>Standard_D2_v2&lt;/code>. It is up to each &lt;code>Environment&lt;/code> to determine how to implement a &lt;code>VirtualMachineTemplate&lt;/code>.&lt;/p></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a &lt;code>t3.medium&lt;/code> whereas in Azure it may correspond to &lt;code>Standard_D2_v2&lt;/code>. It is up to each &lt;code>Environment&lt;/code> to determine how to implement a &lt;code>VirtualMachineTemplate&lt;/code>.&lt;/p>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
+&lt;p>Identifier for the VM template. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
+&lt;blockquote>
+&lt;p>This field is deprecated and will be removed in a future release of HobbyFarm.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
+&lt;p>Display name for the VM template.&lt;/p>
+&lt;h3 id="image">&lt;code>image&lt;/code>&lt;/h3>
+&lt;p>Default value for the image to use when provisioning this VM. Acceptable values will depend upon the provisioner in use. Useful either as a default value for a default provisioner, or when multiple environments use the same provisioner. Can be overridden via configuration in the &lt;code>Environment&lt;/code> resource.&lt;/p>
+&lt;h3 id="resources">&lt;code>resources&lt;/code>&lt;/h3>
+&lt;p>This field defines counts and quantities of consumption for VMs created from this template. In other words how many CPU, how much memory, and how much storage is expected to be consumed by each VM utilizing this template.&lt;/p>
+&lt;p>This field has three &amp;ldquo;sub-values&amp;rdquo;, &lt;code>cpu&lt;/code>, &lt;code>memory&lt;/code>, and &lt;code>storage&lt;/code>. CPU is defined as the number of vCPUs; memory as the MiB of memory used; storage as the GiB of storage allocated.&lt;/p>
+&lt;blockquote>
+&lt;p>This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on how many VMs are created, not the resources consumed by each VM. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/237">https://github.com/hobbyfarm/hobbyfarm/issues/237&lt;/a>.&lt;/p>
+&lt;/blockquote></description></item></channel></rss>
