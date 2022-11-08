@@ -22,7 +22,7 @@ This page contains a reference of the options available in the HobbyFarm Helm ch
 |Key|Default|Purpose|
 |---|-------|-------|
 |`ui.image`|`hobbyfarm/ui:[version]`|Image used for ui|
-|`ui.configMapName`|`ui-config`|ConfigMap usedf to configure ui
+|`ui.configMapName`|`ui-config`|ConfigMap used to configure ui
 |`ui.config.title`|HobbyFarm Learn|Title of ui as seen in browser|
 |`ui.config.favicon`|`/assets/default/favicon.png`|Path to the favicon to use for ui|
 |`ui.config.login.logo`|`/assets/default/rancher-labs-stacked-color.svg`|Path to logo image as seen on ui login page|
