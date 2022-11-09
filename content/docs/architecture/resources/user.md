@@ -42,3 +42,14 @@ This is the bcrypt'ed password of the user. This field is set when a user regist
 ### `access_codes`
 
 These are the access codes (not resource names, but actual codes) that the user has entered in the end-user UI. If matched to an access code these will grant access to content in HobbyFarm. 
+
+### `settings`
+
+Settings of users are stored in their ressource as a `map[string]string`. The following options are currently available:
+
+|Key|Default|Purpose|
+|---|-------|-------|
+|`ctr_enabled`|`true`|If CTRs enabled|
+|`ctxAccessCode`|`<empty-string>`|Selected Context AccessCode|
+|`terminal_fontSize`|`16`|Terminal Font-Size|
+|`terminal_theme`|`default`|Terminal Theme|
