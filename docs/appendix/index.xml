@@ -65,7 +65,7 @@
 &lt;tr>
 &lt;td>&lt;code>ui.configMapName&lt;/code>&lt;/td>
 &lt;td>&lt;code>ui-config&lt;/code>&lt;/td>
-&lt;td>ConfigMap usedf to configure ui&lt;/td>
+&lt;td>ConfigMap used to configure ui&lt;/td>
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;code>ui.config.title&lt;/code>&lt;/td>

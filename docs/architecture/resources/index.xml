@@ -200,7 +200,40 @@
 &lt;h3 id="password">&lt;code>password&lt;/code>&lt;/h3>
 &lt;p>This is the bcrypt&amp;rsquo;ed password of the user. This field is set when a user registers in the end-user UI. It can be changed via the admin UI.&lt;/p>
 &lt;h3 id="access_codes">&lt;code>access_codes&lt;/code>&lt;/h3>
-&lt;p>These are the access codes (not resource names, but actual codes) that the user has entered in the end-user UI. If matched to an access code these will grant access to content in HobbyFarm.&lt;/p></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
+&lt;p>These are the access codes (not resource names, but actual codes) that the user has entered in the end-user UI. If matched to an access code these will grant access to content in HobbyFarm.&lt;/p>
+&lt;h3 id="settings">&lt;code>settings&lt;/code>&lt;/h3>
+&lt;p>Settings of users are stored in their ressource as a &lt;code>map[string]string&lt;/code>. The following options are currently available:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ctr_enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;td>If CTRs enabled&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ctxAccessCode&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;lt;empty-string&amp;gt;&lt;/code>&lt;/td>
+&lt;td>Selected Context AccessCode&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>terminal_fontSize&lt;/code>&lt;/td>
+&lt;td>&lt;code>16&lt;/code>&lt;/td>
+&lt;td>Terminal Font-Size&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>terminal_theme&lt;/code>&lt;/td>
+&lt;td>&lt;code>default&lt;/code>&lt;/td>
+&lt;td>Terminal Theme&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: Virtual Machine Template</title><link>http://example.org/docs/architecture/resources/virtualmachinetemplate/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/virtualmachinetemplate/</guid><description>
 &lt;p>A &lt;code>VirtualMachineTemplate&lt;/code> is a provider-agnostic representation of a template for a VM. It allows HobbyFarm to schedule resources across multiple providers while providing a common definition for content creators.&lt;/p>
 &lt;p>Here&amp;rsquo;s a sample virtual machine manifest:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
