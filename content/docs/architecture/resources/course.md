@@ -53,7 +53,18 @@ This field defines the scenarios that comprise the course. Scenarios are display
 
 ### `categories`
 
-This field lists categories to which the course belongs. Categories are used in the UI to group scenarios with common elements together.
+This field allows a course to select scenarios _dynamically_ based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course _in addition to any explicitly defined scenarios_. 
+
+From the admin UI, here are some example query strings:
+
+|Query|Effect|
+|-----|------|
+|`kubernetes`|All scenarios with category `kubernetes` are included.|
+|`!kubernetes`|All scenarios that are not in the `kubernetes` category are included.|
+|`kubernetes&basic`|Scenarios that have _both_ the `kubernetes` _and_ `basic` categories are included.|
+|`kubernetes&k3s&basic`|Queries can work with more than two categories.|
+|`kubernetes&!basic`|All Scenarios that are in the `kubernetes` category, but not in the `basic` category.|
+|`example&!example`|This query will never match any scenarios.|
 
 ### `virtual_machines`
 
