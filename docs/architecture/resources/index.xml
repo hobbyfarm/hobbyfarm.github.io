@@ -36,7 +36,42 @@
 &lt;h3 id="scenarios">&lt;code>scenarios&lt;/code>&lt;/h3>
 &lt;p>This field defines the scenarios that comprise the course. Scenarios are displayed in the order they are defined in this list. Each entry in this list is the &lt;code>name&lt;/code> (&lt;code>id&lt;/code>) of the scenario.&lt;/p>
 &lt;h3 id="categories">&lt;code>categories&lt;/code>&lt;/h3>
-&lt;p>This field lists categories to which the course belongs. Categories are used in the UI to group scenarios with common elements together.&lt;/p>
+&lt;p>This field allows a course to select scenarios &lt;em>dynamically&lt;/em> based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course &lt;em>in addition to any explicitly defined scenarios&lt;/em>.&lt;/p>
+&lt;p>From the admin UI, here are some example query strings:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Query&lt;/th>
+&lt;th>Effect&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>kubernetes&lt;/code>&lt;/td>
+&lt;td>All scenarios with category &lt;code>kubernetes&lt;/code> are included.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>!kubernetes&lt;/code>&lt;/td>
+&lt;td>All scenarios that are not in the &lt;code>kubernetes&lt;/code> category are included.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>kubernetes&amp;amp;basic&lt;/code>&lt;/td>
+&lt;td>Scenarios that have &lt;em>both&lt;/em> the &lt;code>kubernetes&lt;/code> &lt;em>and&lt;/em> &lt;code>basic&lt;/code> categories are included.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>kubernetes&amp;amp;k3s&amp;amp;basic&lt;/code>&lt;/td>
+&lt;td>Queries can work with more than two categories.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>kubernetes&amp;amp;!basic&lt;/code>&lt;/td>
+&lt;td>All Scenarios that are in the &lt;code>kubernetes&lt;/code> category, but not in the &lt;code>basic&lt;/code> category.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>example&amp;amp;!example&lt;/code>&lt;/td>
+&lt;td>This query will never match any scenarios.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
 &lt;h3 id="virtual_machines">&lt;code>virtual_machines&lt;/code>&lt;/h3>
 &lt;p>This field is a &lt;code>map[string]string&lt;/code> listing each virtual machine that is required for the course. The key is the name of the VM (as used in both the end-user UI &lt;em>and&lt;/em> the variable content in the steps), and the value is the VM template which &amp;ldquo;backs&amp;rdquo; that VM.&lt;/p>
 &lt;p>This field must define all VMs which are used for the scenarios that this course contains. A scenario may fail to execute if the course does not define a matching VM in this map for that scenario.&lt;/p>
@@ -160,7 +195,7 @@
 &lt;h3 id="steps">&lt;code>steps&lt;/code>&lt;/h3>
 &lt;p>This field contains a list of steps which (in order) are the steps displayed to the end-user. Each step is an object containing two fields, &lt;code>title&lt;/code> and &lt;code>content&lt;/code>. The value of each of these fields should be base64-encoded.&lt;/p>
 &lt;h3 id="categories">&lt;code>categories&lt;/code>&lt;/h3>
-&lt;p>This field lists categories to which the scenario belongs. Categories are used in the UI to group scenarios with common elements together.&lt;/p>
+&lt;p>This field lists categories to which the scenario belongs. Categories are used in &lt;a href="course.md">Courses&lt;/a> to dynamically include scenarios based on queries.&lt;/p>
 &lt;h3 id="tags">&lt;code>tags&lt;/code>&lt;/h3>
 &lt;p>This field lists tags applied to the scenario. Tags are used in the admin UI to quickly search for scenarios matching desired content.&lt;/p>
 &lt;h3 id="virtual_machines">&lt;code>virtual_machines&lt;/code>&lt;/h3>
@@ -173,7 +208,62 @@
 &lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
 &lt;h3 id="pauseable">&lt;code>pauseable&lt;/code>&lt;/h3>
 &lt;p>This field determines whether an end-user may pause their session. &lt;code>true&lt;/code> enables the pausing of sessions, &lt;code>false&lt;/code> disables it.&lt;/p>
-&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: User</title><link>http://example.org/docs/architecture/resources/user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/user/</guid><description>
+&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: Session</title><link>http://example.org/docs/architecture/resources/session/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/session/</guid><description>
+&lt;p>In HobbyFarm, a session is defined as a user currently executing a scenario or course. The Session resource in HobbyFarm tracks that occurrence, storing information such as the start time of the user, which scenario or course is being executed, etc.&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️ Sessions are always created by HobbyFarm&amp;rsquo;s code. Except in very rare, surgical operations, you should not create a Session resource via the Kubernetes API. You may view the Session in this manner but creating one outside of HobbyFarm&amp;rsquo;s code is not a supported operation.&lt;/p>
+&lt;/blockquote>
+&lt;p>Here&amp;rsquo;s an example Session:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Session&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">sample-session&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">sample-session&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">scenario&lt;/span>: &lt;span style="color:#ae81ff">s-lkjsdflkjs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">course&lt;/span>: &lt;span style="color:#ae81ff">c-lkjsdflkjs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keep_course_vm&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">user&lt;/span>: &lt;span style="color:#ae81ff">u-lkjsdflkjs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">vm_claim&lt;/span>: &lt;span style="color:#ae81ff">vmc-lkjsdflkjsf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_code&lt;/span>: &lt;span style="color:#ae81ff">ac-ljw4s4dsdf&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">status&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">paused&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;false&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pause_time&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">active&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">finished&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;false&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">start_time&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2006-01-02 15:04:05.999999999 -0700 MST&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">end_time&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2006-01-02 17:04:05.999999999 -0700 MST&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
+&lt;p>Identifier for the session. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
+&lt;blockquote>
+&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="scenario">&lt;code>scenario&lt;/code>&lt;/h3>
+&lt;p>Id of the scenario that the user is currently executing.&lt;/p>
+&lt;h3 id="course">&lt;code>course&lt;/code>&lt;/h3>
+&lt;p>If the user is executing a scenario in the context of a course, this field tracks the course id.&lt;/p>
+&lt;h3 id="keep_course_vm">&lt;code>keep_course_vm&lt;/code>&lt;/h3>
+&lt;p>Whether or not HobbyFarm should keep the VMs referenced by this session for the duration of the Course.&lt;/p>
+&lt;h3 id="user">&lt;code>user&lt;/code>&lt;/h3>
+&lt;p>Id of the user that owns this session.&lt;/p>
+&lt;h3 id="vm_claim">&lt;code>vm_claim&lt;/code>&lt;/h3>
+&lt;p>Id of the VirtualMachineClaim that this session owns.&lt;/p>
+&lt;h3 id="access_code">&lt;code>access_code&lt;/code>&lt;/h3>
+&lt;p>Id of the AccessCode that granted access to this scenario/course.&lt;/p>
+&lt;h3 id="statuspaused">&lt;code>status.paused&lt;/code>&lt;/h3>
+&lt;p>Whether or not the user has paused the session.&lt;/p>
+&lt;h3 id="statuspause_time">&lt;code>status.pause_time&lt;/code>&lt;/h3>
+&lt;p>Time stamp marking when the user paused their session.&lt;/p>
+&lt;h3 id="statusactive">&lt;code>status.active&lt;/code>&lt;/h3>
+&lt;p>Whether or not this session is active.&lt;/p>
+&lt;h3 id="statusfinished">&lt;code>status.finished&lt;/code>&lt;/h3>
+&lt;p>Whether or not this session has concluded.&lt;/p>
+&lt;h3 id="statusstart_time">&lt;code>status.start_time&lt;/code>&lt;/h3>
+&lt;p>The timestamp when this session was created.&lt;/p>
+&lt;h3 id="statusend_time">&lt;code>status.end_time&lt;/code>&lt;/h3>
+&lt;p>The timestamp after which point the session expires and is concluded. This timestamp is continuously updated as the end-user UI sends &amp;ldquo;keepalive&amp;rdquo; messages to the HobbyFarm API endpoint. Every keepalive message advances the timestamp. This prevents an active user from getting disconnected, but more importantly allows HobbyFarm to reclaim resources from users who have closed their browsers or otherwise gone inactive.&lt;/p></description></item><item><title>Docs: User</title><link>http://example.org/docs/architecture/resources/user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/user/</guid><description>
 &lt;p>Users are represented in HobbyFarm via the &lt;code>User&lt;/code> resource.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example of that resource:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v2&lt;/span>
