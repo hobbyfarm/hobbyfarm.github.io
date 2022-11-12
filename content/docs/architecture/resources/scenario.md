@@ -57,7 +57,7 @@ This field contains a list of steps which (in order) are the steps displayed to 
 
 ### `categories`
 
-This field lists categories to which the scenario belongs. Categories are used in the UI to group scenarios with common elements together.
+This field lists categories to which the scenario belongs. Categories are used in [Courses](course.md) to dynamically include scenarios based on queries.
 
 ### `tags`
 
