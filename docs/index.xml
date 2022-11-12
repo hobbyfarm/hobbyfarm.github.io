@@ -193,7 +193,7 @@
 &lt;h3 id="scenarios">&lt;code>scenarios&lt;/code>&lt;/h3>
 &lt;p>This field defines the scenarios that comprise the course. Scenarios are displayed in the order they are defined in this list. Each entry in this list is the &lt;code>name&lt;/code> (&lt;code>id&lt;/code>) of the scenario.&lt;/p>
 &lt;h3 id="categories">&lt;code>categories&lt;/code>&lt;/h3>
-&lt;p>This field allows a course to select scenarios &lt;em>dynamically&lt;/em> based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course &lt;em>in addition to any explicitly defined scenarios&lt;/em>.&lt;/p>
+&lt;p>This field allows a course to select scenarios &lt;em>dynamically&lt;/em> based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course _in addition to any scenarios defined in the &lt;a href="#scenarios">scenarios&lt;/a> field.&lt;/p>
 &lt;p>From the admin UI, here are some example query strings:&lt;/p>
 &lt;table>
 &lt;thead>
