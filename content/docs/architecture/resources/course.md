@@ -53,7 +53,7 @@ This field defines the scenarios that comprise the course. Scenarios are display
 
 ### `categories`
 
-This field allows a course to select scenarios _dynamically_ based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course _in addition to any explicitly defined scenarios_. 
+This field allows a course to select scenarios _dynamically_ based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course _in addition to any scenarios defined in the [scenarios](#scenarios) field.
 
 From the admin UI, here are some example query strings:
 
