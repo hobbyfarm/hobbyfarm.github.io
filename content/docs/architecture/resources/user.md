@@ -17,6 +17,11 @@ spec:
     access_codes:
     - event01
     - demo99
+    settings:
+      ctr_enabled: "true"
+      ctxAccessCode: example-access-code
+      terminal_fontSize: "16"
+      terminal_theme: Solarized_Dark_Higher_Contrast
 ```
 
 ## Configuration

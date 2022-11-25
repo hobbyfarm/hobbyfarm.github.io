@@ -69,4 +69,4 @@ helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set in
 
 ## 5 - Complete
 
-Installation should be complete at this point. Please proceed to [post-install setup](setup/post_install.md).
+Installation should be complete at this point. Please proceed to [post-install setup](setup/post_install).
