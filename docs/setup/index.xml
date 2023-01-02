@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm Documentation – Setup</title><link>http://example.org/docs/setup/</link><description>Recent content in Setup on HobbyFarm Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://example.org/docs/setup/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Prerequisites</title><link>http://example.org/docs/setup/prerequisites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/prerequisites/</guid><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm Documentation – Setup</title><link>http://hobbyfarm.github.io/docs/setup/</link><description>Recent content in Setup on HobbyFarm Documentation</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/setup/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Prerequisites</title><link>http://hobbyfarm.github.io/docs/setup/prerequisites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/setup/prerequisites/</guid><description>
 &lt;p>Generally speaking, all that is required to run HobbyFarm is a Kubernetes cluster with an ingress controller installed.&lt;/p>
 &lt;table>
 &lt;thead>
@@ -84,7 +84,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;clusterroles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;clusterrolebindings&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;roles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;rolebindings&amp;#34;&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Installation</title><link>http://example.org/docs/setup/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/installation/</guid><description>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Installation</title><link>http://hobbyfarm.github.io/docs/setup/installation/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/setup/installation/</guid><description>
 &lt;h2 id="1---add-helm-repository">1 - Add Helm Repository&lt;/h2>
 &lt;p>Add the required Helm repository:&lt;/p>
 &lt;p>&lt;code>helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm&lt;/code>&lt;/p>
@@ -146,11 +146,11 @@
 &lt;p>For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set ingress.tls.enabled&lt;span style="color:#f92672">=&lt;/span>true
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5---complete">5 - Complete&lt;/h2>
-&lt;p>Installation should be complete at this point. Please proceed to &lt;a href="setup/post_install">post-install setup&lt;/a>.&lt;/p></description></item><item><title>Docs: Post-Install Setup</title><link>http://example.org/docs/setup/post_install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/post_install/</guid><description>
+&lt;p>Installation should be complete at this point. Please proceed to &lt;a href="setup/post_install">post-install setup&lt;/a>.&lt;/p></description></item><item><title>Docs: Post-Install Setup</title><link>http://hobbyfarm.github.io/docs/setup/post_install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/setup/post_install/</guid><description>
 &lt;h2 id="initial-admin-user">Initial Admin User&lt;/h2>
 &lt;p>Create a new user via the user-UI (Register a user).
 Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;namespace&amp;gt;&lt;/code>.&lt;/p>
-&lt;p>See &lt;a href="http://example.org/docs/architecture/resources/user/">user documentation&lt;/a> on how to give this user access to the admin dashboard.&lt;/p>
+&lt;p>See &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/user/">user documentation&lt;/a> on how to give this user access to the admin dashboard.&lt;/p>
 &lt;p>By default a Role &lt;code>hobbyfarm-admin&lt;/code> is created, granting access to all resources.&lt;/p>
 &lt;p>To bind your user to this Role create the following RoleBinding&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io/v1&lt;/span>
@@ -170,6 +170,6 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">apiGroup&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="initial-vm-template">Initial VM Template&lt;/h2>
 &lt;p>Before you can provision virtual machines, you must first define a &lt;code>VirtualMachineTemplate&lt;/code>. A virtual machine template is a provider-agnostic representation of a template for a VM. It is used to schedule resources across different providers using a common definition.&lt;/p>
-&lt;p>See &lt;a href="http://example.org/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
+&lt;p>See &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
 &lt;h2 id="seed-data">Seed Data&lt;/h2>
-&lt;p>For other examples of resources see &lt;a href="http://example.org/docs/architecture/resources/">architecture/resources&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;p>For other examples of resources see &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/">architecture/resources&lt;/a>&lt;/p></description></item></channel></rss>
