@@ -146,7 +146,7 @@
 &lt;p>For example:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set ingress.tls.enabled&lt;span style="color:#f92672">=&lt;/span>true
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="5---complete">5 - Complete&lt;/h2>
-&lt;p>Installation should be complete at this point. Please proceed to &lt;a href="setup/post_install.md">post-install setup&lt;/a>.&lt;/p></description></item><item><title>Docs: Post-Install Setup</title><link>http://example.org/docs/setup/post_install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/post_install/</guid><description>
+&lt;p>Installation should be complete at this point. Please proceed to &lt;a href="setup/post_install">post-install setup&lt;/a>.&lt;/p></description></item><item><title>Docs: Post-Install Setup</title><link>http://example.org/docs/setup/post_install/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/setup/post_install/</guid><description>
 &lt;h2 id="initial-admin-user">Initial Admin User&lt;/h2>
 &lt;p>Create a new user via the user-UI (Register a user).
 Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;namespace&amp;gt;&lt;/code>.&lt;/p>
@@ -171,7 +171,8 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="initial-vm-template">Initial VM Template&lt;/h2>
 &lt;p>Before you can provision virtual machines, you must first define a &lt;code>VirtualMachineTemplate&lt;/code>. A virtual machine template is a provider-agnostic representation of a template for a VM. It is used to schedule resources across different providers using a common definition.&lt;/p>
 &lt;p>See &lt;a href="http://example.org/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
-&lt;h2 id="heading">&lt;/h2></description></item><item><title>Docs: Course</title><link>http://example.org/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/course/</guid><description>
+&lt;h2 id="seed-data">Seed Data&lt;/h2>
+&lt;p>For other examples of resources see &lt;a href="http://example.org/docs/architecture/resources/">architecture/resources&lt;/a>&lt;/p></description></item><item><title>Docs: Course</title><link>http://example.org/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/course/</guid><description>
 &lt;p>A course is a collection of scenarios meant to be consumed as a single unit or as a series of individual sessions (configurable). A course is useful in situations where you want to group related learnings together or provide a day&amp;rsquo;s worth of curriculum to students who can retain their VMs from scenario to scenario.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example course:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
@@ -577,26 +578,6 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h2 id="seed">Seed&lt;/h2>
-&lt;blockquote>
-&lt;p>Seed will be deprecated in a future version, to be replaced with examples.&lt;/p>
-&lt;/blockquote>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Key&lt;/th>
-&lt;th>Default&lt;/th>
-&lt;th>Purpose&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;code>seed.enabled&lt;/code>&lt;/td>
-&lt;td>&lt;code>false&lt;/code>&lt;/td>
-&lt;td>Provides some preseed data (example resources)&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
 &lt;h2 id="terraform">Terraform&lt;/h2>
 &lt;blockquote>
 &lt;p>⚠️⚠️⚠️ Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.&lt;/p>
@@ -605,7 +586,9 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;h2 id="ranchervm">RancherVM&lt;/h2>
 &lt;blockquote>
 &lt;p>⚠️⚠️⚠️ RancherVM is old, old, old, and seriously deprecated. Do not use this. It will be removed in a future version.&lt;/p>
-&lt;/blockquote></description></item><item><title>Docs: Scenario</title><link>http://example.org/docs/architecture/resources/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/scenario/</guid><description>
+&lt;/blockquote></description></item><item><title>Contributing: Local development</title><link>http://example.org/contributing/local_development/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/contributing/local_development/</guid><description>
+&lt;h2 id="setup-environment">Setup Environment&lt;/h2>
+&lt;p>TODO&lt;/p></description></item><item><title>Docs: Scenario</title><link>http://example.org/docs/architecture/resources/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/scenario/</guid><description>
 &lt;p>Scenarios are the main content resource in HobbyFarm. They contain a series of steps which are presented to the end-user during a session. Scenarios also configure what VM templates are necessary for use of the scenario.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example scenario:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
@@ -661,7 +644,12 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
 &lt;h3 id="pauseable">&lt;code>pauseable&lt;/code>&lt;/h3>
 &lt;p>This field determines whether an end-user may pause their session. &lt;code>true&lt;/code> enables the pausing of sessions, &lt;code>false&lt;/code> disables it.&lt;/p>
-&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: Session</title><link>http://example.org/docs/architecture/resources/session/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/session/</guid><description>
+&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: ScheduledEvent</title><link>http://example.org/docs/architecture/resources/scheduledevent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/scheduledevent/</guid><description>
+&lt;p>We are currently working on this&amp;hellip;&lt;/p>
+&lt;p>TODO: Example&lt;/p>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;p>ScheduledEvents created through the Admin-UI. You should never have to create or update scheduledevents yourself.&lt;/p>
+&lt;p>TODO: Fields of ScheduledEvent CRD&lt;/p></description></item><item><title>Docs: Session</title><link>http://example.org/docs/architecture/resources/session/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/session/</guid><description>
 &lt;p>In HobbyFarm, a session is defined as a user currently executing a scenario or course. The Session resource in HobbyFarm tracks that occurrence, storing information such as the start time of the user, which scenario or course is being executed, etc.&lt;/p>
 &lt;blockquote>
 &lt;p>⚠️ Sessions are always created by HobbyFarm&amp;rsquo;s code. Except in very rare, surgical operations, you should not create a Session resource via the Kubernetes API. You may view the Session in this manner but creating one outside of HobbyFarm&amp;rsquo;s code is not a supported operation.&lt;/p>
@@ -730,6 +718,11 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_codes&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">event01&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">demo99&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">settings&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ctr_enabled&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ctxAccessCode&lt;/span>: &lt;span style="color:#ae81ff">example-access-code&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">terminal_fontSize&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">terminal_theme&lt;/span>: &lt;span style="color:#ae81ff">Solarized_Dark_Higher_Contrast&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;p>Most user accounts are created through registration via the end-user UI. You should only need to manually create or adjust accounts for users that need access to the admin UI.&lt;/p>
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>

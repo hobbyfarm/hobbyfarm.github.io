@@ -208,7 +208,12 @@
 &lt;p>Acceptable values for this field are of the form &lt;code>XXm&lt;/code> or &lt;code>XXh&lt;/code> where &lt;code>XX&lt;/code> is a positive integer that denotes minutes or hours of time.&lt;/p>
 &lt;h3 id="pauseable">&lt;code>pauseable&lt;/code>&lt;/h3>
 &lt;p>This field determines whether an end-user may pause their session. &lt;code>true&lt;/code> enables the pausing of sessions, &lt;code>false&lt;/code> disables it.&lt;/p>
-&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: Session</title><link>http://example.org/docs/architecture/resources/session/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/session/</guid><description>
+&lt;p>This toggle only applies to sessions that are using this scenario.&lt;/p></description></item><item><title>Docs: ScheduledEvent</title><link>http://example.org/docs/architecture/resources/scheduledevent/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/scheduledevent/</guid><description>
+&lt;p>We are currently working on this&amp;hellip;&lt;/p>
+&lt;p>TODO: Example&lt;/p>
+&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;p>ScheduledEvents created through the Admin-UI. You should never have to create or update scheduledevents yourself.&lt;/p>
+&lt;p>TODO: Fields of ScheduledEvent CRD&lt;/p></description></item><item><title>Docs: Session</title><link>http://example.org/docs/architecture/resources/session/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://example.org/docs/architecture/resources/session/</guid><description>
 &lt;p>In HobbyFarm, a session is defined as a user currently executing a scenario or course. The Session resource in HobbyFarm tracks that occurrence, storing information such as the start time of the user, which scenario or course is being executed, etc.&lt;/p>
 &lt;blockquote>
 &lt;p>⚠️ Sessions are always created by HobbyFarm&amp;rsquo;s code. Except in very rare, surgical operations, you should not create a Session resource via the Kubernetes API. You may view the Session in this manner but creating one outside of HobbyFarm&amp;rsquo;s code is not a supported operation.&lt;/p>
@@ -277,6 +282,11 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_codes&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">event01&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#ae81ff">demo99&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">settings&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ctr_enabled&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ctxAccessCode&lt;/span>: &lt;span style="color:#ae81ff">example-access-code&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">terminal_fontSize&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;16&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">terminal_theme&lt;/span>: &lt;span style="color:#ae81ff">Solarized_Dark_Higher_Contrast&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;p>Most user accounts are created through registration via the end-user UI. You should only need to manually create or adjust accounts for users that need access to the admin UI.&lt;/p>
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>

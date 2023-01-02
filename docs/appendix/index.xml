@@ -250,26 +250,6 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h2 id="seed">Seed&lt;/h2>
-&lt;blockquote>
-&lt;p>Seed will be deprecated in a future version, to be replaced with examples.&lt;/p>
-&lt;/blockquote>
-&lt;table>
-&lt;thead>
-&lt;tr>
-&lt;th>Key&lt;/th>
-&lt;th>Default&lt;/th>
-&lt;th>Purpose&lt;/th>
-&lt;/tr>
-&lt;/thead>
-&lt;tbody>
-&lt;tr>
-&lt;td>&lt;code>seed.enabled&lt;/code>&lt;/td>
-&lt;td>&lt;code>false&lt;/code>&lt;/td>
-&lt;td>Provides some preseed data (example resources)&lt;/td>
-&lt;/tr>
-&lt;/tbody>
-&lt;/table>
 &lt;h2 id="terraform">Terraform&lt;/h2>
 &lt;blockquote>
 &lt;p>⚠️⚠️⚠️ Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.&lt;/p>
