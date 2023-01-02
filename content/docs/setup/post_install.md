@@ -39,4 +39,5 @@ Before you can provision virtual machines, you must first define a `VirtualMachi
 
 See [this link]({{< ref "/docs/architecture/resources/virtualmachinetemplate.md" >}}) for a sample VMT and more information on that resource.
 
-## 
+## Seed Data
+For other examples of resources see [architecture/resources]({{< ref "/docs/architecture/resources" >}})
