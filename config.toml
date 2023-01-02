@@ -1,4 +1,4 @@
-baseURL = 'http://example.org/'
+baseURL = 'http://hobbyfarm.github.io/'
 languageCode = 'en-us'
 title = 'HobbyFarm Documentation'
 offlineSearch = true
