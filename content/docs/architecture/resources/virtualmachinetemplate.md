@@ -16,10 +16,7 @@ spec:
     id: example-vmt
     name: Example VMTemplate
     image: ami-08921390234098
-    resources:
-        cpu: 2
-        memory: 4096
-        storage: 10
+    config_map: {"key": "value", "another_key": ... [] ...}
 ``` 
 
 
@@ -41,10 +38,13 @@ Display name for the VM template.
 
 Default value for the image to use when provisioning this VM. Acceptable values will depend upon the provisioner in use. Useful either as a default value for a default provisioner, or when multiple environments use the same provisioner. Can be overridden via configuration in the `Environment` resource. 
 
-### `resources`
+### `config_map`
+The ConfigMap provides the ability to customize more values given to the provisioner. Useful if the provisioner can distinguish between Regions or different sizing options. 
 
-This field defines counts and quantities of consumption for VMs created from this template. In other words how many CPU, how much memory, and how much storage is expected to be consumed by each VM utilizing this template. 
+An example for a configmap vor VMs on Hetzner could look the following 
 
-This field has three "sub-values", `cpu`, `memory`, and `storage`. CPU is defined as the number of vCPUs; memory as the MiB of memory used; storage as the GiB of storage allocated. 
-
-> This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on how many VMs are created, not the resources consumed by each VM. To track this discussion, please see https://github.com/hobbyfarm/hobbyfarm/issues/237.
+```yaml
+server_type:   cx21 # Hetzner has available sizings cx11, cx21, cx31 ...
+ssh_username:  root # Default SSH Username is root
+location:      nbg1 # Region
+```
