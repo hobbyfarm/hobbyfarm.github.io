@@ -704,7 +704,117 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;h3 id="statusstart_time">&lt;code>status.start_time&lt;/code>&lt;/h3>
 &lt;p>The timestamp when this session was created.&lt;/p>
 &lt;h3 id="statusend_time">&lt;code>status.end_time&lt;/code>&lt;/h3>
-&lt;p>The timestamp after which point the session expires and is concluded. This timestamp is continuously updated as the end-user UI sends &amp;ldquo;keepalive&amp;rdquo; messages to the HobbyFarm API endpoint. Every keepalive message advances the timestamp. This prevents an active user from getting disconnected, but more importantly allows HobbyFarm to reclaim resources from users who have closed their browsers or otherwise gone inactive.&lt;/p></description></item><item><title>Docs: User</title><link>http://hobbyfarm.github.io/docs/architecture/resources/user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/user/</guid><description>
+&lt;p>The timestamp after which point the session expires and is concluded. This timestamp is continuously updated as the end-user UI sends &amp;ldquo;keepalive&amp;rdquo; messages to the HobbyFarm API endpoint. Every keepalive message advances the timestamp. This prevents an active user from getting disconnected, but more importantly allows HobbyFarm to reclaim resources from users who have closed their browsers or otherwise gone inactive.&lt;/p></description></item><item><title>Docs: Special Markdown Syntax</title><link>http://hobbyfarm.github.io/docs/appendix/markdown_syntax/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/markdown_syntax/</guid><description>
+&lt;p>This page contains a reference of the special markdown syntax available in the scenario contents.&lt;/p>
+&lt;h2 id="code">Code&lt;/h2>
+&lt;h3 id="syntax-highlighting">Syntax Highlighting&lt;/h3>
+&lt;p>You can enable syntax highlighting by providing a language to the codeblock. Providing the optional filename will display it together with the content&lt;/p>
+&lt;pre tabindex="0">&lt;code>```&amp;lt;language&amp;gt;:&amp;lt;optional filename&amp;gt;
+code
+```
+&lt;/code>&lt;/pre>&lt;p>For example&lt;/p>
+&lt;pre tabindex="0">&lt;code>```md
+# Content
+```
+```yaml:myfile.yaml
+yaml: highlight this #comment
+```
+&lt;/code>&lt;/pre>&lt;h3 id="click-to-file">Click-To-File&lt;/h3>
+&lt;p>Beginning with HobbyFarm 2.0.6 you can also enable users to create files directly with one click using the folowing syntax:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```file:&amp;lt;language&amp;gt;:&amp;lt;filepath&amp;gt;:&amp;lt;target&amp;gt;
+content
+```
+&lt;/code>&lt;/pre>&lt;p>For example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```file:yaml:/var/myfile.yaml:node1
+content: yaml content
+```
+&lt;/code>&lt;/pre>&lt;h3 id="click-to-run">Click-To-Run&lt;/h3>
+&lt;p>Click-to-run is enabled by passing a special language argument to a markdown code block. Use the syntax &lt;code>ctr:&amp;lt;vmname&amp;gt;[:&amp;lt;limit&amp;gt;]&lt;/code> as the language argument where vmname is the name of one of the VMs in the scenario. and limit is the maximum number of times the CTR can be pressed to be executed. Limit can be omitted which defaults to unlimited executions.&lt;/p>
+&lt;p>Examples:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```ctr:cluster01
+cat example.txt
+```
+```ctr:cluster01
+echo This CTR has no limit
+```
+```ctr:cluster01:2
+echo This CTR limits to 2 clicks
+```
+&lt;/code>&lt;/pre>&lt;h2 id="virtual-machine-information">Virtual Machine Information&lt;/h2>
+&lt;p>The listed variables are available. To use, specify within a ${} block using the following syntax:&lt;/p>
+&lt;p>&lt;code>${vminfo:[vmname]:[variable]}&lt;/code> where vminfo is a static string, vmname is the name of one of the VMs in the scenario, and variable is an item from the list on the right.&lt;/p>
+&lt;p>Example: &lt;code>${vminfo:cluster01:public_ip}&lt;/code>&lt;/p>
+&lt;h3 id="available-options">Available Options&lt;/h3>
+&lt;p>all fields that are provided by virtual machines&lt;/p>
+&lt;ul>
+&lt;li>id&lt;/li>
+&lt;li>vm_template_id&lt;/li>
+&lt;li>keypair_name&lt;/li>
+&lt;li>vm_claim_id&lt;/li>
+&lt;li>user&lt;/li>
+&lt;li>status&lt;/li>
+&lt;li>allocated&lt;/li>
+&lt;li>tainted&lt;/li>
+&lt;li>public_ip&lt;/li>
+&lt;li>private_ip&lt;/li>
+&lt;li>environment_id&lt;/li>
+&lt;li>hostname&lt;/li>
+&lt;li>tfstate&lt;/li>
+&lt;li>ws_endpoint&lt;/li>
+&lt;li>vm_set_id&lt;/li>
+&lt;li>protocol&lt;/li>
+&lt;/ul>
+&lt;h2 id="session-information">Session Information&lt;/h2>
+&lt;p>Display the session id by using &lt;code>${session}&lt;/code>.&lt;/p>
+&lt;h2 id="summary--hidden--solution-text-element">Summary / Hidden / Solution Text Element&lt;/h2>
+&lt;p>To create a hidden text element, pass the special language argument hidden to a markdown code block.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```hidden:Hidden Text Summary
+This is the hidden Text that opens and closes after a click on the summary
+```
+&lt;/code>&lt;/pre>&lt;h2 id="glossary">Glossary&lt;/h2>
+&lt;p>To create a glossary element, pass the special language argument &lt;code>glossary:&amp;lt;name&amp;gt;&lt;/code> to a markdown code block. The text inside the code block will be displayed when a user hovers over the provided name&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```glossary:Kubernetes
+Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+```
+&lt;/code>&lt;/pre>&lt;h2 id="nested-elements">Nested Elements&lt;/h2>
+&lt;p>Nested elements can be applied inside blocks or hidden elements. To define a nested block, replace backticks by tildes.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```
+Some text
+~~~python
+# This program prints Hello, world!
+print(&amp;#39;Hello, world!&amp;#39;)
+~~~
+Some more text
+```
+&lt;/code>&lt;/pre>&lt;h2 id="note">Note&lt;/h2>
+&lt;p>as of HobbyFarm 2.0.6 Notes can be used to highlight parts of the text with a special box.&lt;/p>
+&lt;pre tabindex="0">&lt;code>```note:&amp;lt;type&amp;gt;:&amp;lt;optional title&amp;gt;
+Content
+```
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```note:info:More info
+Note that is suitable for additional `information`
+```
+```note:task
+Check the nodes.
+~~~ctr:node1
+kubectl get nodes
+~~~
+```
+```note:other
+Unknown note type. Can be used for general boxes
+```
+&lt;/code>&lt;/pre>&lt;h3 id="types">Types&lt;/h3>
+&lt;ul>
+&lt;li>info (Blue)&lt;/li>
+&lt;li>warn (Orange)&lt;/li>
+&lt;li>caution (Red)&lt;/li>
+&lt;li>task (Green)
+all other values than the types state above will result in a grey highlighted box&lt;/li>
+&lt;/ul></description></item><item><title>Docs: User</title><link>http://hobbyfarm.github.io/docs/architecture/resources/user/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/user/</guid><description>
 &lt;p>Users are represented in HobbyFarm via the &lt;code>User&lt;/code> resource.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example of that resource:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v2&lt;/span>
