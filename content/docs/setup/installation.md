@@ -36,6 +36,7 @@ tls:
         backend:    backend-tls-secret  # replace with your own
         admin:      admin-tls-secret    # can be the same for each
         ui:         ui-tls-secret       # e.g. if you are using *.your-hobbyfarm.com
+        shell:      shell-tls-secret
     hostnames:
         backend:    api.your-hobbyfarm.com
         admin:      admin.your-hobbyfarm.com
