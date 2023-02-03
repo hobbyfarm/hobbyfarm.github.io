@@ -130,6 +130,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">backend-tls-secret &lt;/span> &lt;span style="color:#75715e"># replace with your own&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin-tls-secret &lt;/span> &lt;span style="color:#75715e"># can be the same for each&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">ui-tls-secret &lt;/span> &lt;span style="color:#75715e"># e.g. if you are using *.your-hobbyfarm.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">shell-tls-secret&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hostnames&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">api.your-hobbyfarm.com&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin.your-hobbyfarm.com&lt;/span>
