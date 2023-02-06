@@ -96,10 +96,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">sample-environment&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">burst_capable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">burst_count_capacity&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">100&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">capacity_mode&lt;/span>: &lt;span style="color:#ae81ff">count&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">count_capacity&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">example-template&lt;/span>: &lt;span style="color:#ae81ff">500&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">display_name&lt;/span>: &lt;span style="color:#ae81ff">sample-environment&lt;/span>
@@ -115,23 +111,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">size&lt;/span>: &lt;span style="color:#ae81ff">t3.medium&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ws_endpoint&lt;/span>: &lt;span style="color:#ae81ff">ws.your-hobbyfarm.io&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
-&lt;h3 id="burst_capable">&lt;code>burst_capable&lt;/code>&lt;/h3>
-&lt;p>Bursting was the original name given to HobbyFarm&amp;rsquo;s capability to dynamically provision VMs. Setting &lt;code>spec.burst_capable&lt;/code> to &lt;code>true&lt;/code> on an environment means that this environment is tolerant of dynamically created VMs.&lt;/p>
-&lt;blockquote>
-&lt;p>This field may be removed in a future release of HobbyFarm. External provisioners generally do not distinguish between ahead-of-time (AOT) provisioning and dynamic or on-demand provisioning. Thus an environment may not need to define this property at all. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/236">https://github.com/hobbyfarm/hobbyfarm/issues/236&lt;/a>.&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="burst_count_capacity">&lt;code>burst_count_capacity&lt;/code>&lt;/h3>
-&lt;p>This field is a &lt;code>map[string]int&lt;/code> designed to inform HobbyFarm how much capacity is available for dynamic provisioning in an environment. For dynamic provisioning to work, administrators need to set a count of the number of provisionable VM templates in this map.&lt;/p>
-&lt;blockquote>
-&lt;p>This field may be removed in a future release of HobbyFarm. It is confusing to set the capacity of an environment in two locations. Further, removal of the concept of &amp;ldquo;bursting&amp;rdquo; from HobbyFarm may render this field useless. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/236">https://github.com/hobbyfarm/hobbyfarm/issues/236&lt;/a>&lt;/p>
-&lt;/blockquote>
-&lt;h3 id="capacity_mode">&lt;code>capacity_mode&lt;/code>&lt;/h3>
-&lt;p>Possible values: &lt;code>count&lt;/code> and &lt;code>resource&lt;/code>&lt;/p>
-&lt;p>The capacity mode of an environment determines whether HobbyFarm schedules VMs based on how many VMs are already provisioned, or how much consumption there is of the basic resources (cpu, memory, storage).&lt;/p>
-&lt;p>Practical usage almost always sets the value of this field to &lt;code>count&lt;/code>.&lt;/p>
-&lt;blockquote>
-&lt;p>This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on the &lt;code>count&lt;/code> strategy and do not utilize &lt;code>resource&lt;/code>. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/237">https://github.com/hobbyfarm/hobbyfarm/issues/237&lt;/a>.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="count_capacity">&lt;code>count_capacity&lt;/code>&lt;/h3>
 &lt;p>This field is a &lt;code>map[string]int&lt;/code> designed to inform HobbyFarm about the capacity of the environment for a particular VM template. Each key in this map is the name of the VM template, and the value is the number of total VMs of that type that the environment can support.&lt;/p>
 &lt;p>For example:&lt;/p>
@@ -381,10 +360,7 @@ Granting access to resources works via kubernetes native Roles and RoleBindings&
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Example VMTemplate&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ami-08921390234098&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cpu&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">memory&lt;/span>: &lt;span style="color:#ae81ff">4096&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">storage&lt;/span>: &lt;span style="color:#ae81ff">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config_map&lt;/span>: {&lt;span style="color:#f92672">&amp;#34;key&amp;#34;: &amp;#34;value&amp;#34;, &amp;#34;another_key&amp;#34;: &lt;/span>&lt;span style="color:#ae81ff">... [] ...}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a &lt;code>t3.medium&lt;/code> whereas in Azure it may correspond to &lt;code>Standard_D2_v2&lt;/code>. It is up to each &lt;code>Environment&lt;/code> to determine how to implement a &lt;code>VirtualMachineTemplate&lt;/code>.&lt;/p>
 &lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
@@ -396,9 +372,10 @@ Granting access to resources works via kubernetes native Roles and RoleBindings&
 &lt;p>Display name for the VM template.&lt;/p>
 &lt;h3 id="image">&lt;code>image&lt;/code>&lt;/h3>
 &lt;p>Default value for the image to use when provisioning this VM. Acceptable values will depend upon the provisioner in use. Useful either as a default value for a default provisioner, or when multiple environments use the same provisioner. Can be overridden via configuration in the &lt;code>Environment&lt;/code> resource.&lt;/p>
-&lt;h3 id="resources">&lt;code>resources&lt;/code>&lt;/h3>
-&lt;p>This field defines counts and quantities of consumption for VMs created from this template. In other words how many CPU, how much memory, and how much storage is expected to be consumed by each VM utilizing this template.&lt;/p>
-&lt;p>This field has three &amp;ldquo;sub-values&amp;rdquo;, &lt;code>cpu&lt;/code>, &lt;code>memory&lt;/code>, and &lt;code>storage&lt;/code>. CPU is defined as the number of vCPUs; memory as the MiB of memory used; storage as the GiB of storage allocated.&lt;/p>
-&lt;blockquote>
-&lt;p>This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on how many VMs are created, not the resources consumed by each VM. To track this discussion, please see &lt;a href="https://github.com/hobbyfarm/hobbyfarm/issues/237">https://github.com/hobbyfarm/hobbyfarm/issues/237&lt;/a>.&lt;/p>
-&lt;/blockquote></description></item></channel></rss>
+&lt;h3 id="config_map">&lt;code>config_map&lt;/code>&lt;/h3>
+&lt;p>The ConfigMap provides the ability to customize more values given to the provisioner. Useful if the provisioner can distinguish between Regions or different sizing options.&lt;/p>
+&lt;p>An example for a configmap vor VMs on Hetzner could look the following&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">server_type&lt;/span>: &lt;span style="color:#ae81ff">cx21&lt;/span> &lt;span style="color:#75715e"># Hetzner has available sizings cx11, cx21, cx31 ...&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ssh_username&lt;/span>: &lt;span style="color:#ae81ff">root&lt;/span> &lt;span style="color:#75715e"># Default SSH Username is root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span>: &lt;span style="color:#ae81ff">nbg1&lt;/span> &lt;span style="color:#75715e"># Region&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
