@@ -10,8 +10,8 @@ apiVersion: hobbyfarm.io/v2
 kind: User
 metadata:
     name: example-user
+    namesapce: hobbyfarm-system
 spec:
-    id: example-user
     email: user@example.com
     password: $6p$01$LJsdflisn3d9jrlkjdf
     access_codes:
@@ -27,12 +27,6 @@ spec:
 ## Configuration
 
 Most user accounts are created through registration via the end-user UI. You should only need to manually create or adjust accounts for users that need access to the admin UI.
-
-### `id`
-
-Identifier for the user. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
-
-> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
 
 ### `email`
 

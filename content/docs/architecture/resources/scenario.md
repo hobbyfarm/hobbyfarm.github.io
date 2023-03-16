@@ -12,7 +12,6 @@ metadata:
     name: example-scenario
     namespace: hobbyfarm-system
 spec:
-    id: example-scenario
     name: RXhhbXBsZSBTY2VuYXJpbwo= # "Example Scenario"
     description: VGhpcyBpcyBhbiBleGFtcGxlIHNjZW5hcmlvCg== # "This is an example scenario"
     steps:
@@ -36,12 +35,6 @@ spec:
 ```
 
 ## Configuration
-
-### `id` 
-
-Identifier for the scenario. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
-
-> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
 
 ### `name`
 

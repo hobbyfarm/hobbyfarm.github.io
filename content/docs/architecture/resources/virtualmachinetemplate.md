@@ -13,7 +13,6 @@ metadata:
     name: example-vmt
     namespace: hobbyfarm-system
 spec:
-    id: example-vmt
     name: Example VMTemplate
     image: ami-08921390234098
     config_map: {"key": "value", "another_key": ... [] ...}
@@ -23,13 +22,6 @@ spec:
 A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a `t3.medium` whereas in Azure it may correspond to `Standard_D2_v2`. It is up to each `Environment` to determine how to implement a `VirtualMachineTemplate`.
 
 ## Configuration
-
-### `id`
-
-Identifier for the VM template. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
-
-> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
-
 ### `name`
 
 Display name for the VM template.
@@ -48,3 +40,12 @@ server_type:   cx21 # Hetzner has available sizings cx11, cx21, cx31 ...
 ssh_username:  root # Default SSH Username is root
 location:      nbg1 # Region
 ```
+
+## Cloud-Init configuration
+`VirtualMachineTemplates` may offer Cloud-Init configuration. Currently this is saved under the `cloud-config` key inside the `config_map`.
+This is supposed to be changed to be saved in it's own field inside the VMT. 
+
+## Services and Webinterfaces
+Services and webinterfaces can be configured for VMTs. A Service may provide a webinterface on a specific port and path which will be shown to the user in an iFrame. This webinterface will be proxied to ensure authorization.
+Currently this should be configured through the UI as it is stored in an array under the `webinterfaces` key inside the `config_map`.
+You can define presets of often used services using [PredefinedServices]({{< ref "/docs/architecture/resources/predefinedservice" >}}).
