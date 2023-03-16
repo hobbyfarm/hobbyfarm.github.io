@@ -7,7 +7,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-course&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-course&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">RXhhbXBsZSBDb3Vyc2UK&lt;/span> &lt;span style="color:#75715e"># &amp;#34;Example Course&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#ae81ff">VGhpcyBpcyBhbiBleGFtcGxlIGNvdXJzZQo=&lt;/span> &lt;span style="color:#75715e"># &amp;#34;This is an example course&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">scenarios&lt;/span>:
@@ -24,11 +23,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pauseable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keep_vm&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
-&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
-&lt;p>Identifier for the course. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
-&lt;blockquote>
-&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
 &lt;p>Display name for the course as shown in both the end-user UI and admin UI. This field should be base64 encoded.&lt;/p>
 &lt;h3 id="description">&lt;code>description&lt;/code>&lt;/h3>
@@ -131,7 +125,126 @@
 &lt;p>This field is a &lt;code>map[string]string&lt;/code> allowing administrators to configure specific values for each VM template in use in the environment. Some common uses of this map are for elements such as instance size or AMI.&lt;/p>
 &lt;p>The keys defined here are specific to the provisioner in use for the environment. Each provisioner may have specific values that are required.&lt;/p>
 &lt;h3 id="ws_endpoint">&lt;code>ws_endpoint&lt;/code>&lt;/h3>
-&lt;p>This field defines which websocket (shell) endpoint should be used by end-user clients to open a shell to VMs provisioned in this environment. This field may be used in situations where a specific shell server needs to be utilized. An example of this may be an environment where the shell server needs to be in a DMZ in order to access VMs that are otherwise isolated from the main HobbyFarm install.&lt;/p></description></item><item><title>Docs: Scenario</title><link>http://hobbyfarm.github.io/docs/architecture/resources/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/scenario/</guid><description>
+&lt;p>This field defines which websocket (shell) endpoint should be used by end-user clients to open a shell to VMs provisioned in this environment. This field may be used in situations where a specific shell server needs to be utilized. An example of this may be an environment where the shell server needs to be in a DMZ in order to access VMs that are otherwise isolated from the main HobbyFarm install.&lt;/p></description></item><item><title>Docs: PredefinedService</title><link>http://hobbyfarm.github.io/docs/architecture/resources/predefinedservice/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/predefinedservice/</guid><description>
+&lt;p>A &lt;code>PredefinedService&lt;/code> is a way to provide preconfigured Services that are usible when creating or updating &lt;code>VirtualMachineTemplates&lt;/code> inside the Admin-UI.&lt;/p>
+&lt;p>Example manifest:
+Look at the bottom of page for more Example Services.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">PredefinedService&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">another-service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">install Code-Server IDE&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cloud_config&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> runcmd:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - export HOME=/root
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - curl -fsSL https://code-server.dev/install.sh &amp;gt; codeServerInstall.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - /bin/sh codeServerInstall.sh &amp;amp;&amp;amp; systemctl enable --now code-server@root
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - &amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sleep 5 &amp;amp;&amp;amp; sed -i.bak &amp;#39;s/auth: password/auth: none/&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> ~/.config/code-server/config.yaml
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - sudo systemctl restart code-server@root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">has_webinterface&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">has_tab&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">path&lt;/span>: &lt;span style="color:#ae81ff">/?path=/root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite_host_header&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">no_rewrite_root_path&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite_origin_header&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">disallow_iframe&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
+&lt;p>Display name for the Service inside the UI.&lt;/p>
+&lt;h3 id="cloud_config">&lt;code>cloud_config&lt;/code>&lt;/h3>
+&lt;p>default: &amp;quot;&amp;quot; (empty string)&lt;/p>
+&lt;p>Cloud-Config data. See [documentation]https://cloudinit.readthedocs.io/en/latest/&lt;/p>
+&lt;blockquote>
+&lt;p>This has to be supported by the operator or the terraform module.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="has_webinterface">&lt;code>has_webinterface&lt;/code>&lt;/h3>
+&lt;p>default: false&lt;/p>
+&lt;p>If the service provides a Webinterface that can be proxied to the user. The proxy will connect to the server via ssh and tunnel the webinterface located at the configured port to the user.&lt;/p>
+&lt;h3 id="has_tab">&lt;code>has_tab&lt;/code>&lt;/h3>
+&lt;p>default: false&lt;/p>
+&lt;p>All webinterfaces are grouped inside a submenu next to the terminal tabs.
+If &lt;code>has_tab&lt;/code> is set to true the webinterface will be get its own tab next to the terminal tabs. The tab will be named after the virtual machine and the display name of the service.&lt;/p>
+&lt;h3 id="port">&lt;code>port&lt;/code>&lt;/h3>
+&lt;p>default: 0&lt;/p>
+&lt;p>The port to which the application is exposed. The proxy will tunnel &lt;code>localhost:[port]&lt;/code>.&lt;/p>
+&lt;h3 id="path">&lt;code>path&lt;/code>&lt;/h3>
+&lt;p>default: &amp;quot;&amp;quot; (empty string)&lt;/p>
+&lt;p>Some applications may provide different paths or entrypoint to be called like &lt;code>/dashboard&lt;/code>. When &lt;code>path&lt;/code> is defined the first page that is loaded will be the given path.&lt;/p>
+&lt;h3 id="rewrite_host_header">&lt;code>rewrite_host_header&lt;/code>&lt;/h3>
+&lt;p>default: true&lt;/p>
+&lt;p>The proxy will rewrite the host header of requests to the proxy/shell server host.&lt;/p>
+&lt;h3 id="no_rewrite_root_path">&lt;code>no_rewrite_root_path&lt;/code>&lt;/h3>
+&lt;p>default: false&lt;/p>
+&lt;p>The proxy will rewrite the requested path &lt;code>/p/[vm-id]/80/path/to/application&lt;/code> to &lt;code>/path/to/application&lt;/code> when calling the server. Set this flag to &lt;code>true&lt;/code> when you want the proxy so send the whole path. This is needed by some applications like Jupyter when providing a &lt;code>base_url&lt;/code> parameter.&lt;/p>
+&lt;h3 id="rewrite_origin_header">&lt;code>rewrite_origin_header&lt;/code>&lt;/h3>
+&lt;p>default: false&lt;/p>
+&lt;p>The proxy will rewrite the origin header of requests to localhost&lt;/p>
+&lt;h3 id="disallow_iframe">&lt;code>disallow_iframe&lt;/code>&lt;/h3>
+&lt;p>default: false&lt;/p>
+&lt;p>Disallow the webinterface inside iFrame tabs, the user will have to open the webinterface inside a new tab.&lt;/p>
+&lt;h2 id="example-predefinedservices">Example PredefinedServices:&lt;/h2>
+&lt;h3 id="docker">Docker&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">PredefinedService&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">docker-service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">install Docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cloud_config&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> runcmd:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - curl -fsSL get.docker.com | bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> has_tab: true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="code-server">Code-Server&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">PredefinedService&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">code-server-service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Code-Server IDE&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">8080&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cloud_config&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> runcmd:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - export HOME=/root
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - curl -fsSL https://code-server.dev/install.sh &amp;gt; codeServerInstall.sh
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - /bin/sh codeServerInstall.sh &amp;amp;&amp;amp; systemctl enable --now code-server@root
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - &amp;gt;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> sleep 5 &amp;amp;&amp;amp; sed -i.bak &amp;#39;s/auth: password/auth: none/&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> ~/.config/code-server/config.yaml
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - sudo systemctl restart code-server@root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">has_tab&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">has_webinterface&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">path&lt;/span>: &lt;span style="color:#ae81ff">/?path=/root&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite_host_header&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">no_rewrite_root_path&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite_origin_header&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">disallow_iframe&lt;/span>: &lt;span style="color:#66d9ef">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="jupyter">Jupyter&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">PredefinedService&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">jupyter-service&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Jupyter&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">port&lt;/span>: &lt;span style="color:#ae81ff">8888&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cloud_config&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> #cloud-config
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> runcmd:
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - apt-get update &amp;amp;&amp;amp; apt-get install python3-pip -y
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> - pip install jupyterlab markupsafe==2.0.1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">has_tab&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">has_webinterface&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">path&lt;/span>: &lt;span style="color:#ae81ff">/&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">rewrite_origin_header&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">disallow_iframe&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Scenario</title><link>http://hobbyfarm.github.io/docs/architecture/resources/scenario/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/scenario/</guid><description>
 &lt;p>Scenarios are the main content resource in HobbyFarm. They contain a series of steps which are presented to the end-user during a session. Scenarios also configure what VM templates are necessary for use of the scenario.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example scenario:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
@@ -140,7 +253,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-scenario&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-scenario&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">RXhhbXBsZSBTY2VuYXJpbwo=&lt;/span> &lt;span style="color:#75715e"># &amp;#34;Example Scenario&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">description&lt;/span>: &lt;span style="color:#ae81ff">VGhpcyBpcyBhbiBleGFtcGxlIHNjZW5hcmlvCg==&lt;/span> &lt;span style="color:#75715e"># &amp;#34;This is an example scenario&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">steps&lt;/span>:
@@ -162,11 +274,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pause_duration&lt;/span>: &lt;span style="color:#ae81ff">4h&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">pauseable&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
-&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
-&lt;p>Identifier for the scenario. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
-&lt;blockquote>
-&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
 &lt;p>Display name for the scenario as shown in both the end-user UI and admin UI. This field should be base64 encoded.&lt;/p>
 &lt;h3 id="description">&lt;code>description&lt;/code>&lt;/h3>
@@ -204,7 +311,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">sample-session&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">sample-session&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">scenario&lt;/span>: &lt;span style="color:#ae81ff">s-lkjsdflkjs&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">course&lt;/span>: &lt;span style="color:#ae81ff">c-lkjsdflkjs&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">keep_course_vm&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
@@ -219,11 +325,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">start_time&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2006-01-02 15:04:05.999999999 -0700 MST&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">end_time&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2006-01-02 17:04:05.999999999 -0700 MST&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
-&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
-&lt;p>Identifier for the session. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
-&lt;blockquote>
-&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="scenario">&lt;code>scenario&lt;/code>&lt;/h3>
 &lt;p>Id of the scenario that the user is currently executing.&lt;/p>
 &lt;h3 id="course">&lt;code>course&lt;/code>&lt;/h3>
@@ -254,8 +355,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">User&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-user&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namesapce&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-user&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">email&lt;/span>: &lt;span style="color:#ae81ff">user@example.com&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">$6p$01$LJsdflisn3d9jrlkjdf&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">access_codes&lt;/span>:
@@ -268,11 +369,6 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">terminal_theme&lt;/span>: &lt;span style="color:#ae81ff">Solarized_Dark_Higher_Contrast&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
 &lt;p>Most user accounts are created through registration via the end-user UI. You should only need to manually create or adjust accounts for users that need access to the admin UI.&lt;/p>
-&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
-&lt;p>Identifier for the user. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
-&lt;blockquote>
-&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="email">&lt;code>email&lt;/code>&lt;/h3>
 &lt;p>This field determines the username for the user. During original development of HobbyFarm it was assumed that all users would login using an email address and password. However, no validation in HobbyFarm or any UI forces an email to be used for this field.&lt;/p>
 &lt;p>&lt;em>Therefore it is acceptable to treat this field as a synonym for username.&lt;/em>&lt;/p>
@@ -357,17 +453,11 @@ Granting access to resources works via kubernetes native Roles and RoleBindings&
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">example-vmt&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">Example VMTemplate&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">image&lt;/span>: &lt;span style="color:#ae81ff">ami-08921390234098&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config_map&lt;/span>: {&lt;span style="color:#f92672">&amp;#34;key&amp;#34;: &amp;#34;value&amp;#34;, &amp;#34;another_key&amp;#34;: &lt;/span>&lt;span style="color:#ae81ff">... [] ...}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a &lt;code>t3.medium&lt;/code> whereas in Azure it may correspond to &lt;code>Standard_D2_v2&lt;/code>. It is up to each &lt;code>Environment&lt;/code> to determine how to implement a &lt;code>VirtualMachineTemplate&lt;/code>.&lt;/p>
 &lt;h2 id="configuration">Configuration&lt;/h2>
-&lt;h3 id="id">&lt;code>id&lt;/code>&lt;/h3>
-&lt;p>Identifier for the VM template. Should be identical to the Kubernetes &lt;code>metadata.name&lt;/code> field. Present for historical reasons, will be phased out in a future release.&lt;/p>
-&lt;blockquote>
-&lt;p>This field is currently &lt;em>required&lt;/em> in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field.&lt;/p>
-&lt;/blockquote>
 &lt;h3 id="name">&lt;code>name&lt;/code>&lt;/h3>
 &lt;p>Display name for the VM template.&lt;/p>
 &lt;h3 id="image">&lt;code>image&lt;/code>&lt;/h3>
@@ -378,4 +468,10 @@ Granting access to resources works via kubernetes native Roles and RoleBindings&
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">server_type&lt;/span>: &lt;span style="color:#ae81ff">cx21&lt;/span> &lt;span style="color:#75715e"># Hetzner has available sizings cx11, cx21, cx31 ...&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ssh_username&lt;/span>: &lt;span style="color:#ae81ff">root&lt;/span> &lt;span style="color:#75715e"># Default SSH Username is root&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">location&lt;/span>: &lt;span style="color:#ae81ff">nbg1&lt;/span> &lt;span style="color:#75715e"># Region&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="cloud-init-configuration">Cloud-Init configuration&lt;/h2>
+&lt;p>&lt;code>VirtualMachineTemplates&lt;/code> may offer Cloud-Init configuration. Currently this is saved under the &lt;code>cloud-config&lt;/code> key inside the &lt;code>config_map&lt;/code>.
+This is supposed to be changed to be saved in it&amp;rsquo;s own field inside the VMT.&lt;/p>
+&lt;h2 id="services-and-webinterfaces">Services and Webinterfaces&lt;/h2>
+&lt;p>Services and webinterfaces can be configured for VMTs. A Service may provide a webinterface on a specific port and path which will be shown to the user in an iFrame. This webinterface will be proxied to ensure authorization.
+Currently this should be configured through the UI as it is stored in an array under the &lt;code>webinterfaces&lt;/code> key inside the &lt;code>config_map&lt;/code>.
+You can define presets of often used services using &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/predefinedservice/">PredefinedServices&lt;/a>.&lt;/p></description></item></channel></rss>
