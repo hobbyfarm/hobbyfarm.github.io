@@ -126,9 +126,6 @@ spec:
   has_webinterface: true
   path: /?path=/root
   rewrite_host_header: true
-  no_rewrite_root_path: false
-  rewrite_origin_header: false
-  disallow_iframe: false
 ``` 
 ### Jupyter
 
@@ -151,4 +148,5 @@ spec:
   path: /
   rewrite_origin_header: true
   disallow_iframe: true
+  no_rewrite_root_path: true
 ```
