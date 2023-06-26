@@ -16,4 +16,6 @@ Before you can provision virtual machines, you must first define a `VirtualMachi
 
 See [this link]({{< ref "/docs/architecture/resources/virtualmachinetemplate.md" >}}) for a sample VMT and more information on that resource.
 
-## 
+## Configure Settings
+HobbyFarm has some settings that can be adjusted via the Admin-UI or by altering the kubernetes objects directly.
+See 
