@@ -6,9 +6,32 @@ weight = 3
 
 ## Initial Admin User
 
-The initial admin username is `admin` and password is `hobbyfarm`. 
+Create a new user via the user-UI (Register a user).
+Verify the creation of the user with `kubectl get users -n <namespace>`.
 
-> :warning: Make sure to change the password after your initial login.
+See [user documentation]({{< ref "/docs/architecture/resources/user.md" >}}) on how to give this user access to the admin dashboard.
+
+By default a Role `hobbyfarm-admin` is created, granting access to all resources.
+
+To bind your user to this Role create the following RoleBinding
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+    labels:
+        rbac.hobbyfarm.io/managed: "true"
+    name: hobbyfarm-admin-rolebinding
+    namespace: {{ .Release.Namespace }}
+subjects:
+- kind: User
+  name: <id of your created user>
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: hobbyfarm-admin
+  apiGroup: rbac.authorization.k8s.io
+```
 
 ## Initial VM Template
 
@@ -16,6 +39,7 @@ Before you can provision virtual machines, you must first define a `VirtualMachi
 
 See [this link]({{< ref "/docs/architecture/resources/virtualmachinetemplate.md" >}}) for a sample VMT and more information on that resource.
 
+
 ## Configure Settings
-HobbyFarm has some settings that can be adjusted via the Admin-UI or by altering the kubernetes objects directly.
-See 
+HobbyFarm has some settings that can be adjusted via the Admin-UI or by altering the `setting` kubernetes objects directly.
+

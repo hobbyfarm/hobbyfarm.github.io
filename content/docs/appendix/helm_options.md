@@ -98,14 +98,6 @@ ui:
 |`ingress.tls.secrets.admin`|`admin-tls-secret`|TLS secret for admin ui ingress|
 |`ingress.tls.secrets.ui`|`ui-tls-secret`|TLS secret for ui ingress|
 
-## Seed
-
-> Seed will be deprecated in a future version, to be replaced with examples. 
-
-|Key|Default|Purpose|
-|---|-------|-------|
-|`seed.enabled`|`false`|Provides some preseed data (example resources)|
-
 ## Terraform
 
 

@@ -12,7 +12,6 @@ metadata:
     name: example-scenario
     namespace: hobbyfarm-system
 spec:
-    id: example-scenario
     name: RXhhbXBsZSBTY2VuYXJpbwo= # "Example Scenario"
     description: VGhpcyBpcyBhbiBleGFtcGxlIHNjZW5hcmlvCg== # "This is an example scenario"
     steps:
@@ -37,12 +36,6 @@ spec:
 
 ## Configuration
 
-### `id` 
-
-Identifier for the scenario. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
-
-> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
-
 ### `name`
 
 Display name for the scenario as shown in both the end-user UI and admin UI. This field should be base64 encoded.
@@ -57,7 +50,7 @@ This field contains a list of steps which (in order) are the steps displayed to 
 
 ### `categories`
 
-This field lists categories to which the scenario belongs. Categories are used in the UI to group scenarios with common elements together.
+This field lists categories to which the scenario belongs. Categories are used in [Courses](course.md) to dynamically include scenarios based on queries.
 
 ### `tags`
 

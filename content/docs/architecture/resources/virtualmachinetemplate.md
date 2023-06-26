@@ -13,26 +13,15 @@ metadata:
     name: example-vmt
     namespace: hobbyfarm-system
 spec:
-    id: example-vmt
     name: Example VMTemplate
     image: ami-08921390234098
-    resources:
-        cpu: 2
-        memory: 4096
-        storage: 10
+    config_map: {"key": "value", "another_key": ... [] ...}
 ``` 
 
 
 A VM template is merely a representation of a possible VM implementation by a provider. For example, in AWS this template may correspond to the creation of a `t3.medium` whereas in Azure it may correspond to `Standard_D2_v2`. It is up to each `Environment` to determine how to implement a `VirtualMachineTemplate`.
 
 ## Configuration
-
-### `id`
-
-Identifier for the VM template. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
-
-> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
-
 ### `name`
 
 Display name for the VM template.
@@ -41,10 +30,22 @@ Display name for the VM template.
 
 Default value for the image to use when provisioning this VM. Acceptable values will depend upon the provisioner in use. Useful either as a default value for a default provisioner, or when multiple environments use the same provisioner. Can be overridden via configuration in the `Environment` resource. 
 
-### `resources`
+### `config_map`
+The ConfigMap provides the ability to customize more values given to the provisioner. Useful if the provisioner can distinguish between Regions or different sizing options. 
 
-This field defines counts and quantities of consumption for VMs created from this template. In other words how many CPU, how much memory, and how much storage is expected to be consumed by each VM utilizing this template. 
+An example for a configmap vor VMs on Hetzner could look the following 
 
-This field has three "sub-values", `cpu`, `memory`, and `storage`. CPU is defined as the number of vCPUs; memory as the MiB of memory used; storage as the GiB of storage allocated. 
+```yaml
+server_type:   cx21 # Hetzner has available sizings cx11, cx21, cx31 ...
+ssh_username:  root # Default SSH Username is root
+location:      nbg1 # Region
+```
 
-> This field may be removed in a future release of HobbyFarm. Real-world usage of HobbyFarm has shown that most users rely solely on how many VMs are created, not the resources consumed by each VM. To track this discussion, please see https://github.com/hobbyfarm/hobbyfarm/issues/237.
+## Cloud-Init configuration
+`VirtualMachineTemplates` may offer Cloud-Init configuration. Currently this is saved under the `cloud-config` key inside the `config_map`.
+This is supposed to be changed to be saved in it's own field inside the VMT. 
+
+## Services and Webinterfaces
+Services and webinterfaces can be configured for VMTs. A Service may provide a webinterface on a specific port and path which will be shown to the user in an iFrame. This webinterface will be proxied to ensure authorization.
+Currently this should be configured through the UI as it is stored in an array under the `webinterfaces` key inside the `config_map`.
+You can define presets of often used services using [PredefinedServices]({{< ref "/docs/architecture/resources/predefinedservice" >}}).

@@ -13,7 +13,6 @@ metadata:
     name: example-course
     namespace: hobbyfarm-system
 spec:
-    id: example-course
     name: RXhhbXBsZSBDb3Vyc2UK # "Example Course"
     description: VGhpcyBpcyBhbiBleGFtcGxlIGNvdXJzZQo= # "This is an example course"
     scenarios:
@@ -33,12 +32,6 @@ spec:
 
 ## Configuration
 
-### `id` 
-
-Identifier for the course. Should be identical to the Kubernetes `metadata.name` field. Present for historical reasons, will be phased out in a future release. 
-
-> This field is currently *required* in HobbyFarm. Architecturally it is considered deprecated and may be removed in a future release. For now, users must continue to set this field. 
-
 ### `name`
 
 Display name for the course as shown in both the end-user UI and admin UI. This field should be base64 encoded.
@@ -53,7 +46,18 @@ This field defines the scenarios that comprise the course. Scenarios are display
 
 ### `categories`
 
-This field lists categories to which the course belongs. Categories are used in the UI to group scenarios with common elements together.
+This field allows a course to select scenarios _dynamically_ based on the categories applied to the scenario. A basic query format is used to match categories of scenarios. Any scenarios that match are included with the course _in addition to any scenarios defined in the [scenarios](#scenarios) field.
+
+From the admin UI, here are some example query strings:
+
+|Query|Effect|
+|-----|------|
+|`kubernetes`|All scenarios with category `kubernetes` are included.|
+|`!kubernetes`|All scenarios that are not in the `kubernetes` category are included.|
+|`kubernetes&basic`|Scenarios that have _both_ the `kubernetes` _and_ `basic` categories are included.|
+|`kubernetes&k3s&basic`|Queries can work with more than two categories.|
+|`kubernetes&!basic`|All Scenarios that are in the `kubernetes` category, but not in the `basic` category.|
+|`example&!example`|This query will never match any scenarios.|
 
 ### `virtual_machines`
 
