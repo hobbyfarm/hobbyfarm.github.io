@@ -172,8 +172,119 @@ Verify the creation of the user with &lt;code>kubectl get users -n &amp;lt;names
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="initial-vm-template">Initial VM Template&lt;/h2>
 &lt;p>Before you can provision virtual machines, you must first define a &lt;code>VirtualMachineTemplate&lt;/code>. A virtual machine template is a provider-agnostic representation of a template for a VM. It is used to schedule resources across different providers using a common definition.&lt;/p>
 &lt;p>See &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/virtualmachinetemplate/">this link&lt;/a> for a sample VMT and more information on that resource.&lt;/p>
-&lt;h2 id="seed-data">Seed Data&lt;/h2>
-&lt;p>For other examples of resources see &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/">architecture/resources&lt;/a>&lt;/p></description></item><item><title>Docs: Course</title><link>http://hobbyfarm.github.io/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/course/</guid><description>
+&lt;h2 id="configure-settings">Configure Settings&lt;/h2>
+&lt;p>HobbyFarm has some settings that can be adjusted via the Admin-UI or by altering the &lt;code>setting&lt;/code> kubernetes objects directly.&lt;/p></description></item><item><title>Docs: Configure Settings</title><link>http://hobbyfarm.github.io/docs/setup/settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/setup/settings/</guid><description>
+&lt;h2 id="settings">Settings&lt;/h2>
+&lt;p>HobbyFarm has some adjustable settings. They alter the behaviour of the plattform by adding or removing features via feature-gates or by setting numbers like the retention time of certain objects. All settings will be dynamically rendered in the Admin-UI.&lt;/p>
+&lt;p>Settings always have a name and a scope. The scope defines who can adjust this settings (at least this is the plan) as well as who can retreive the settings (Users will not see all the settings but only public available settings)&lt;/p>
+&lt;p>Values can be of one of four types:&lt;/p>
+&lt;ul>
+&lt;li>String&lt;/li>
+&lt;li>Integer&lt;/li>
+&lt;li>Float&lt;/li>
+&lt;li>Boolean&lt;/li>
+&lt;/ul>
+&lt;p>As well as of three different representations&lt;/p>
+&lt;ul>
+&lt;li>Scalar (single value)&lt;/li>
+&lt;li>Array&lt;/li>
+&lt;li>Map&lt;/li>
+&lt;/ul>
+&lt;p>Settings might also have Validators.
+Validators include:&lt;/p>
+&lt;ul>
+&lt;li>required&lt;/li>
+&lt;li>maximum&lt;/li>
+&lt;li>minimum&lt;/li>
+&lt;li>maxLength&lt;/li>
+&lt;li>minLength&lt;/li>
+&lt;li>format&lt;/li>
+&lt;li>pattern&lt;/li>
+&lt;li>enum&lt;/li>
+&lt;li>default&lt;/li>
+&lt;li>uniqueItems&lt;/li>
+&lt;/ul>
+&lt;p>See [https://github.com/hobbyfarm/gargantua/blob/master/pkg/property/types.go](Property Types) for a full List and corresponding data types.&lt;/p>
+&lt;h2 id="available-scopes">Available Scopes&lt;/h2>
+&lt;ul>
+&lt;li>public &lt;strong>Accessible without registration&lt;/strong>&lt;/li>
+&lt;li>ui (Accessible by registered users)&lt;/li>
+&lt;li>admin-ui (Accessible by admin only)&lt;/li>
+&lt;/ul>
+&lt;p>Scopes can also be created by operators or any HobbyFarm compatible application.
+Therefore the AWS Provisioning Operator could bring the &lt;code>aws&lt;/code> scope.&lt;/p>
+&lt;p>The Scope will be saved in label &lt;code>hobbyfarm.io/setting-scope&lt;/code>&lt;/p>
+&lt;h2 id="available-settings">Available Settings&lt;/h2>
+&lt;p>HobbyFarm brings these settings by default. They are automatically created when missing.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Display Name&lt;/th>
+&lt;th>Scope&lt;/th>
+&lt;th>Default value&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>motd-admin-ui&lt;/td>
+&lt;td>Admin UI MOTD&lt;/td>
+&lt;td>admin-ui&lt;/td>
+&lt;td>none&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>motd-ui&lt;/td>
+&lt;td>User UI MOTD&lt;/td>
+&lt;td>public&lt;/td>
+&lt;td>none&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>registration-disabled&lt;/td>
+&lt;td>Registration disabled&lt;/td>
+&lt;td>public&lt;/td>
+&lt;td>false&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="example-setting-manifest">Example Setting Manifest&lt;/h2>
+&lt;h3 id="scalar">Scalar&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">dataType&lt;/span>: &lt;span style="color:#ae81ff">boolean&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Setting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">labels&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hobbyfarm.io/setting-scope&lt;/span>: &lt;span style="color:#ae81ff">public&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">registration-disabled&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">value&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">valueType&lt;/span>: &lt;span style="color:#ae81ff">scalar&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="array-with-validators">Array with validators&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">dataType&lt;/span>: &lt;span style="color:#ae81ff">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">displayName&lt;/span>: &lt;span style="color:#ae81ff">String Array&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Setting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">labels&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hobbyfarm.io/setting-group&lt;/span>: &lt;span style="color:#ae81ff">my-group&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hobbyfarm.io/setting-scope&lt;/span>: &lt;span style="color:#ae81ff">public&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">string-array&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">value&lt;/span>: &lt;span style="color:#e6db74">&amp;#39;[&amp;#34;string&amp;#34;,&amp;#34;array&amp;#34;]&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">valueType&lt;/span>: &lt;span style="color:#ae81ff">array&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">minLength&lt;/span>: &lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">maxLength&lt;/span>: &lt;span style="color:#ae81ff">4&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="enum">Enum&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">dataType&lt;/span>: &lt;span style="color:#ae81ff">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Setting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">labels&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hobbyfarm.io/setting-scope&lt;/span>: &lt;span style="color:#ae81ff">public&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">enum-setting&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">value&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;abc&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">enum&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;xyz&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;abc&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;def&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">valueType&lt;/span>: &lt;span style="color:#ae81ff">scalar&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Course</title><link>http://hobbyfarm.github.io/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/course/</guid><description>
 &lt;p>A course is a collection of scenarios meant to be consumed as a single unit or as a series of individual sessions (configurable). A course is useful in situations where you want to group related learnings together or provide a day&amp;rsquo;s worth of curriculum to students who can retain their VMs from scenario to scenario.&lt;/p>
 &lt;p>Here&amp;rsquo;s an example course:&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
