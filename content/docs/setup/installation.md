@@ -4,70 +4,125 @@ weight = 2
 
 +++
 
-## 1 - Add Helm Repository
+## Step 1: Add Helm Repository
 
-Add the required Helm repository:
+```bash
+## Add the required Helm repository
+helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm
 
-`helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm`
+## Update your local Helm repository cache
+helm repo update
 
-## 2 - Examine hostnames and prepare Certificates
+## List available versions of HobbyFarm
+helm search repo hobbyfarm/hobbyfarm
 
-HobbyFarm requires four domains to serve its traffic:
-
-|Domain Example|Purpose|
-|--------------|--------|
-|api.your-hobbyfarm.com|API & Controller Hosting|
-|admin.your-hobbyfarm.com|Administrative Interface|
-|learn.your-hobbyfarm.com|End-User Learning Interface|
-|shell.your-hobbyfarm.com|WebSocket Shell Endpoint|
-
-Prior to installation of HobbyFarm you will need to create these entries in your DNS server(s) and point them to your load balancer, ingress endpoint, etc. Documentation of that process is outside the scope of this document. 
-
-> You are not required to adhere to these specifix prefixes (e.g. api, admin). You may choose your own. 
-
-> :warning: While it *may* work to host HobbyFarm at multiple sub-paths (e.g. your-hobbyfarm.io/learn) this is not currently a tested configuration. 
-
-HobbyFarm uses ingress for its web traffic and if TLS is enabled it will make use of certificates referenced via the ingress resource. You can specify the secret(s) that contains the key and certificate via the following `values.yaml` keys:
-
-```yaml
-tls:
-    enabled: true
-    secrets:
-        backend:    backend-tls-secret  # replace with your own
-        admin:      admin-tls-secret    # can be the same for each
-        ui:         ui-tls-secret       # e.g. if you are using *.your-hobbyfarm.com
-        shell:      shell-tls-secret
-    hostnames:
-        backend:    api.your-hobbyfarm.com
-        admin:      admin.your-hobbyfarm.com
-        shell:      shell.your-hobbyfarm.com
-        ui:         learn.your-hobbyfarm.com
+## Get the values.yaml for HobbyFarm
+helm show values hobbyfarm/hobbyfarm > values.yaml
 ```
 
-Please ensure that each certificate corresponds to the correct hostname as specified in `values.yaml`. For example, if you define a secret (as named in the example above) of `backend-tls-secret`, make sure the certificate in this secret is valid for `api.your-hobbyfarm.com`. Wildcard certificates *are* acceptable.
+## Step 2: Customize the Values File
 
-## 2 - Customize Values File
+There are several options available in the `values.yaml` file. Please refer to the [Helm options](appendix/helm_options.md) documentation for a full reference of these values. Additionally, the [HobbyFarm Helm Chart values.yaml](https://github.com/hobbyfarm/hobbyfarm/blob/master/charts/hobbyfarm/values.yaml) file is available for review and contains additional comments and examples.
 
-There are several options available in the `values.yaml` file for this helm chart. Please refer to the [helm options](appendix/helm_options.md) document for a full reference of these values. 
+### Hostname Configuration
 
-## 3 - Create Namespace
+HobbyFarm requires four domains to serve its traffic. Prior to installation of HobbyFarm, these domains must exist in a DNS server and must point to either a load balancer or a Kubernetes Node. Documentation of that process is outside the scope of this documentation.
 
-Create a namespace of your choice in which to install HobbyFarm. For example:
+| Domain | Purpose | HobbyFarm Service |
+|----------------|---------|---------|
+| api.{domain}.com | API & Controller Hosting | Gargantua Backend |
+| admin.{domain}.com | Administrative Interface | Admin-UI Frontend |
+| learn.{domain}.com | End-User Learning Interface | UI Frontend |
+| shell.{domain}.com | Shell Endpoint for UI | Gargantua Shell |
+
+> **NOTE:** It is not required to adhere to the prefixes shown in the examples above (e.g. api, admin). Users may choose any desired prefix.
+
+> :warning: HobbyFarm may work using sub-paths (e.g. {domain}.com/api) but this is not currently a tested configuration.
+
+### TLS Configuration
+HobbyFarm uses [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) for Web traffic and routing. If TLS is enabled, HobbyFarm will make use of certificates referenced via the Ingress resource. [Kubernetes TLS Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) can be created containing the key and certificate for each domain, and referenced in the `values.yaml` file.
+
+Example Kubernetes Secrets TLS manifest:
+```yaml
+## Create a Secret containing the TLS certificate and key for the backend domain, api.{domain}.com
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-tls-secret
+  namespace: hobbyfarm-system    ## The Secret must be created in the HobbyFarm namespace
+type: kubernetes.io/tls
+data:
+  tls.crt: <base64 encoded certificate>  ## Replace with a valid base64 encoded certificate
+  tls.key: <base64 encoded key>          ## Replace with a valid base64 encoded key
+```
+
+> **NOTE:** The creation of certificates is outside the scope of this documentation. Cert-manager can be used to automate the creation of TLS certificates. Please refer to the [cert-manager documentation](https://cert-manager.io/docs/) for more information.
+
+The following example shows the configuration for TLS in the `values.yaml` file:
+```yaml
+ingress:
+  enabled: true
+  tls:
+    enabled: true
+    secrets:
+      backend:    backend-tls-secret  ## References the Secret created above
+      admin:      admin-tls-secret
+      ui:         ui-tls-secret
+      shell:      shell-tls-secret
+    hostnames:
+      backend:    api.{domain}.com    ## Hostname for the backend, used in the above Secret
+      admin:      admin.{domain}.com
+      shell:      shell.{domain}.com
+      ui:         learn.{domain}.com
+```
+
+If unique certificates per hostname are required, a unique Secret per hostname must be created and associated with the hostname in the `values.yaml` file. Ensure each certificate stored in a Secret corresponds to the correct hostname, otherwise traffic will not be routed correctly.
+
+> **NOTE:** Wildcard certificates **_are_** acceptable.
+
+
+## Step 3: Create a Namespace
+
+Create a namespace to install HobbyFarm. For example:
 
 ```bash
 kubectl create namespace hobbyfarm-system
 ```
 
-## 4 - Install HobbyFarm 
+> **NOTE:** The namespace name is arbitrary and can be changed to suit your needs. However, be sure to use the same namespace name throughout the installation process.
+
+## Step 4: Install HobbyFarm via Helm
 
 Install HobbyFarm using a values file that you have created, or by specifying your chosen options using Helm's `--set` flags.
 
-For example:
-
 ```bash
-helm install hobbyfarm hobbyfarm/hobbyfarm --namespace hobbyfarm-system --set ingress.tls.enabled=true
+## Install HobbyFarm using a values file
+helm upgrade \
+  --install hobbyfarm hobbyfarm/hobbyfarm \
+  --namespace hobbyfarm-system \
+  --values values.yaml
+
+## Install HobbyFarm using --set flags
+helm upgrade \
+  --install hobbyfarm hobbyfarm/hobbyfarm \
+  --namespace hobbyfarm-system \
+  --set ingress.tls.enabled=true
 ```
 
-## 5 - Complete
+> **NOTE:** Using the `upgrade --install` command will install HobbyFarm if it does not exist, or upgrade it if it does exist.
 
-Installation should be complete at this point. Please proceed to [post-install setup](setup/post_install).
+## Step 5: Verify Installation
+
+Verify that HobbyFarm has been installed successfully by checking the status of the HobbyFarm pods.
+
+```bash
+## Use the watch command to monitor the status of the HobbyFarm pods
+watch -n1 kubectl get pods -n hobbyfarm-system
+
+## Use the watch commadn to monitor the deployments until all are in a Ready state
+watch -n1 kubectl get deployment -n hobbyfarm-system
+```
+
+## Step 6: Complete the Post-Install Setup
+
+Once installation has been verified, proceed to the [post-install setup](setup/post_install) documentation to complete the setup of HobbyFarm.
