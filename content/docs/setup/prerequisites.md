@@ -4,11 +4,13 @@ title = "Prerequisites"
 weight = 1
 +++
 
-## Installation
+The following prerequisites are required for installing HobbyFarm. Please ensure that all prerequisites are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.
+
+## Helm
 
 Helm v3 is required for installing HobbyFarm. Please refer to the [Helm documentation](https://helm.sh/docs/intro/install/) for installation instructions.
 
-## Kubernetes Version
+## Kubernetes
 
 In order to run HobbyFarm, a Kubernetes cluster with an installed ingress controller is required. The following list shows the supported Kubernetes versions for each HobbyFarm version.
 
@@ -19,7 +21,7 @@ In order to run HobbyFarm, a Kubernetes cluster with an installed ingress contro
 |v2.0.1|v1.24.x|
 |v1.0x|v1.23.x|
 
-## Role-Based Access Control (RBAC)
+### Role-Based Access Control (RBAC)
 
 HobbyFarm requires an account with the following permissions for installation. For simplicity, the use of an account with `cluster-admin` role binding is recommended.
 
