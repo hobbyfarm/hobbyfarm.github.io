@@ -4,21 +4,24 @@ title = "Prerequisites"
 weight = 1
 +++
 
-Generally speaking, all that is required to run HobbyFarm is a Kubernetes cluster with an ingress controller installed. 
+## Installation
 
-| HobbyFarm Version      | Supported Kubernetes Version (up to) |
-| ----------- | ----------- |
+Helm v3 is required for installing HobbyFarm. Please refer to the [Helm documentation](https://helm.sh/docs/intro/install/) for installation instructions.
+
+## Kubernetes Version
+
+In order to run HobbyFarm, a Kubernetes cluster with an installed ingress controller is required. The following list shows the supported Kubernetes versions for each HobbyFarm version.
+
+
+| HobbyFarm Version | Kubernetes Version (up to) |
+|-------------------|----------------------------|
+|v3.0.1|v1.25.x|
 |v2.0.1|v1.24.x|
-|v2.0.0|v1.24.x|
 |v1.0x|v1.23.x|
 
-## Helm
+## Role-Based Access Control (RBAC)
 
-Helm 3+ is required for installing HobbyFarm. 
-
-## RBAC
-
-In order to install HobbyFarm, it is required that you use an account with the following permissions:
+HobbyFarm requires an account with the following permissions for installation. For simplicity, the use of an account with `cluster-admin` role binding is recommended.
 
 |API Group|Resource|Verbs|
 |---------|--------|-----|
@@ -28,7 +31,12 @@ In order to install HobbyFarm, it is required that you use an account with the f
 |networking.k8s.io|Ingresses|Get, Create, Update, Delete|
 |rbac.authorization.k8s.io|ClusterRoles, ClusterRoleBindings, Roles, RoleBindings|Get, Create, Update, Delete|
 
-It is easiest to use a `ClusterAdmin` account to accomplish the above, but if you need to use a specific role, here is a definition for your convenience.
+
+### ClusterRole Manifest
+
+If an account is not available with full cluster access, or a `cluster-admin` role does not exist, the following `ClusterRole` manifest can be created and bound to an account.
+
+> **NOTE:** The following manifest maps to the permissions listed in the table above.
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -51,5 +59,4 @@ rules:
     - apiGroups: ["rbac.authorization.k8s.io"]
       resources: ["clusterroles", "clusterrolebindings", "roles", "rolebindings"]
       verbs: ["get", "create", "update", "delete"]
-      
 ```
