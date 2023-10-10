@@ -26,7 +26,7 @@ There are several options available in the `values.yaml` file. Please refer to t
 
 ### Hostname Configuration
 
-HobbyFarm requires four domains to serve its traffic. Prior to installation of HobbyFarm, these domains must exist in a DNS server and must point to either a load balancer or a Kubernetes Node. Documentation of that process is outside the scope of this documentation.
+HobbyFarm requires four domains to serve its traffic. Prior to installation of HobbyFarm, these domains **_must exist_** in a DNS server and must point to either a load balancer or a Kubernetes Node. Documentation of DNS configuration is outside the scope of this documentation.
 
 | Domain | Purpose | HobbyFarm Service |
 |----------------|---------|---------|
