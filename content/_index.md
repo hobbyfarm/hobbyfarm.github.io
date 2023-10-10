@@ -12,9 +12,9 @@ HobbyFarm is a [cloud-native](https://en.wikipedia.org/wiki/Cloud-native_computi
 
 HobbyFarm enables developers and engineers to execute hands-on training without requiring a powerful laptop or significant cloud resources. This allows trainers to focus on delivering content and education, rather than fixing issues with outdated virtual machine setups.
 
-| Current Release | Release Date |
-| :--- | :--- |
-| [hobbyfarm-3.0.1](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-3.0.1) | July 2023 |
+| Current Release | Release Date | Supported K8s Version |
+| :--- | :--- | :--- |
+| [hobbyfarm-3.0.1](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-3.0.1) | July 2023 | v1.25.x |
 
 ## Origin
 

@@ -8,7 +8,7 @@ weight = 40
 
 HobbyFarm is a community of developers, engineers, and trainers who are passionate with furthering education via cloud-native technologies. HobbyFarm welcomes and encourages contributions of all varieties.
 
-Please visit the [Github HobbyFarm Project](https://github.com/hobbyfarm) to explore the various repositories to find a place to contribute. Additionally, please join the [HobbyFarm Slack channel](https://rancher-users.slack.com/archives/C02AN2W6WSX) to discuss your ideas with the community.
+Please visit the [Github HobbyFarm Project](https://github.com/hobbyfarm) on Github to explore the various repositories to find a place to contribute. Additionally, please join the [HobbyFarm Slack channel](https://rancher-users.slack.com/archives/C02AN2W6WSX) to discuss your ideas with the community.
 
 ## Participation
 
@@ -32,3 +32,10 @@ HobbyFarm is committed to fostering a welcoming community. The following guideli
 3. Inclusion is central to this project. **_All_** who follow these rules are welcome.
 
 > **NOTE:** A more formal code of conduct is forthcoming in the near future.
+
+## Future Contribution Documentation
+
+The following documentation is planned for the near future:
+
+* Documentation Contribution Guide
+* Provisioner Contribution Guide
