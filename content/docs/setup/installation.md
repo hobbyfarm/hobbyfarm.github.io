@@ -4,6 +4,8 @@ weight = 2
 
 +++
 
+The following steps will guide you through the installation of HobbyFarm. Please ensure that all [prerequisites](/docs/setup/prerequisites) are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.
+
 ## Step 1: Add Helm Repository
 
 ```bash
@@ -22,7 +24,7 @@ helm show values hobbyfarm/hobbyfarm > values.yaml
 
 ## Step 2: Customize the Values File
 
-There are several options available in the `values.yaml` file. Please refer to the [Helm options](appendix/helm_options.md) documentation for a full reference of these values. Additionally, the [HobbyFarm Helm Chart values.yaml](https://github.com/hobbyfarm/hobbyfarm/blob/master/charts/hobbyfarm/values.yaml) file is available for review and contains additional comments and examples.
+There are several options available in the `values.yaml` file. Please refer to the [Helm options](/docs/appendix/helm_options) documentation for a full reference of these values. Additionally, the [HobbyFarm Helm Chart values.yaml](https://github.com/hobbyfarm/hobbyfarm/blob/master/charts/hobbyfarm/values.yaml) file is available for review and contains additional comments and examples.
 
 ### Hostname Configuration
 
@@ -125,4 +127,4 @@ watch -n1 kubectl get deployment -n hobbyfarm-system
 
 ## Step 6: Complete the Post-Install Setup
 
-Once installation has been verified, proceed to the [post-install setup](setup/post_install) documentation to complete the setup of HobbyFarm.
+Once installation has been verified, proceed to the [post-install setup](/docs/setup/post_install) documentation to complete the setup of HobbyFarm.
