@@ -1,5 +1,6 @@
 +++
 title = "Admin Account"
+description = "Create an initial administrator account for HobbyFarm."
 weight = 3
 +++
 

@@ -1,7 +1,7 @@
 +++
 title = "Installation"
+description = "Steps for the installation of HobbyFarm."
 weight = 2
-
 +++
 
 The following steps will guide you through the installation of HobbyFarm. Please ensure that all [prerequisites](/docs/setup/prerequisites) are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.

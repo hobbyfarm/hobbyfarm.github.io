@@ -1,6 +1,6 @@
 +++
 title = "Prerequisites"
-
+description = "Required prerequisites for installing HobbyFarm."
 weight = 1
 +++
 
