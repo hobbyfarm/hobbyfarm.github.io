@@ -125,6 +125,6 @@ watch -n1 kubectl get pods -n hobbyfarm-system
 watch -n1 kubectl get deployment -n hobbyfarm-system
 ```
 
-## Step 6: Complete the Post-Install Setup
+## Step 6: Setup an Admin User
 
-Once installation has been verified, proceed to the [post-install setup](/docs/setup/post_install) documentation to complete the setup of HobbyFarm.
+Once installation has been verified, proceed to the [Admin Account](/docs/setup/initial_admin) documentation to create an initial administrator account.
