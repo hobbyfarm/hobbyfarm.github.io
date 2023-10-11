@@ -1,7 +1,5 @@
 +++
 title = "Configure Settings"
-weight = 5
-
 +++
 
 ## Settings

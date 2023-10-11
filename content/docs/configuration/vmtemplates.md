@@ -23,12 +23,7 @@ The `Basic Information` section of the form is used to provide basic information
 | **_Name_** | The name of the VM Template. This name will be used to identify the VM Template in the HobbyFarm Admin-UI and API. |
 | **_Image_** | The image to use for the VM Template. The image must be a valid image existing on the provider platform. |
 
-
-#### Image Examples
-| Provider | Image | Image Type | AMI URL |
-| --- | --- | --- | --- |
-| DigitalOcean | ubuntu-20-04-x64 | Ubuntu 20.04 LTS x64 | [DO Available Images](https://do-community.github.io/available-images/) |
-| AWS | ami-0a6e38961e6e621b0 | Ubuntu 20.04 LTS x64 | [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html) |
+> **NOTE:** Please visit the [Provider Images](/docs/appendix/provider_images) page for more information on provider images and how to find an image for a specific provider.
 
 ### Config Map
 
