@@ -4,7 +4,9 @@ description = "Configure general HobbyFarm settings."
 weight = 1
 +++
 
-The Settings page allows administrators to configure general settings for the HobbyFarm platform. Settings are divided into the following scopes:
+The Settings page allows administrators to configure general settings for the HobbyFarm platform. To access the Settings page, log into the HobbyFarm Admin-UI and click the `Configuration` option in the top navigation menu. In the left navigation menu, click the `Settings` option.
+
+Settings are divided into the following `scopes`:
 
 ## Public
 The `Public` scope is used to configure settings which impact the HobbyFarm platform as a whole.
