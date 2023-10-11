@@ -1,12 +1,14 @@
 +++
-title = "Installation"
-description = "Steps for the installation of HobbyFarm."
+title = "Deployment"
+description = "Steps for the deployment of HobbyFarm via Helm."
 weight = 2
 +++
 
-The following steps will guide you through the installation of HobbyFarm. Please ensure that all [prerequisites](/docs/setup/prerequisites) are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.
+The following steps will guide you through the deployment of HobbyFarm in a Kubernetes environment using Helm. Please ensure that all [prerequisites](/docs/setup/prerequisites) are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.
 
 ## Step 1: Add Helm Repository
+
+Using Helm, add the HobbyFarm repository and generate a values.yaml file for customization.
 
 ```bash
 ## Add the required Helm repository

@@ -1,6 +1,6 @@
 +++
 title = "Prerequisites"
-description = "Required prerequisites for installing HobbyFarm."
+description = "Required prerequisites for deploying HobbyFarm."
 weight = 1
 +++
 
@@ -8,18 +8,17 @@ The following prerequisites are required for installing HobbyFarm. Please ensure
 
 ## Helm
 
-Helm v3 is required for installing HobbyFarm. Please refer to the [Helm documentation](https://helm.sh/docs/intro/install/) for installation instructions.
+Helm v3 is required for deploying HobbyFarm. Please refer to the [Helm documentation](https://helm.sh/docs/intro/install/) for instructions on installing Helm.
 
 ## Kubernetes
 
-In order to run HobbyFarm, a Kubernetes cluster with an installed ingress controller is required. The following list shows the supported Kubernetes versions for each HobbyFarm version.
+HobbyFarm is a Kubernetes-native application, using [custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/) and controllers to manage the application. To run HobbyFarm, a Kubernetes cluster with an installed ingress controller is required. The following list shows the supported Kubernetes versions for each HobbyFarm version.
 
-
-| HobbyFarm Version | Kubernetes Version (up to) |
-|-------------------|----------------------------|
-|v3.0.1|v1.25.x|
-|v2.0.1|v1.24.x|
-|v1.0x|v1.23.x|
+| HobbyFarm Release | Release Date | K8s Version (up to) |
+| :--- | :--- | :--- |
+| [hobbyfarm-3.0.1](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-3.0.1) | July 2023 | v1.25.x |
+| [hobbyfarm-2.0.9](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-2.0.9) | June 2023 | v1.24.x |
+| [hobbyfarm-1.0.0](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-1.0.0) | January 2022 | v1.23.x |
 
 ### Role-Based Access Control (RBAC)
 
