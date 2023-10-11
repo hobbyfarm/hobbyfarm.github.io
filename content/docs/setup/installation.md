@@ -37,7 +37,7 @@ HobbyFarm requires four domains to serve its traffic. Prior to installation of H
 | learn.{domain}.com | End-User Learning Interface | UI Frontend |
 | shell.{domain}.com | Shell Endpoint for UI | Gargantua Shell |
 
-> **NOTE:** It is not required to adhere to the prefixes shown in the examples above (e.g. api, admin). Users may choose any desired prefix.
+> **NOTE:** The documentation assumes the above domain prefixes are used for deployment of HobbyFarm. It is **_not required_** to adhere to the prefixes shown in the examples above (e.g. api, admin). Users may choose any desired prefix.
 
 > :warning: HobbyFarm may work using sub-paths (e.g. {domain}.com/api) but this is not currently a tested configuration.
 
