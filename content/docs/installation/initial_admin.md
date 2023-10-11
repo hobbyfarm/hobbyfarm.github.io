@@ -52,6 +52,8 @@ roleRef:
 
 > **NOTE:** Multiple users can be added to this RoleBinding by adding additional `subjects`.
 
-## Additional Users
+## Step 4: Login to the Admin UI
 
-See the [User documentation](/docs/architecture/resources/user) for more information on user management.
+Visit the HobbyFarm Admin UI at `https://admin.{domain}.com` and login with the user created in Step 1. If configured correctly, the user should be logged in and have access to the HobbyFarm Admin UI and see the following page:
+
+![HobbyFarm Admin Homepage](/images/hobbyfarm-admin-home.png)
