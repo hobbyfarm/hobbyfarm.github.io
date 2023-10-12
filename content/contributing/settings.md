@@ -10,7 +10,7 @@ All settings are dynamically rendered in the Admin-UI under the [Settings](/docs
 ## Settings
 Settings always have a `name` and a `scope`. The name provides a unique identifier for the setting while the scope defines who can adjust settings as well as who can retrieve the settings.
 
-### Default Settings
+### `Defaults`
 HobbyFarm generates the following default settings. If these settings are removed, they will be automatically recreated.
 
 | Name | Display Name | Scope | Default Value |
@@ -19,7 +19,20 @@ HobbyFarm generates the following default settings. If these settings are remove
 | motd-ui | User UI MOTD | public | none |
 | registration-disabled | Registration disabled | public | false |
 
-### Settings dataTypes
+The above settings can be reviewed and modified via the command line:
+```bash
+## Get a list of settings
+kubectl get settings -n hobbyfarm-system
+
+## Review a specific setting
+kubectl get settings registration-disabled -n hobbyfarm-system
+kubectl get settings registration-disabled -n hobbyfarm-system -o yaml
+
+## Edit a setting
+kubectl edit settings registration-disabled -n hobbyfarm-system
+```
+
+### `dataTypes`
 Settings `dataType` values can be of one of four types:
 | dataType | Example | Description |
 | --- | --- | --- |
@@ -28,7 +41,7 @@ Settings `dataType` values can be of one of four types:
 | float | 123.456 | A number with a decimal point. |
 | boolean | true | A value which is either `true` or `false`. |
 
-### Settings valueTypes
+### `valueTypes`
 Settings `valueType` values can be one of three types:
 | valueType | Example | Description |
 | --- | --- | --- |
@@ -36,7 +49,7 @@ Settings `valueType` values can be one of three types:
 | array | ["Hello", "World"] | A list of values. |
 | map | {"key": "value"} | A key/value pair. |
 
-### Settings Validators
+### `Validators`
 Settings may also include Validators.
 
 | Validator | Example | Description |
