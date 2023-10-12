@@ -20,23 +20,21 @@ HobbyFarm generates the following default settings. If these settings are remove
 | registration-disabled | Registration disabled | public | false |
 
 ### Settings dataTypes
-Settings `dataType` values can be of one of four types.
-
-| Type | Example | Description |
+Settings `dataType` values can be of one of four types:
+| dataType | Example | Description |
 | --- | --- | --- |
-| String | "Hello World" | A sequence of characters. |
-| Integer | 123 | A whole number. |
-| Float | 123.456 | A number with a decimal point. |
-| Boolean | true | A value which is either `true` or `false`. |
+| string | "Hello World" | A sequence of characters. |
+| integer | 123 | A whole number. |
+| float | 123.456 | A number with a decimal point. |
+| boolean | true | A value which is either `true` or `false`. |
 
-
-Values can also be of one of three representations.
-
-| Representation | Example | Description |
+### Settings valueTypes
+Settings `valueType` values can be one of three types:
+| valueType | Example | Description |
 | --- | --- | --- |
-| Scalar | "Hello World" | A single value. |
-| Array | ["Hello", "World"] | A list of values. |
-| Map | {"key": "value"} | A key/value pair. |
+| scalar | "Hello World" | A single value. |
+| array | ["Hello", "World"] | A list of values. |
+| map | {"key": "value"} | A key/value pair. |
 
 ### Settings Validators
 Settings may also include Validators.
