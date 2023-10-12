@@ -13,25 +13,19 @@ The `Public` scope is used to configure settings which impact the HobbyFarm plat
 
 ![Settings - Scope - Public](/images/hobbyfarm-admin-settings-public.png)
 
-### User UI MOTD
-A message to be displayed to users when logging into the HobbyFarm User UI.
-
-**Default:** Null
-
-#### Registration Disabled
-Disables the ability for users to register for a HobbyFarm account. This is useful when the HobbyFarm platform is being used in a closed environment with users who are already known and created by an administrator in the HobbyFarm platform.
-
-**Default:** False
+| Setting | Default | Optional | Description |
+| --- | --- | --- | --- |
+| **_User UI MOTD_** | _none_ | Yes | A message to be displayed to users when logging into the HobbyFarm User UI. |
+| **_Registration Disabled_** | _false_ | Yes | Disables the ability for users to register for a HobbyFarm account. This is useful when the HobbyFarm platform is being used in a closed environment with users who are already known and created by an administrator in the HobbyFarm platform. |
 
 ## Admin UI
 The `Admin UI` scope is used to configure settings which impact the HobbyFarm Admin UI.
 
 ![Settings - Scope - Admin UI](/images/hobbyfarm-admin-settings-adminui.png)
 
-### Admin UI MOTD
-A message to be displayed to administrators when logging into the HobbyFarm Admin UI.
-
-**Default:** Null
+| Setting | Default | Optional | Description |
+| --- | --- | --- | --- |
+| **_Admin UI MOTD_** | _none_ | Yes | A message to be displayed to administrators when logging into the HobbyFarm Admin UI. |
 
 ## User UI
 
@@ -43,8 +37,6 @@ The `Gargantua` scope is used to configure settings which impact the Gargantua b
 
 ![Settings - Scope - Admin UI](/images/hobbyfarm-admin-settings-gargantua.png)
 
-### ScheduledEvent Retention Time (h)
-
-The amount of time, in hours, that a scheduled event will be retained in the Gargantua database. After this time, the scheduled event will be deleted from the database.
-
-**Default:** 24
+| Setting | Default | Optional | Description |
+| --- | --- | --- | --- |
+| **_ScheduledEvent Retention Time (h)_** | _24_ | Yes | The amount of time, in hours, that a scheduled event will be retained in the Gargantua database. After this time, the scheduled event will be deleted from the database. |
