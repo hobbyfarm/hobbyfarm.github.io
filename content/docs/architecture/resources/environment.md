@@ -1,66 +1,66 @@
 +++
 title = "Environment"
+description = "Defines specific implementation details on how HobbyFarm connects to a provider for scheduling virtual machines."
 +++
 
-An `Environment` defines specific implementation details on how HobbyFarm connects to a provider for scheduling virtual machines. An environment resource contains configuration information such as where provider credentials are stored, what image to use when creating a VM, or how much capacity a provider has for a specific type of VM. 
 
-Here's an example environment manifest:
+An `Environment` resource contains configuration information such as where provider credentials are stored, what image to use when creating a VM, or how much capacity a provider has for a specific type of VM.
+
+## Environment Manifest Example
+The following shows an example of an Environment manifest in Kubernetes.
 
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: Environment
 metadata:
-    name: sample-environment
-    namespace: hobbyfarm-system
+  annotations:
+    hobbyfarm.io/provisioner: external
+  name: demo-environment
+  namespace: hobbyfarm-system
 spec:
-    count_capacity:
-        example-template: 500
-    display_name: sample-environment
-    environment_specifics:
-        cred_secret: sample-environment-creds
-        region: us-east-1
-        subnet: subnet-09823djk
-        vpc_security_group_id: sg-09823iwedlijqd39
-    provider: aws
-    template_mapping:
-        example-template:
-            image: ami-098230498234
-            size: t3.medium
-    ws_endpoint: ws.your-hobbyfarm.io
+  count_capacity:
+    example-do-vm-template: 10
+  display_name: demo-environment
+  environment_specifics:
+    region: nyc1
+    token-secret: do-secret
+  provider: digitalocean
+  template_mapping:
+    example-do-vm-template:
+      image: ubuntu-20-04-x64
+      size: s-1vcpu-512mb-10gb
+      ssh_username: root
+  ws_endpoint: shell.{domain}.com
 ```
 
 ## Configuration
 
 ### `count_capacity`
+This field is a `map[string]int` and is designed to inform HobbyFarm about the capacity of the environment for a particular VM template. Each key in this map is the name of the VM template, and the value is the number of total VMs of that type that the environment can support.
 
-This field is a `map[string]int` designed to inform HobbyFarm about the capacity of the environment for a particular VM template. Each key in this map is the name of the VM template, and the value is the number of total VMs of that type that the environment can support. 
+This map should be set according to what resources an environment has. Take care to account for multiple templates and totals that will affect the amount of instances, cpu, memory, etc. that are consumed in the provider.
 
-For example:
-```yaml
-...
-count_capacity:
-    example-template: 100
-```
-
-The above example indicates that at any given point in time, the environment can support up to 100 total `example-template` VMs.
-
-This map should be set according to what resources an environment has. Take care to account for multiple templates and totals that will affect the amount of instances, cpu, memory, etc. that are consumed in the provider. 
+> **NOTE:** In the example manifest shown above, the environment can support 10 total VMs of the `example-do-vm-template` type.
 
 ### `display_name`
-
 Display name for the environment.
 
 ### `environment_specifics`
+This field is a `map[string]string` designed to inform HobbyFarm about specific values for the environment. Entries in this map are utilized by VM provisioners for purposes.
 
-This field is a `map[string]string` designed to inform HobbyFarm about specific values for the environment. Entries in this map are utilized by VM provisioners for purposes such as security group ID, VPC, etc. The keys defined here are specific to the provisioner in use for the environment. Each provisioner may have specific values that are required.
+The keys defined here are specific to the provisioner in use for the environment, such as DigitalOcean or AWS. Each provisioner may have specific values that are required.
+
+> **NOTE:** In the example manifest shown above, the DigitalOcean provisioner requires a `region` and `token-secret` to be defined.
 
 ### `provider`
+This field is used to determine what provisioner should be utilized for an environment and **_must_** be used in conjunction with the `hobbyfarm.io/provisioner: external` annotation to set the external provisioner. See the [example manifest above](#environment-manifest-example) for a demonstration of this annotation.
 
-This field is used to determine what provisioner should be utilized for an environment. 
+> **NOTE:** Current available options are `digitalocean` and `aws`.
 
-The logic behind this field is somewhat complicated due to the original use of only Terraform for VM provisioning. The field originally informed HobbyFarm what Terraform module to use when provisioning. 
+> **NOTE:** An external provider must be installed separately from HobbyFarm. See the [Provisioner documentation](/docs/configuration/provisioners) for more information.
 
-With the advent of external provisioners this field now determines what external provisioner is used. When used in combination with the annotation `hobbyfarm.io/provisioner: external`, a matching external provisioner (to the `provider` field) will be used. 
+#### Terraform Deprecation
+The logic behind the `provider` field has changed. It was originally intended for use with Terraform for VM provisioning. The field originally informed HobbyFarm what Terraform module to use when provisioning. Since [Terraform is deprecated](/docs/configuration/provisioners/#terraform-provisioning), this field is now used to inform HobbyFarm what external provisioner to use for an environment.
 
 ### `template_mapping`
 

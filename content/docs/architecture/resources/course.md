@@ -65,7 +65,7 @@ From the admin UI, here are some example query strings:
 
 ### `virtual_machines`
 
-This field is a `map` listing each virtual machine that is required for the course. The key is the name of the VM (as used in both the end-user UI *and* the variable content in the steps), and the value is the VM template which "backs" that VM.
+This field is a `map[string]string` listing each virtual machine that is required for the course. The key is the name of the VM (as used in both the end-user UI *and* the variable content in the steps), and the value is the VM template which "backs" that VM.
 
 This field must define all VMs which are used for the scenarios that this course contains. A scenario may fail to execute if the course does not define a matching VM in this map for that scenario.
 
