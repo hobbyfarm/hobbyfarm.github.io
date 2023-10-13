@@ -14,6 +14,7 @@ To create a new `Role`, click on the `+NEW` button in the top left corner of the
 
 ![Role - Basic Information](/images/hobbyfarm-admin-role-create.png)
 
+#### `Variables`
 | Setting | Required | Description |
 | --- | --- | --- |
 | **_Role Name_** | Yes | The name of the `Role`. This name will be used to identify the `Role` in the HobbyFarm Admin-UI and API. |

@@ -12,7 +12,7 @@ To access the Settings page, log into the HobbyFarm Admin-UI and click the `Conf
 
 To create a new VM Template, click on the `+NEW` button in the top left corner of the page under the `VM Templates` heading. A popup will appear with a form to fill out the details of the new VM Template. The following information will explain each field in the form.
 
-### Basic Information
+### `Basic Information`
 
 The `Basic Information` section of the form is used to provide basic information about the VM Template.
 
@@ -27,7 +27,7 @@ The `Basic Information` section of the form is used to provide basic information
 
 > **NOTE:** Please visit the [Provider Images](/docs/appendix/provider_images) page for more information on provider images and how to find an image for a specific provider.
 
-### Config Map
+### `Config Map`
 
 The `Config Map` section of the form is used to provide configuration information for the VM Template. Variables are passed in a key/value format, where the key is the name of the variable and the value is the value of the variable.
 
@@ -35,7 +35,7 @@ The `Config Map` section of the form is used to provide configuration informatio
 
 > **NOTE:** Please visit the [Virtual Machine Template](/docs/architecture/resources/virtualmachinetemplate) Resource documentation for more information on `Config Map` variables.
 
-### Services
+### `Services`
 
 The `Services` section of the form defines services running on the virtual machine which are available for use by the end-user.
 
@@ -45,7 +45,7 @@ When a service is made available using the VM Template, it will be presented to 
 
 ![VM Template - Services](/images/hobbyfarm-admin-vmtemplate-services.png)
 
-### Confirmation
+### `Confirmation`
 
 Finally, the `Confirmation` section of the form is used to confirm the details of the VM Template before it is created. Once the details have been verified, click the `FINISH` button in the lower right corner to create the VM Template.
 

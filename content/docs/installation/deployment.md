@@ -28,7 +28,7 @@ helm show values hobbyfarm/hobbyfarm > values.yaml
 
 There are several options available in the `values.yaml` file. Please refer to the [Helm options](/docs/appendix/helm_options) documentation for a full reference of these values. Additionally, the [HobbyFarm Helm Chart values.yaml](https://github.com/hobbyfarm/hobbyfarm/blob/master/charts/hobbyfarm/values.yaml) file is available for review and contains additional comments and examples.
 
-### Hostname Configuration
+### `Hostname Configuration`
 
 HobbyFarm requires four domains to serve its traffic. Prior to installation of HobbyFarm, these domains **_must exist_** in a DNS server and must point to either a load balancer or a Kubernetes Node. Documentation of DNS configuration is outside the scope of this documentation.
 
@@ -43,7 +43,7 @@ HobbyFarm requires four domains to serve its traffic. Prior to installation of H
 
 > :warning: HobbyFarm may work using sub-paths (e.g. {domain}.com/api) but this is not currently a tested configuration.
 
-### TLS Configuration
+### `TLS Configuration`
 HobbyFarm uses [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) for Web traffic and routing. If TLS is enabled, HobbyFarm will make use of certificates referenced via the Ingress resource. [Kubernetes TLS Secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) can be created containing the key and certificate for each domain, and referenced in the `values.yaml` file.
 
 Example Kubernetes Secrets TLS manifest:

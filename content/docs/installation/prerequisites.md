@@ -20,7 +20,7 @@ HobbyFarm is a Kubernetes-native application, using [custom resources](https://k
 | [hobbyfarm-2.0.9](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-2.0.9) | June 2023 | v1.24.x |
 | [hobbyfarm-1.0.0](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-1.0.0) | January 2022 | v1.23.x |
 
-### Role-Based Access Control (RBAC)
+### `Role-Based Access Control (RBAC)`
 
 HobbyFarm requires an account with the following permissions for installation. For simplicity, the use of an account with `cluster-admin` role binding is recommended.
 
@@ -33,7 +33,7 @@ HobbyFarm requires an account with the following permissions for installation. F
 |rbac.authorization.k8s.io|ClusterRoles, ClusterRoleBindings, Roles, RoleBindings|Get, Create, Update, Delete|
 
 
-### ClusterRole Manifest
+### `ClusterRole Manifest`
 
 If an account is not available with full cluster access, or a `cluster-admin` role does not exist, the following `ClusterRole` manifest can be created and bound to an account.
 

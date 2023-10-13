@@ -16,7 +16,7 @@ To access the Environments page, log into the HobbyFarm Admin-UI and click the `
 
 To create a new `Environment`, click on the `+NEW` button in the top left corner of the page under the `Environments` heading. A popup will appear with a form to fill out the details of the new `Environment`. The following information will explain each field in the form.
 
-### Basic Information
+### `Basic Information`
 
 The `Basic Information` section of the form is used to provide basic information about the `Environment`.
 
@@ -31,7 +31,7 @@ The `Basic Information` section of the form is used to provide basic information
 | **_Provider_** | _none_ |  No | The provider to use for the environment, ie. `digitalocean`, `aws`, etc. |
 | **_Websocket Endpoint_** | _none_ |  No | This should be the URL for the `shell` domain, ie. `shell.{domain}.com`. |
 
-### Environment Specifics
+### `Environment Specifics`
 
 The `Environment Specifics` section of the form is used to add specific values for the environment in HobbyFarm.
 
@@ -39,7 +39,7 @@ Entries in this section are utilized by virtual machine provisioners, such as Di
 
 ![Environment - Environment Specifics](/images/hobbyfarm-admin-environment-specifics.png)
 
-### VM Templates
+### `VM Templates`
 
 The `VM Templates` section of the form is used to select the available VM Templates to use for the environment via a dropdown menu. Multiple VM Templates can be selected for an environment. The selected VM Templates will be available for use when creating a virtual machine in the environment.
 
@@ -55,7 +55,7 @@ Optional parameters can be set for each VM Template selected. These parameters a
 | --- | --- | --- | --- |
 | **_Limit_** | _0_ | No | The maximum number of virtual machines which can be deployed in the environment. |
 
-### IP Mappings
+### `IP Mappings`
 
 The `IP Mappings` section of the form is used in situations where [Carrier Grade NAT (CGNAT)](https://en.wikipedia.org/wiki/Carrier-grade_NAT) may be in use. This allows a 1:1 mapping of public IP addresses to private IP addresses.
 
@@ -63,7 +63,7 @@ The `IP Mappings` section of the form is used in situations where [Carrier Grade
 
 > **NOTE:** This feature may be deprecated in a future release.
 
-### Confirmation
+### `Confirmation`
 
 Finally, the `Confirmation` section of the form is used to confirm the details of the `Environment` before it is created. Once the details have been verified, click the `FINISH` button in the lower right corner to create the `Environment`.
 
