@@ -11,7 +11,29 @@ A ScheduledEvent can be created by an administrator in the Admin-UI under the `S
 
 > **NOTE:** ScheduledEvents should be created using the Admin-UI, which creates the ScheduledEvent resource. It is not recommended to create ScheduledEvent resources manually.
 
+## Kubernetes Commands
+The following commands are useful for managing ScheduledEvent resources in Kubernetes.
+
+```bash
+## Get a list of all ScheduledEvents
+kubectl get scheduledevents -n hobbyfarm-system
+
+## Create a ScheduledEvent from a YAML manifest
+kubectl apply -f {scheduledEventManifest} -n hobbyfarm-system
+
+## Edit a ScheduledEvent
+kubectl edit scheduledevent {scheduledEventName} -n hobbyfarm-system
+
+## Backup a ScheduledEvent to a YAML manifest
+kubectl get scheduledevent {scheduledEventName} -n hobbyfarm-system -o yaml > {scheduledEventManifest}
+
+## Delete a ScheduledEvent
+kubectl delete scheduledevent {scheduledEventName} -n hobbyfarm-system
+```
+
 ## Example ScheduledEvent Manifest
+The following shows an example of a ScheduledEvent manifest in Kubernetes.
+
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: ScheduledEvent

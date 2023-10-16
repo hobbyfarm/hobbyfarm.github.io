@@ -5,7 +5,29 @@ description = "Defines a set of settings that are accessible by a specific group
 
 A Scope is used to control access to settings in the HobbyFarm UI. For example, a setting that is only accessible by administrators would be assigned to the `admin-ui` scope.
 
+## Kubernetes Commands
+The following commands are useful for managing Scope resources in Kubernetes.
+
+```bash
+## Get a list of all Scopes
+kubectl get scopes -n hobbyfarm-system
+
+## Create a Scope from a YAML manifest
+kubectl apply -f {scopeManifest} -n hobbyfarm-system
+
+## Edit a Scope
+kubectl edit scope {scopeName} -n hobbyfarm-system
+
+## Backup a Scope to a YAML manifest
+kubectl get scope {scopeName} -n hobbyfarm-system -o yaml > {scopeManifest}
+
+## Delete a Scope
+kubectl delete scope {scopeName} -n hobbyfarm-system
+```
+
 ## Example Scope Manifests
+The following shows an example of a Scope manifest in Kubernetes.
+
 ```yaml
 ## Public Scope
 apiVersion: hobbyfarm.io/v1

@@ -5,6 +5,26 @@ description = "Configure pre-defined services with VirtualMachineTemplates."
 
 A `PredefinedService` provides pre-configured Services that are available when creating or updating [VirtualMachineTemplates](/docs/architecture/resources/virtualmachinetemplate). The services can be configured to provide a web interface that is proxied to the user.
 
+## Kubernetes Commands
+The following commands are useful for managing PredefinedService resources in Kubernetes.
+
+```bash
+## Get a list of all PredefinedServices
+kubectl get predefinedservices -n hobbyfarm-system
+
+## Create a PredefinedService from a YAML manifest
+kubectl apply -f {predefinedServiceManifest} -n hobbyfarm-system
+
+## Edit a PredefinedService
+kubectl edit predefinedservice {predefinedServiceName} -n hobbyfarm-system
+
+## Backup a PredefinedService to a YAML manifest
+kubectl get predefinedservice {predefinedServiceName} -n hobbyfarm-system -o yaml > {predefinedServiceManifest}
+
+## Delete a PredefinedService
+kubectl delete predefinedservice {predefinedServiceName} -n hobbyfarm-system
+```
+
 ## Example PredefinedService Manifest
 The following shows an example of a PredefinedService manifest in Kubernetes. This example shows the installation of [code-server](https://github.com/coder/code-server), which provides the ability to run VS Code on any machine and access the instance via a Web browser. Additional manifest examples can be found at the bottom of this page.
 ```yaml

@@ -6,6 +6,27 @@ description = "Defines specific implementation details on how HobbyFarm connects
 
 An `Environment` resource contains configuration information such as where provider credentials are stored, what image to use when creating a VM, or how much capacity a provider has for a specific type of VM.
 
+## Kubernetes Commands
+The following commands are useful for managing Environment resources in Kubernetes.
+
+```bash
+## Get a list of all Environments
+kubectl get environments -n hobbyfarm-system
+
+## Create an Environment from a YAML manifest
+kubectl apply -f {environmentManifest} -n hobbyfarm-system
+
+## Edit an Environment
+kubectl edit environment {environmentName} -n hobbyfarm-system
+
+## Backup an Environment to a YAML manifest
+kubectl get environment {environmentName} -n hobbyfarm-system -o yaml > {environmentManifest}
+
+## Delete an Environment
+kubectl delete environment {environmentName} -n hobbyfarm-system
+```
+
+
 ## Environment Manifest Example
 The following shows an example of an Environment manifest in Kubernetes.
 

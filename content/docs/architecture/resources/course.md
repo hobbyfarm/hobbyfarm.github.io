@@ -7,6 +7,27 @@ A `Course` is useful in situations where a trainer wants to group related learni
 
 The Course resource is used to populate content in the HobbyFarm Admin-UI Content Management > Courses page. Modifying a Course resource in Kubernetes will modify the information in the Admin-UI.
 
+## Kubernetes Commands
+The following commands are useful for managing Course resources in Kubernetes.
+
+```bash
+## Get a list of all Courses
+kubectl get courses -n hobbyfarm-system
+
+## Create a Course from a YAML manifest
+kubectl apply -f {courseManifest} -n hobbyfarm-system
+
+## Edit a Course
+kubectl edit course {courseName} -n hobbyfarm-system
+
+## Backup a Course to a YAML manifest
+kubectl get course {courseName} -n hobbyfarm-system -o yaml > {courseManifest}
+
+## Delete a Course
+kubectl delete course {courseName} -n hobbyfarm-system
+```
+
+
 ## Course Manifest Example
 The following shows an example of a Course manifest in Kubernetes.
 

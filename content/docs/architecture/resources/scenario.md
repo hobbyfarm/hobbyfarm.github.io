@@ -5,7 +5,29 @@ description = "A set of steps that are presented to a user during a session."
 
 Scenarios are the main content resource in HobbyFarm. They contain a series of steps which are presented to the end-user during a session. Scenarios also configure what [VirtualMachineTemplates](/docs/architecture/resources/virtualmachinetemplate) are necessary for use of the scenario.
 
+## Kubernetes Commands
+The following commands are useful for managing Scenario resources in Kubernetes.
+
+```bash
+## Get a list of all Scenarios
+kubectl get scenarios -n hobbyfarm-system
+
+## Create a Scenario from a YAML manifest
+kubectl apply -f {scenarioManifest} -n hobbyfarm-system
+
+## Edit a Scenario
+kubectl edit scenario {scenarioName} -n hobbyfarm-system
+
+## Backup a Scenario to a YAML manifest
+kubectl get scenario {scenarioName} -n hobbyfarm-system -o yaml > {scenarioManifest}
+
+## Delete a Scenario
+kubectl delete scenario {scenarioName} -n hobbyfarm-system
+```
+
 ## Example Scenario Manifest
+The following shows an example of a Scenario manifest in Kubernetes.
+
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: Scenario

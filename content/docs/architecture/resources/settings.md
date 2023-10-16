@@ -10,8 +10,29 @@ Settings always have a `name` and a `scope`. The name provides a unique identifi
 
 All settings are dynamically rendered in the Admin-UI under the Configuration > [Settings](/docs/configuration/settings) page.
 
+## Kubernetes Commands
+The following commands are useful for managing Setting resources in Kubernetes.
+
+```bash
+## Get a list of all Settings
+kubectl get settings -n hobbyfarm-system
+
+## Create a Setting from a YAML manifest
+kubectl apply -f {settingManifest} -n hobbyfarm-system
+
+## Edit a Setting
+kubectl edit setting {settingName} -n hobbyfarm-system
+
+## Backup a Setting to a YAML manifest
+kubectl get setting {settingName} -n hobbyfarm-system -o yaml > {settingManifest}
+
+## Delete a Setting
+kubectl delete setting {settingName} -n hobbyfarm-system
+```
+
 ## Example Setting Manifests
-The following are three example settings manifests. The first setting is a boolean value which is assigned to the `public` scope. The second setting is a string array which is assigned to the `admin-ui` scope. The third setting is a string value which is assigned to the `user-ui` scope.
+The following are three example Settings manifests.
+
 ```yaml
 ## Boolean dataType using a scalar.
 ## Assigned to the public scope.
@@ -70,18 +91,6 @@ HobbyFarm ships with the following default settings. If these settings are remov
 | motd-ui | User UI MOTD | public | none |
 | registration-disabled | Registration disabled | public | false |
 
-The above settings can be reviewed and modified via the command line:
-```bash
-## Get a list of settings
-kubectl get settings -n hobbyfarm-system
-
-## Review a specific setting
-kubectl get settings registration-disabled -n hobbyfarm-system
-kubectl get settings registration-disabled -n hobbyfarm-system -o yaml
-
-## Edit a setting
-kubectl edit settings registration-disabled -n hobbyfarm-system
-```
 ## Configuration
 ### `dataTypes`
 Settings `dataType` values can be of one of four types:

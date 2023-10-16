@@ -7,6 +7,17 @@ The `Session` resource in HobbyFarm tracks one or more users execution of a scen
 
 > **NOTE:** :warning: Sessions are created by HobbyFarm and **_SHOULD NOT_** be modified and/or created manually. This documentation is provided for informational purposes only.
 
+## Kubernetes Commands
+The following commands are useful for managing Session resources in Kubernetes.
+
+```bash
+## Get a list of all Sessions
+kubectl get sessions -n hobbyfarm-system
+
+## Delete a Session
+kubectl delete session {sessionName} -n hobbyfarm-system
+```
+
 ## Example Session Manifest
 The following is an example of a Session resource in Kubernetes.
 
