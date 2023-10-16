@@ -1,19 +1,20 @@
 +++
 title = "PredefinedService"
+description = "Configure pre-defined services with VirtualMachineTemplates."
 +++
 
-A `PredefinedService` is a way to provide preconfigured Services that are usible when creating or updating `VirtualMachineTemplates` inside the Admin-UI. 
+A `PredefinedService` provides pre-configured Services that are available when creating or updating [VirtualMachineTemplates](/docs/architecture/resources/virtualmachinetemplate). The services can be configured to provide a web interface that is proxied to the user.
 
-Example manifest:
-Look at the bottom of page for more Example Services.
+## Example PredefinedService Manifest
+The following shows an example of a PredefinedService manifest in Kubernetes. This example shows the installation of [code-server](https://github.com/coder/code-server), which provides the ability to run VS Code on any machine and access the instance via a Web browser. Additional manifest examples can be found at the bottom of this page.
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: PredefinedService
 metadata:
-  name: another-service
+  name: code-server-service
   namespace: hobbyfarm-system
 spec:
-  name: install Code-Server IDE
+  name: Code-Server Service
   cloud_config: |
     runcmd:
       - export HOME=/root
@@ -31,51 +32,53 @@ spec:
   no_rewrite_root_path: false
   rewrite_origin_header: false
   disallow_iframe: false
-``` 
+```
 
 ## Configuration
 
 ### `name`
 Display name for the Service inside the UI.
 
+**Default:** _null_
+
 ### `cloud_config`
-default: "" (empty string)
+Makes use of [cloud-init](https://cloudinit.readthedocs.io/en/latest/) to configure a Service. The cloud-init data is provided as a string and will executed during the initial boot of the virtual machine. Uses the [runcmd](https://cloudinit.readthedocs.io/en/latest/reference/modules.html#runcmd) feature of cloud-init to execute commands.
 
+**Default:** _null_
 
-Cloud-Config data. See [documentation]https://cloudinit.readthedocs.io/en/latest/
-
-> This has to be supported by the operator or the terraform module. 
+> **NOTE:** Cloud-Config must be supported by the operator that is used to provision the virtual machine.
 
 ### `has_webinterface`
-default: false
+If the service has a web interface which can be accessed by the user, the proxy will connect to the server via ssh and tunnel the web interface located at the configured port to the user.
 
-If the service provides a Webinterface that can be proxied to the user. The proxy will connect to the server via ssh and tunnel the webinterface located at the configured port to the user.
+**Default:** _false_
 
 ### `has_tab`
-default: false
+Used in conjunction with `has_webinterface`. If `has_tab` is set to true, the web interface will be get its own tab next to the terminal tabs in the User UI. The tab will be named after the virtual machine and the display name of the Service.
 
-All webinterfaces are grouped inside a submenu next to the terminal tabs.
-If `has_tab` is set to true the webinterface will be get its own tab next to the terminal tabs. The tab will be named after the virtual machine and the display name of the service.
+**Default:** _false_
 
 ### `port`
-default: 0
-
 The port to which the application is exposed. The proxy will tunnel `localhost:[port]`.
 
-### `path`
-default: "" (empty string)
+**Default:** _0_
 
+### `path`
 Some applications may provide different paths or entrypoint to be called like `/dashboard`. When `path` is defined the first page that is loaded will be the given path.
 
-### `rewrite_host_header`
-default: true
+**Default:** _null_
 
-The proxy will rewrite the host header of requests to the proxy/shell server host.
+### `rewrite_host_header`
+The HobbyFarm proxy will modify the host header of requests to match the host of the proxy/shell server.
+
+**Default:** _true_
 
 ### `no_rewrite_root_path`
-default: false
+The proxy will rewrite the requested path `/p/{virtualMachineId}/80/path/to/application` to `/path/to/application` when calling the server. Set this flag to `true` when you want the proxy so send the whole path.
 
-The proxy will rewrite the requested path `/p/[vm-id]/80/path/to/application` to `/path/to/application` when calling the server. Set this flag to `true` when you want the proxy so send the whole path. This is needed by some applications like Jupyter when providing a `base_url` parameter.
+**Default:** _false_
+
+> **NOTE:** This feature is required by certain applications, such as Jupyter, when providing a `base_url` parameter.
 
 ### `rewrite_origin_header`
 default: false
@@ -84,12 +87,14 @@ The proxy will rewrite the origin header of requests to localhost
 
 
 ### `disallow_iframe`
-default: false
+Disallow the web interface inside iFrame tabs. Users will have to open the exposed web interface inside a new browser tab.
 
-Disallow the webinterface inside iFrame tabs, the user will have to open the webinterface inside a new tab.
+**Default:** _false_
 
-## Example PredefinedServices:
+## Additional Example Manifests
+Below are additional examples of PredefinedService manifests.
 ### Docker
+The following is an example of a PredefinedService that installs Docker on a VM.
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: PredefinedService
@@ -101,34 +106,11 @@ spec:
   cloud_config: |
     runcmd:
       - curl -fsSL get.docker.com | bash
-    has_tab: true
-``` 
-### Code-Server
-```yaml
-apiVersion: hobbyfarm.io/v1
-kind: PredefinedService
-metadata:
-  name: code-server-service
-  namespace: hobbyfarm-system
-spec:
-  name: Code-Server IDE
-  port: 8080
-  cloud_config: |
-    runcmd:
-      - export HOME=/root
-      - curl -fsSL https://code-server.dev/install.sh > codeServerInstall.sh
-      - /bin/sh codeServerInstall.sh && systemctl enable --now code-server@root
-      - >
-        sleep 5 && sed -i.bak 's/auth: password/auth: none/'
-        ~/.config/code-server/config.yaml
-      - sudo systemctl restart code-server@root
   has_tab: true
-  has_webinterface: true
-  path: /?path=/root
-  rewrite_host_header: true
-``` 
-### Jupyter
+```
 
+### Jupyter
+The following is an example of a PredefinedService that installs a Jupyter Notebook on a VM.
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: PredefinedService
