@@ -56,6 +56,16 @@ kind: Scope
 metadata:
   name: admin-ui
   namespace: hobbyfarm-system
+
+---
+
+## Gargarntua Scope
+apiVersion: hobbyfarm.io/v1
+displayName: Admin UI
+kind: Scope
+metadata:
+  name: gargantua
+  namespace: hobbyfarm-system
 ```
 
 ## Default Scopes
@@ -66,6 +76,7 @@ The following scopes are available in HobbyFarm by default:
 | public | Settings which are accessible without registration. |
 | user-ui | Settings which are accessible by registered users. |
 | admin-ui | Settings which are accessible by administrators. |
+| gargantua | Settings which are used by the Gargantua backend. |
 
 ## Use with Settings Resource
 A Scope works in conjunction with the `hobbyfarm.io/setting-scope` label on a [Setting](/docs/architecture/resources/settings) resource. The label defines which scope a setting belongs to. For example, a setting that is assigned to the `admin-ui` scope would have the label `hobbyfarm.io/setting-scope: admin-ui`.
@@ -75,3 +86,4 @@ A Scope works in conjunction with the `hobbyfarm.io/setting-scope` label on a [S
   * `hobbyfarm.io/setting-scope: public`
   * `hobbyfarm.io/setting-scope: user-ui`
   * `hobbyfarm.io/setting-scope: admin-ui`
+  * `hobbyfarm.io/setting-scope: gargantua`
