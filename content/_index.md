@@ -20,7 +20,7 @@ HobbyFarm enables developers and engineers to execute hands-on training without 
 
 [Rancher Labs](https://rancher.com) operates training sessions called [Rodeos](https://www.rancher.com/events?event_type=rodeos), designed to teach developers and engineers about containers, Kubernetes, and Rancher technologies. These events take place at various locations, such as hotels and conferences, consisting of training presentations and hands-on labs.
 
-These labs were conducted using virtual machines running on attendees' computers. This often caused issues due to common problems such as low-end devices, network issues, and insufficient disk space.
+These labs were conducted using virtual machines running on attendees' computers. This often caused issues due to common problems such as low-end devices, network issues, insufficient disk space, and user permissions.
 
 [Eamon Bauman](https://github.com/ebauman) and [Chris Kim](https://github.com/Oats87) were tasked with finding a replacement for the virtual machine setup used in the training sessions. After being unsatisfied with the available options on the market, the pair decided to build a tool designed to meet the training needs of Rancher Labs.
 
