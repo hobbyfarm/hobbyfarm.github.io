@@ -73,10 +73,10 @@ A list of Courses that are included in the ScheduledEvent. The courses are liste
 > **NOTE:** A course must be created before it can be added to a ScheduledEvent.
 
 ### `creator`
-The administrator who created the ScheduledEvent.
+The name of the user who created the ScheduledEvent.
 
 ### `description`
-A description of the ScheduledEvent. This description is displayed to users when they view the ScheduledEvent.
+A description of the ScheduledEvent.
 
 ### `end_time`
 The time when the ScheduledEvent ends. Used in conjunction with `start_time` to define the time range of the ScheduledEvent.
@@ -85,7 +85,7 @@ The time when the ScheduledEvent ends. Used in conjunction with `start_time` to 
 The name of the ScheduledEvent. This name is displayed to users when they view the ScheduledEvent.
 
 ### `on_demand`
-Allocates virtual machine resources when requested by a user instead of pre-provisioning the resources. When set to `true`, virtual machine resources are allocated when a user initiates the ScheduledEvent. When set to `false`, virtual machine resources are allocated when the ScheduledEvent starts.
+Allocates virtual machine resources when requested by a user instead of pre-provisioning the resources. When set to `true`, virtual machine resources are allocated when a user initiates a session on the ScheduledEvent. When set to `false`, virtual machine resources are allocated based on the start time of the ScheduledEvent.
 
 **Default:** _true_
 
