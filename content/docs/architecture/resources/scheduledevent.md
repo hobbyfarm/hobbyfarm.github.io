@@ -87,7 +87,7 @@ The time when the ScheduledEvent ends. Used in conjunction with `start_time` to 
 The name of the ScheduledEvent. This name is displayed to users when they view the ScheduledEvent.
 
 ### `on_demand`
-Allocates virtual machine resources when requested by a user instead of pre-provisioning the resources. When set to `true`, virtual machine resources are allocated when a user initiates a session on the ScheduledEvent. When set to `false`, virtual machine resources are allocated based on the start time of the ScheduledEvent.
+Allocates virtual machine resources when requested by a user instead of pre-provisioning the resources. When set to `true`, virtual machine resources are allocated when a user initiates a session on the ScheduledEvent. When set to `false`, virtual machine resources are allocated based on the `start_time` of the ScheduledEvent.
 
 **Default:** _true_
 
@@ -115,4 +115,4 @@ A list of Scenarios that are included in the ScheduledEvent. Scenarios are liste
 > **NOTE:** A Scenario must be created before it can be added to a ScheduledEvent.
 
 ### `start_time`
-The time when the ScheduledEvent starts. Used in conjunction with `end_time` to define the time range of the ScheduledEvent.
+The time when the ScheduledEvent starts. Used in conjunction with `end_time` to define the time range of the ScheduledEvent. Used by `on_demand` when set to `false` to determine when to allocate virtual machine resources.
