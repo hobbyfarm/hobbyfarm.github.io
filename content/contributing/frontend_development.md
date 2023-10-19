@@ -51,6 +51,9 @@ The following instructions will assist in setting up a local development environ
 
 4. Launch the local server from the Git repository root directory.
     ```bash
+    ## Run the install command
+    npm install
+
     ## Start the local UI/Admin-UI server
     npm run start:local
     ```
