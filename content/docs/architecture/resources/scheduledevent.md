@@ -5,7 +5,7 @@ description = "A collection of Scenarios and Courses that are scheduled to run a
 
 In HobbyFarm, a `ScheduledEvent` is a collection of [Scenarios](/docs/architecture/resources/scenario) and [Courses](/docs/architecture/resources/course) that are scheduled to run at a specific time. ScheduledEvents make use of an access code to restrict access to the event.
 
-Users must enter the access code to view and initiate the event. The access code is created during the creation of the ScheduledEvent and can be changed at any time. A ScheduledEvent can be configured to run on-demand or at a specific time.
+Users must enter the access code to view and initiate the event. The access code is created during the creation of the ScheduledEvent and can be changed at any time. A ScheduledEvent can be configured to provision virtual machines on-demand or at a specific time.
 
 A ScheduledEvent can be created by an administrator in the Admin-UI under the `Scheduled Events` tab.
 
