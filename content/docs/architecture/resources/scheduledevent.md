@@ -81,7 +81,7 @@ A description of the ScheduledEvent.
 ### `end_time`
 The time when the ScheduledEvent ends. Used in conjunction with `start_time` to define the time range of the ScheduledEvent.
 
-> **NOTE**: All virtual machines are destroyed when the ScheduledEvent ends, if if the ScheduledEvent is deleted before the end time.
+> **NOTE**: All virtual machines are destroyed when the ScheduledEvent `end_time` is met or if the ScheduledEvent is deleted before the set `end_time`.
 
 ### `event_name`
 The name of the ScheduledEvent. This name is displayed to users when they view the ScheduledEvent.
