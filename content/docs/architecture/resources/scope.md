@@ -71,12 +71,14 @@ metadata:
 ## Default Scopes
 The following scopes are available in HobbyFarm by default:
 
-| Scope | Description |
-| --- | --- |
-| public | Settings which are accessible without registration. |
-| user-ui | Settings which are accessible by registered users. |
-| admin-ui | Settings which are accessible by administrators. |
-| gargantua | Settings which are used by the Gargantua backend. |
+| Scope | Description | Examples |
+| --- | --- | --- |
+| public | Settings which are publicly accessible. | Disabling of User Registration. |
+| user-ui | Settings which are accessible in the user-ui. | N/A |
+| admin-ui | Settings which are accessible in the admin-ui. | MOTD in the admin-ui. |
+| gargantua | Settings which are used by the Gargantua backend. | ScheduledEvent Retention Time. |
+
+> **NOTE:** All settings are accessible by administrators, regardless of the assigned Scope, based on RBAC rules.
 
 ## Use with Settings Resource
 A Scope works in conjunction with the `hobbyfarm.io/setting-scope` label on a [Setting](/docs/architecture/resources/settings) resource. The label defines which scope a setting belongs to. For example, a setting that is assigned to the `admin-ui` scope would have the label `hobbyfarm.io/setting-scope: admin-ui`.
