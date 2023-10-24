@@ -54,6 +54,8 @@ spec:
   ws_endpoint: shell.{domain}.com
 ```
 
+> **NOTE:** The inclusion of the `hobbyfarm.io/provisioner: external` annotation is required when using an external provisioner. However, the use of this annotation **_will_** break provisioning with Terraform. See the [Provisioner documentation](/docs/configuration/provisioners) for more information.
+
 ## Configuration
 
 ### `count_capacity`
