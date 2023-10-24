@@ -76,21 +76,21 @@ The keys defined here are specific to the provisioner in use for the environment
 > **NOTE:** In the example manifest shown above, the DigitalOcean provisioner requires a `region` and `token-secret` to be defined.
 
 ### `provider`
-This field is used to determine what provisioner should be utilized for an environment and **_must_** be used in conjunction with the `hobbyfarm.io/provisioner: external` annotation to set the external provisioner. See the [example manifest above](#environment-manifest-example) for a demonstration of this annotation.
+This field is used to determine what provider should be utilized for an environment.
 
-> **NOTE:** Current available options are `digitalocean` and `aws`.
+> **NOTE:** If using an [external provisioner](/docs/configuration/provisioners), this field is **_required_** and **_must_** be used in conjunction with the `hobbyfarm.io/provisioner: external` annotation to set the external provisioner. See the [example manifest above](#environment-manifest-example) for a demonstration of the `hobbyfarm.io/provisioner: external` annotation.
 
 > **NOTE:** An external provider must be installed separately from HobbyFarm. See the [Provisioner documentation](/docs/configuration/provisioners) for more information.
 
-#### Terraform Deprecation
-The logic behind the `provider` field has changed. It was originally intended for use with Terraform for VM provisioning. The field originally informed HobbyFarm what Terraform module to use when provisioning. Since [Terraform is deprecated](/docs/configuration/provisioners/#terraform-provisioning), this field is now used to inform HobbyFarm what external provisioner to use for an environment.
+#### :warning: Terraform Deprecation :warning:
+The logic behind the `provider` field has changed. The field originally informed HobbyFarm what [Terraform provider](https://registry.terraform.io/browse/providers) to use when provisioning. Since [Terraform is deprecated](/docs/configuration/provisioners/#terraform-provisioning), the recommended use of this field is to inform HobbyFarm what external provisioner to use for an environment.
 
 ### `template_mapping`
 
-This field is a `map[string]string` allowing administrators to configure specific values for each VM template in use in the environment. Some common uses of this map are for elements such as instance size or AMI. 
+This field is a `map[string]string` allowing administrators to configure specific values for each VM template in use in the environment. Some common uses of this map are for elements such as instance size or AMI.
 
-The keys defined here are specific to the provisioner in use for the environment. Each provisioner may have specific values that are required. 
+The keys defined here are specific to the provisioner in use for the environment. Each provisioner may have specific values that are required.
 
 ### `ws_endpoint`
 
-This field defines which websocket (shell) endpoint should be used by end-user clients to open a shell to VMs provisioned in this environment. This field may be used in situations where a specific shell server needs to be utilized. An example of this may be an environment where the shell server needs to be in a DMZ in order to access VMs that are otherwise isolated from the main HobbyFarm install. 
+This field defines which websocket (shell) endpoint should be used by end-user clients to open a shell to VMs provisioned in this environment. This field may be used in situations where a specific shell server needs to be utilized. An example of this may be an environment where the shell server needs to be in a DMZ in order to access VMs that are otherwise isolated from the main HobbyFarm install.
