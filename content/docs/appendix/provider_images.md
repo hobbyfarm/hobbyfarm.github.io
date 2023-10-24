@@ -12,4 +12,6 @@ A provider image is a virtual machine image which exists on a 3rd party cloud pr
 | AWS | ami-0a6e38961e6e621b0 | Ubuntu 20.04 LTS x64 | [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html) |
 
 ## Custom Images
-HobbyFarm supports the use of custom images. To use a custom image, the image must be available on the cloud provider platform and the image must be configured to allow the HobbyFarm service account, configured in the provisioner, to access the image.
+HobbyFarm supports the use of custom cloud images, for example a [custom built AWS AMI](https://developer.hashicorp.com/packer/integrations/hashicorp/amazon) built using [Hashicorp's Packer tool](https://www.packer.io). To use a custom image, the image must be built, pushed to the respective cloud platform, and accessible by [the provisioner](/docs/configuration/provisioners) used by HobbyFarm.
+
+> **NOTE:** Container images are not supported at this time.
