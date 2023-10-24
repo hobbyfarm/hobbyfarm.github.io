@@ -85,7 +85,7 @@ spec:
         - echo "Hello World"
 ```
 
-> **NOTE:** Future releases of HobbyFarm will allow the Cloud-Init configuration to be saved in it's own field inside the VirtualMachineTemplate.
+> **NOTE:** Future releases of HobbyFarm will allow the Cloud-Init configuration to be saved in it's own field inside the VirtualMachineTemplate or a ConfigMap.
 
 ## Services and Webinterfaces
 Services and webinterfaces can be configured for VMTs. A Service may provide a webinterface on a specific port and path which will be shown to the user in an iFrame. This webinterface will be proxied to ensure authorization.
