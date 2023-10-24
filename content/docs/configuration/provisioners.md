@@ -12,8 +12,8 @@ Below is a list of the provisioners currently supported by HobbyFarm. Please vis
 
 | Provisioner | Provider | Current Version | Description |
 | --- | --- | --- | --- |
-| [hf-provisioner-digitalocean](https://github.com/hobbyfarm/hf-provisioner-digitalocean) | DigitalOcean | v0.0.1 | A provisioner for DigitalOcean. |
-| [hf-provisioner-ec2](https://github.com/hobbyfarm/hf-provisioner-ec2) | AWS | WIP | A provisioner for AWS. |
+| [hf-provisioner-digitalocean](https://github.com/hobbyfarm/hf-provisioner-digitalocean) | `digitalocean` | v0.0.1 | A provisioner for DigitalOcean. |
+| [hf-provisioner-ec2](https://github.com/hobbyfarm/hf-provisioner-ec2) | `aws` | WIP | A provisioner for AWS. |
 | Terraform _(deprecated)_ | See the [Terraform documentation](https://developer.hashicorp.com/terraform/language/providers#how-to-find-providers). | Built-in | Use provisioning providers built-in to Terraform. |
 
 > **NOTE:** At least one [Environment](/docs/configuration/environments) **_must_** be created before a provisioner can be used in HobbyFarm.
