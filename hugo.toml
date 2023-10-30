@@ -1,6 +1,6 @@
 baseURL = 'http://hobbyfarm.github.io/'
 languageCode = 'en-us'
-title = 'HobbyFarm Documentation'
+title = 'HobbyFarm'
 offlineSearch = true
 enableEmoji = true
 [module]
@@ -9,3 +9,12 @@ proxy = 'direct'
 path = 'github.com/google/docsy'
 [[module.imports]]
 path = 'github.com/google/docsy/dependencies'
+[menu]
+[[menu.main]]
+  name = 'Home'
+  weight = 1
+  pageRef = '/'
+[[menu.main]]
+  name = 'Github'
+  weight = 99
+  url = 'https://github.com/hobbyfarm/hobbyfarm'

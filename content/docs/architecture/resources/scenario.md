@@ -1,10 +1,33 @@
 +++
 title = "Scenario"
+description = "A set of steps that are presented to a user during a session."
 +++
 
-Scenarios are the main content resource in HobbyFarm. They contain a series of steps which are presented to the end-user during a session. Scenarios also configure what VM templates are necessary for use of the scenario.
+Scenarios are the main content resource in HobbyFarm. They contain a series of steps which are presented to the end-user during a session. Scenarios also configure what [VirtualMachineTemplates](/docs/architecture/resources/virtualmachinetemplate) are necessary for use of the scenario.
 
-Here's an example scenario:
+## Kubernetes Commands
+The following commands are useful for managing Scenario resources in Kubernetes.
+
+```bash
+## Get a list of all Scenarios
+kubectl get scenarios -n hobbyfarm-system
+
+## Create a Scenario from a YAML manifest
+kubectl apply -f {scenarioManifest} -n hobbyfarm-system
+
+## Edit a Scenario
+kubectl edit scenario {scenarioName} -n hobbyfarm-system
+
+## Backup a Scenario to a YAML manifest
+kubectl get scenario {scenarioName} -n hobbyfarm-system -o yaml > {scenarioManifest}
+
+## Delete a Scenario
+kubectl delete scenario {scenarioName} -n hobbyfarm-system
+```
+
+## Example Scenario Manifest
+The following shows an example of a Scenario manifest in Kubernetes.
+
 ```yaml
 apiVersion: hobbyfarm.io/v1
 kind: Scenario
@@ -29,7 +52,7 @@ spec:
     virtual_machines:
         machine01: ubuntu-2004
         cluster01: sles-15-sp4
-    keepalive_duration: 90m 
+    keepalive_duration: 90m
     pause_duration: 4h
     pauseable: true
 ```
@@ -37,43 +60,62 @@ spec:
 ## Configuration
 
 ### `name`
-
-Display name for the scenario as shown in both the end-user UI and admin UI. This field should be base64 encoded.
+Display name for the scenario as shown in both the end-user UI and admin UI. This field requires base64 encoding.
 
 ### `description`
-
-A brief description of the scenario shown under the title in the end-user UI. This field should be base64 encoded. 
+A brief description of the scenario shown under the title in the end-user UI. This field requires base64 encoding.
 
 ### `steps`
+Contains a list of steps to be displayed to the end-user. The order of the steps in the list is the order in which they will be displayed. Each step is an object containing two fields, `title` and `content`. This field requires base64 encoding.
 
-This field contains a list of steps which (in order) are the steps displayed to the end-user. Each step is an object containing two fields, `title` and `content`. The value of each of these fields should be base64-encoded. 
+> **NOTE:** A step within the platform delineates a specific task in a scenario. For instance, an initial step might involve echoing "Hello World" to the CLI, followed by a step that writes "Hello World" to a file using the echo command, and concluding with a step that employs the cat command to display the file's content to stdout.
 
 ### `categories`
-
-This field lists categories to which the scenario belongs. Categories are used in [Courses](course.md) to dynamically include scenarios based on queries.
+Lists categories to which the scenario belongs. Categories are used in [Courses](/docs/architecture/resources/course) to dynamically include scenarios based on queries.
 
 ### `tags`
-
-This field lists tags applied to the scenario. Tags are used in the admin UI to quickly search for scenarios matching desired content. 
+Lists tags applied to the Scenario. Tags are used in the admin UI to quickly search for scenarios matching desired content.
 
 ### `virtual_machines`
-
-This field is a `map[string]string` listing each virtual machine that is required for the scenario. The key is the name of the VM (as used in both the end-user UI *and* the variable content in the steps), and the value is the VM template which "backs" that VM. 
+This field contains a `map[string]string` that outlines all the virtual machines needed for a specific scenario, indexed by their names. Each key represents the name of a virtual machine, a label that is consistent in the User UI and within the variable content throughout the steps. The corresponding value for each key identifies the [VirtualMachineTemplate](/docs/architecture/resources/virtualmachinetemplate) associated with that particular virtual machine, serving as its blueprint.
 
 ### `keepalive_duration`
+Defines the duration of time after which a user's virtual machines will be destroyed by HobbyFarm upon user inactivity. For example, should a user become inactive, the platform will wait for the duration of time defined in this field before destroying the deployed virtual machines.
 
-This field defines the duration of time after which a user's VMs can be destroyed by HobbyFarm upon user inactivity. In other words, if a user becomes inactive (their instance of the end-user UI stops sending pings to the server) this is the duration of time HobbyFarm will wait before reclaiming their resources. 
+Acceptable values for this field are of the form `{x}m` or `{x}h` where `{x}` is a positive integer that denotes minutes or hours of time.
 
-Acceptable values for this field are of the form `XXm` or `XXh` where `XX` is a positive integer that denotes minutes or hours of time. 
+```yaml
+## Example keepalive_duration value of 90 minutes
+keepalive_duration: 90m
+
+## Example keepalive_duration value of 4 hours
+keepalive_duration: 4h
+```
+
+**Default:** _10m_
 
 ### `pause_duration`
+Defines the duration of time a user is able to pause an active session.
 
-This field defines the duration of time a user is able to pause their session. The end-user UI contains a button that allows (if enabled) a user to stop the keepalive countdown. This permits the user to take actions that otherwise may result in VM teardown, such as closing their laptop or disconnecting their Internet connection. If a user pauses their session, HobbyFarm will wait until this duration expires before once again reenabling the keepalive duration. Thus the maximum time a user can be paused _and_ inactive is the sum of `keepalive_duration` and `pause_duration`.
+The User UI contains a button that, if enabled, allows a user to stop the keepalive countdown. This permits the user to take actions that otherwise may result in VM teardown, such as closing their laptop or disconnecting the Internet connection.
 
-Acceptable values for this field are of the form `XXm` or `XXh` where `XX` is a positive integer that denotes minutes or hours of time. 
+If a user pauses the session, the platform will wait until this duration expires before reenabling the keepalive duration.
+
+Acceptable values for this field are of the form `{x}m` or `{x}h` where `{x}` is a positive integer that denotes minutes or hours of time.
+
+> **NOTE:**  Thus the maximum time a user can be paused **_and_** inactive is the sum of `keepalive_duration` and `pause_duration`.
+
+```yaml
+## Example pause_duration value of 90 minutes
+pause_duration: 90m
+
+## Example pause_duration value of 4 hours
+pause_duration: 4h
+```
+
+**Default:** _1h_
 
 ### `pauseable`
+This field determines whether an end-user may pause an active session. If `true`, the end-user may pause the session. If `false`, the end-user may not pause the session.
 
-This field determines whether an end-user may pause their session. `true` enables the pausing of sessions, `false` disables it.
-
-This toggle only applies to sessions that are using this scenario. 
+> **NOTE:** The toggle only applies to sessions which the scenario applies.

@@ -1,10 +1,33 @@
 +++
 title = "User"
+description = "A user or administrator of the HobbyFarm platform."
 +++
 
-Users are represented in HobbyFarm via the `User` resource. 
+Users are represented in HobbyFarm via the `User` resource. Users can be created automatically via the registration page or manually via a manifest.
 
-Here's an example of that resource:
+## Kubernetes Commands
+The following commands are useful for managing User resources in Kubernetes.
+
+```bash
+## Get a list of all Users
+kubectl get users -n hobbyfarm-system
+
+## Create a User from a YAML manifest
+kubectl apply -f {userManifest} -n hobbyfarm-system
+
+## Edit a User
+kubectl edit user {userName} -n hobbyfarm-system
+
+## Backup a User to a YAML manifest
+kubectl get user {userName} -n hobbyfarm-system -o yaml > {userManifest}
+
+## Delete a User
+kubectl delete user {userName} -n hobbyfarm-system
+```
+
+## Example User Manifest
+The following is an example of a User resource in Kubernetes.
+
 ```yaml
 apiVersion: hobbyfarm.io/v2
 kind: User
@@ -26,13 +49,10 @@ spec:
 
 ## Configuration
 
-Most user accounts are created through registration via the end-user UI. You should only need to manually create or adjust accounts for users that need access to the admin UI.
-
 ### `email`
+Determines the username for the user. During original development of HobbyFarm it was assumed that all users would login using an email address and password. However, no validation in HobbyFarm or any UI forces an email to be used for this field.
 
-This field determines the username for the user. During original development of HobbyFarm it was assumed that all users would login using an email address and password. However, no validation in HobbyFarm or any UI forces an email to be used for this field. 
-
-*Therefore it is acceptable to treat this field as a synonym for username.*
+> **NOTE:** It is acceptable to treat this field as a synonym for username.
 
 ### `password`
 

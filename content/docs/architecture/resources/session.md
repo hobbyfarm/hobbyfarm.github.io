@@ -1,12 +1,25 @@
 +++
 title = "Session"
+description = "A user currently executing a scenario or course."
 +++
 
-In HobbyFarm, a session is defined as a user currently executing a scenario or course. The Session resource in HobbyFarm tracks that occurrence, storing information such as the start time of the user, which scenario or course is being executed, etc. 
+The `Session` resource in HobbyFarm tracks one or more users execution of a scenario or course, storing information such as the start time of the user, which scenario or course is being executed, etc.
 
-> :warning: Sessions are always created by HobbyFarm's code. Except in very rare, surgical operations, you should not create a Session resource via the Kubernetes API. You may view the Session in this manner but creating one outside of HobbyFarm's code is not a supported operation. 
+> **NOTE:** :warning: Sessions are created by HobbyFarm and **_SHOULD NOT_** be modified and/or created manually. This documentation is provided for informational purposes only.
 
-Here's an example Session:
+## Kubernetes Commands
+The following commands are useful for managing Session resources in Kubernetes.
+
+```bash
+## Get a list of all Sessions
+kubectl get sessions -n hobbyfarm-system
+
+## Delete a Session
+kubectl delete session {sessionName} -n hobbyfarm-system
+```
+
+## Example Session Manifest
+The following is an example of a Session resource in Kubernetes.
 
 ```yaml
 apiVersion: hobbyfarm.io/v1
@@ -30,52 +43,44 @@ status:
     end_time: "2006-01-02 17:04:05.999999999 -0700 MST"
 ```
 
-## Configuration
+## Specification Configuration
 
 ### `scenario`
-
-Id of the scenario that the user is currently executing. 
+The identification of the scenario currently in use by the user.
 
 ### `course`
-
-If the user is executing a scenario in the context of a course, this field tracks the course id.
+If the user is executing a scenario in the context of a course, this field tracks the course identification.
 
 ### `keep_course_vm`
-
-Whether or not HobbyFarm should keep the VMs referenced by this session for the duration of the Course. 
+Determines if HobbyFarm should/shouldn't keep the virtual machines referenced by the session for the duration of the Course. If `true`, the virtual machines are kept. If `false`, the virtual machines are deleted when the user finishes the session.
 
 ### `user`
-
-Id of the user that owns this session.
+The identification of the user that owns the session.
 
 ### `vm_claim`
-
-Id of the VirtualMachineClaim that this session owns. 
+The identification of the VirtualMachineClaim owned by the session.
 
 ### `access_code`
+The identification of the AccessCode that granted access to the scenario/course.
 
-Id of the AccessCode that granted access to this scenario/course.
+## Status Configuration
 
-### `status.paused`
+### `paused`
+Shows if the session has been paused by the user. If `true`, the session is paused. If `false`, the session is not paused.
 
-Whether or not the user has paused the session.
+### `pause_time`
+A time stamp marking when the user paused the session.
 
-### `status.pause_time`
+### `active`
+Shows if the session is currently active. If `true`, the session is active. If `false`, the session is inactive.
 
-Time stamp marking when the user paused their session.
+### `finished`
+Shows if the session has concluded. If `true`, the session has concluded. If `false`, the session is still active.
 
-### `status.active`
+### `start_time`
+The timestamp when the session was created.
 
-Whether or not this session is active. 
+### `end_time`
+The timestamp after which point the session expires and is concluded.
 
-### `status.finished`
-
-Whether or not this session has concluded.
-
-### `status.start_time`
-
-The timestamp when this session was created.
-
-### `status.end_time`
-
-The timestamp after which point the session expires and is concluded. This timestamp is continuously updated as the end-user UI sends "keepalive" messages to the HobbyFarm API endpoint. Every keepalive message advances the timestamp. This prevents an active user from getting disconnected, but more importantly allows HobbyFarm to reclaim resources from users who have closed their browsers or otherwise gone inactive.
+> **NOTE:** The timestamp is continuously updated as the end-user UI sends "keep-alive" messages to the HobbyFarm API endpoint. Every keep-alive message advances the timestamp. This prevents an active user from getting disconnected, but more importantly allows HobbyFarm to reclaim resources from users who have closed their browsers or otherwise gone inactive.

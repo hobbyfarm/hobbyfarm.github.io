@@ -6,6 +6,17 @@ linkTitle = "Community"
 weight = 30
 +++
 
-A Slack channel is available at https://slack.rancher.io in channel #hobbyfarm 
+The HobbyFarm community is a group of developers, engineers, and trainers who are passionate about furthering education via cloud-native technologies. HobbyFarm welcomes and encourages contributions of all varieties.
 
-A developer meeting is held bi-weekly at 09:00 America/Chicago (US/Central) on Tuesdays. To join, please request an invitation in the Slack channel. 
+## Slack
+A Slack channel is available in [Rancher Users Slack](https://rancher-users.slack.com) in the [#hobbyfarm](https://rancher-users.slack.com/archives/C02AN2W6WSX) channel. Come and join us!
+
+## Developer Meetings
+The HobbyFarm developer meeting is held twice a month. To join, please request an invitation in the Slack channel.
+
+| Time | Timezone | Day |
+| :--- | :--- | :--- |
+| 09:00 | Central Daylight Time (CDT) | Tuesday |
+| 14:00 | Coordinated Universal Time (UTC) | Tuesday |
+
+> **NOTE:** The meeting time is subject to change due to daylight savings time.

@@ -1,5 +1,5 @@
 +++
 title = "Appendix"
+description = "Contains various appendix pages with reference and additional content."
+weight = 99
 +++
-
-Contained are various appendix pages with reference and additional content.
