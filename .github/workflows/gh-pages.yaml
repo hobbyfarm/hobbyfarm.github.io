@@ -4,13 +4,14 @@ on:
   push:
     branches:
       - main  # Set a branch to deploy
+      - hugo-test
   pull_request:
 
 jobs:
   deploy:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true  # Fetch Hugo themes (true OR recursive)
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
@@ -26,7 +27,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/hugo-test'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
