@@ -1,9 +1,290 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Configuration on HobbyFarm</title><link>http://hobbyfarm.github.io/docs/configuration/</link><description>Recent content in Configuration on HobbyFarm</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/configuration/index.xml" rel="self" type="application/rss+xml"/><item><title>Settings</title><link>http://hobbyfarm.github.io/docs/configuration/settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/settings/</guid><description>The Settings page allows administrators to configure general settings for the HobbyFarm platform. To access the Settings page, log into the HobbyFarm Admin-UI and click the Configuration option in the top navigation menu. In the left navigation menu, click the Settings option.
-Settings are divided into the following scopes:
-Public The Public scope is used to configure settings which impact the HobbyFarm platform as a whole.
-Setting Default Optional Description User UI MOTD none Yes A message to be displayed to users when logging into the HobbyFarm User UI.</description></item><item><title>VM Templates</title><link>http://hobbyfarm.github.io/docs/configuration/vmtemplates/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/vmtemplates/</guid><description>The VM Templates page allows administrators to configure templates for virtual machines used by HobbyFarm. These templates are used in by HobbyFarm Environments to create virtual machines on 3rd party platforms.
-To access the Settings page, log into the HobbyFarm Admin-UI and click the Configuration option in the top navigation menu. In the left navigation menu, click the VM Templates option.
-Creating a VM Template To create a new VM Template, click on the +NEW button in the top left corner of the page under the VM Templates heading.</description></item><item><title>Environments</title><link>http://hobbyfarm.github.io/docs/configuration/environments/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/environments/</guid><description>An Environment defines specific implementation details on how HobbyFarm connects to a provider, such as DigitalOcean or AWS, for scheduling virtual machines. An environment defines configuration information such as provider credentials, virtual machine templates to use, and the total capacity of virtual machines which can be deployed.
-To access the Environments page, log into the HobbyFarm Admin-UI and click the Configuration option in the top navigation menu. In the left navigation menu, click the Environments option.</description></item><item><title>Provisioners</title><link>http://hobbyfarm.github.io/docs/configuration/provisioners/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/provisioners/</guid><description>In HobbyFarm, a provisioner is a Kubernetes resource used to define the specific implementation details on how HobbyFarm connects to a provider, such as DigitalOcean or AWS, for scheduling virtual machines. A provisioner defines configuration information such as provider credentials, virtual machine templates to use, and the total capacity of virtual machines which can be deployed.
-Current Provisioners Below is a list of the provisioners currently supported by HobbyFarm. Please visit the links below for more information on each provisioner, including documentation on how to deploy and configure the provisioners.</description></item><item><title>Roles</title><link>http://hobbyfarm.github.io/docs/configuration/roles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/roles/</guid><description>In Kubernetes, a Role is a set of permissions that can be assigned to a user or group of users. A Role can be assigned to a user or group of HobbyFarm users via a RoleBinding. HobbyFarm provides an interface for creating and managing HobbyFarm specific Roles via the Admin-UI.
-To access the Roles page, log into the HobbyFarm Admin-UI and click the Configuration option in the top navigation menu. In the left navigation menu, click the Roles option.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm – Configuration</title><link>http://hobbyfarm.github.io/docs/configuration/</link><description>Recent content in Configuration on HobbyFarm</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/configuration/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Settings</title><link>http://hobbyfarm.github.io/docs/configuration/settings/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/settings/</guid><description>
+&lt;p>The Settings page allows administrators to configure general settings for the HobbyFarm platform. To access the Settings page, log into the HobbyFarm Admin-UI and click the &lt;code>Configuration&lt;/code> option in the top navigation menu. In the left navigation menu, click the &lt;code>Settings&lt;/code> option.&lt;/p>
+&lt;p>Settings are divided into the following &lt;code>scopes&lt;/code>:&lt;/p>
+&lt;h2 id="public">Public&lt;/h2>
+&lt;p>The &lt;code>Public&lt;/code> scope is used to configure settings which impact the HobbyFarm platform as a whole.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-settings-public.png" alt="Settings - Scope - Public">&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Optional&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>User UI MOTD&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>none&lt;/em>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>A message to be displayed to users when logging into the HobbyFarm User UI.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Registration Disabled&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>false&lt;/em>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>Disables the ability for users to register for a HobbyFarm account. This is useful when the HobbyFarm platform is being used in a closed environment with users who are already known and created by an administrator in the HobbyFarm platform.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="admin-ui">Admin UI&lt;/h2>
+&lt;p>The &lt;code>Admin UI&lt;/code> scope is used to configure settings which impact the HobbyFarm Admin UI.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-settings-adminui.png" alt="Settings - Scope - Admin UI">&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Optional&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Admin UI MOTD&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>none&lt;/em>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>A message to be displayed to administrators when logging into the HobbyFarm Admin UI.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="user-ui">User UI&lt;/h2>
+&lt;p>Currently, no settings are available for the &lt;code>User UI&lt;/code> scope.&lt;/p>
+&lt;h2 id="gargantua">Gargantua&lt;/h2>
+&lt;p>The &lt;code>Gargantua&lt;/code> scope is used to configure settings which impact the Gargantua backend service.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-settings-gargantua.png" alt="Settings - Scope - Admin UI">&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Optional&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>ScheduledEvent Retention Time (h)&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>24&lt;/em>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>The amount of time, in hours, that a scheduled event will be retained in the Gargantua database. After this time, the scheduled event will be deleted from the database.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: VM Templates</title><link>http://hobbyfarm.github.io/docs/configuration/vmtemplates/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/vmtemplates/</guid><description>
+&lt;p>The VM Templates page allows administrators to configure templates for virtual machines used by HobbyFarm. These templates are used in by HobbyFarm &lt;code>Environments&lt;/code> to create virtual machines on 3rd party platforms.&lt;/p>
+&lt;p>To access the Settings page, log into the HobbyFarm Admin-UI and click the &lt;code>Configuration&lt;/code> option in the top navigation menu. In the left navigation menu, click the &lt;code>VM Templates&lt;/code> option.&lt;/p>
+&lt;h2 id="creating-a-vm-template">Creating a VM Template&lt;/h2>
+&lt;p>To create a new VM Template, click on the &lt;code>+NEW&lt;/code> button in the top left corner of the page under the &lt;code>VM Templates&lt;/code> heading. A popup will appear with a form to fill out the details of the new VM Template. The following information will explain each field in the form.&lt;/p>
+&lt;h3 id="basic-information">&lt;code>Basic Information&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>Basic Information&lt;/code> section of the form is used to provide basic information about the VM Template.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-vmtemplate-basic.png" alt="VM Template - Basic Information">&lt;/p>
+&lt;h4 id="variables">Variables&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Name&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The name of the VM Template. This name will be used to identify the VM Template in the HobbyFarm Admin-UI and API.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Image&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The image to use for the VM Template. The image must be a valid image existing on the provider platform.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Please visit the &lt;a href="http://hobbyfarm.github.io/docs/appendix/provider_images">Provider Images&lt;/a> page for more information on provider images and how to find an image for a specific provider.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="config-map">&lt;code>Config Map&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>Config Map&lt;/code> section of the form is used to provide configuration information for the VM Template. Variables are passed in a key/value format, where the key is the name of the variable and the value is the value of the variable.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-vmtemplate-configmap.png" alt="VM Template - Config Map">&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Please visit the &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/virtualmachinetemplate">Virtual Machine Template&lt;/a> Resource documentation for more information on &lt;code>Config Map&lt;/code> variables.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="services">&lt;code>Services&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>Services&lt;/code> section of the form defines services running on the virtual machine which are available for use by the end-user.&lt;/p>
+&lt;p>For instance, a virtual machine can run a service like &lt;a href="https://code.visualstudio.com/docs/remote/vscode-server">Visual Studio Code Server&lt;/a>, which would allow a user to securely connect to the virtual machine via a local VS Code client. This running service can be exposed to the Internet via a specific port number, ie. 8080, on the virtual machine.&lt;/p>
+&lt;p>When a service is made available using the VM Template, it will be presented to the user in a tab next to VM shell in the HobbyFarm User-UI. This makes it incredibly easy for users to find and use the service.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-vmtemplate-services.png" alt="VM Template - Services">&lt;/p>
+&lt;h3 id="confirmation">&lt;code>Confirmation&lt;/code>&lt;/h3>
+&lt;p>Finally, the &lt;code>Confirmation&lt;/code> section of the form is used to confirm the details of the VM Template before it is created. Once the details have been verified, click the &lt;code>FINISH&lt;/code> button in the lower right corner to create the VM Template.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-vmtemplate-confirmation.png" alt="VM Template - Confirmation">&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;p>Once a VM Template has been created, it can be used in an &lt;code>Environment&lt;/code> to create virtual machines. Please visit the &lt;a href="http://hobbyfarm.github.io/docs/configuration/environments">Environments&lt;/a> page for more information on creating an environment.&lt;/p></description></item><item><title>Docs: Environments</title><link>http://hobbyfarm.github.io/docs/configuration/environments/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/environments/</guid><description>
+&lt;p>An &lt;code>Environment&lt;/code> defines specific implementation details on how HobbyFarm connects to a provider, such as DigitalOcean or AWS, for scheduling virtual machines. An environment defines configuration information such as provider credentials, virtual machine templates to use, and the total capacity of virtual machines which can be deployed.&lt;/p>
+&lt;p>To access the Environments page, log into the HobbyFarm Admin-UI and click the &lt;code>Configuration&lt;/code> option in the top navigation menu. In the left navigation menu, click the &lt;code>Environments&lt;/code> option.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> At least one &lt;a href="http://hobbyfarm.github.io/docs/configuration/vmtemplates">VM Template&lt;/a> &lt;strong>&lt;em>must&lt;/em>&lt;/strong> be created before creating an &lt;code>Environment&lt;/code>.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> An environment must be configured with a provisioner before a virtual machine can be created by HobbyFarm.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="creating-an-environment">Creating an Environment&lt;/h2>
+&lt;p>To create a new &lt;code>Environment&lt;/code>, click on the &lt;code>+NEW&lt;/code> button in the top left corner of the page under the &lt;code>Environments&lt;/code> heading. A popup will appear with a form to fill out the details of the new &lt;code>Environment&lt;/code>. The following information will explain each field in the form.&lt;/p>
+&lt;h3 id="basic-information">&lt;code>Basic Information&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>Basic Information&lt;/code> section of the form is used to provide basic information about the &lt;code>Environment&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-environment-basic.png" alt="Environment - Basic Information">&lt;/p>
+&lt;h4 id="variables">Variables&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Optional&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Display Name&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>none&lt;/em>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>The name of the &lt;code>Environment&lt;/code>. This name will be used to identify the environment in the HobbyFarm Admin-UI and API.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>DNS Suffix&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>none&lt;/em>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>&lt;strong>**DEPRECATED**&lt;/strong> This feature will be removed in a future release.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Provider&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>none&lt;/em>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>The provider to use for the environment, ie. &lt;code>digitalocean&lt;/code>, &lt;code>aws&lt;/code>, etc.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Websocket Endpoint&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>none&lt;/em>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>This should be the URL for the &lt;code>shell&lt;/code> domain, ie. &lt;code>shell.{domain}.com&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="environment-specifics">&lt;code>Environment Specifics&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>Environment Specifics&lt;/code> section of the form is used to add specific values for the environment in HobbyFarm.&lt;/p>
+&lt;p>Entries in this section are utilized by virtual machine provisioners, such as DigitalOcean or AWS, for purposes such as the Secret containing the token used for authentication to the cloud provider. Other examples are VPCs, regions, security group IDs, etc. These values directly correlate to the provisioner in use for the environment. As such, each provisioner may have specific values that are required.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-environment-specifics.png" alt="Environment - Environment Specifics">&lt;/p>
+&lt;h3 id="vm-templates">&lt;code>VM Templates&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>VM Templates&lt;/code> section of the form is used to select the available VM Templates to use for the environment via a dropdown menu. Multiple VM Templates can be selected for an environment. The selected VM Templates will be available for use when creating a virtual machine in the environment.&lt;/p>
+&lt;p>Here, a limit can be set for the number of virtual machines which can be deployed in the environment. This limit is used to prevent users from deploying more virtual machines than the environment can support.&lt;/p>
+&lt;p>Optional parameters can be set for each VM Template selected. These parameters are used to override the default values set in the VM Template. For instance, a VM Template may have a default size of &lt;code>s-1vcpu-1gb&lt;/code> but the environment may require a larger size, such as &lt;code>s-2vcpu-4gb&lt;/code>. In this case, the &lt;code>Size&lt;/code> parameter can be set to &lt;code>s-2vcpu-4gb&lt;/code> to override the default size.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-environment-vmtemplate.png" alt="Environment - VM Templates">&lt;/p>
+&lt;h4 id="values">Values&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Optional&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Limit&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>&lt;em>0&lt;/em>&lt;/td>
+&lt;td>No&lt;/td>
+&lt;td>The maximum number of virtual machines which can be deployed in the environment.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="ip-mappings">&lt;code>IP Mappings&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>IP Mappings&lt;/code> section of the form is used in situations where &lt;a href="https://en.wikipedia.org/wiki/Carrier-grade_NAT">Carrier Grade NAT (CGNAT)&lt;/a> may be in use. This allows a 1:1 mapping of public IP addresses to private IP addresses.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-environment-ipmappings.png" alt="Environment - IP Mappings">&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> This feature may be deprecated in a future release.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="confirmation">&lt;code>Confirmation&lt;/code>&lt;/h3>
+&lt;p>Finally, the &lt;code>Confirmation&lt;/code> section of the form is used to confirm the details of the &lt;code>Environment&lt;/code> before it is created. Once the details have been verified, click the &lt;code>FINISH&lt;/code> button in the lower right corner to create the &lt;code>Environment&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-environment-confirmation.png" alt="Environment - Confirmation">&lt;/p>
+&lt;h2 id="next-steps">Next Steps&lt;/h2>
+&lt;p>Once an &lt;code>Environment&lt;/code> has been created, a &lt;code>Provisioner&lt;/code> must be configured before a virtual machine can be created by HobbyFarm. Please visit the &lt;a href="http://hobbyfarm.github.io/docs/configuration/provisioners">Provisioners&lt;/a> page for more information on deploying and using a provisioner.&lt;/p></description></item><item><title>Docs: Provisioners</title><link>http://hobbyfarm.github.io/docs/configuration/provisioners/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/provisioners/</guid><description>
+&lt;p>In HobbyFarm, a provisioner is a Kubernetes resource used to define the specific implementation details on how HobbyFarm connects to a provider, such as DigitalOcean or AWS, for scheduling virtual machines. A provisioner defines configuration information such as provider credentials, virtual machine templates to use, and the total capacity of virtual machines which can be deployed.&lt;/p>
+&lt;h2 id="current-provisioners">Current Provisioners&lt;/h2>
+&lt;p>Below is a list of the provisioners currently supported by HobbyFarm. Please visit the links below for more information on each provisioner, including documentation on how to deploy and configure the provisioners.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Provisioner&lt;/th>
+&lt;th>Provider&lt;/th>
+&lt;th>Current Version&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a href="https://github.com/hobbyfarm/hf-provisioner-digitalocean">hf-provisioner-digitalocean&lt;/a>&lt;/td>
+&lt;td>&lt;code>digitalocean&lt;/code>&lt;/td>
+&lt;td>v0.0.1&lt;/td>
+&lt;td>A provisioner for DigitalOcean.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a href="https://github.com/hobbyfarm/hf-provisioner-ec2">hf-provisioner-ec2&lt;/a>&lt;/td>
+&lt;td>&lt;code>aws&lt;/code>&lt;/td>
+&lt;td>WIP&lt;/td>
+&lt;td>A provisioner for AWS.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Terraform &lt;em>(deprecated)&lt;/em>&lt;/td>
+&lt;td>See the &lt;a href="https://developer.hashicorp.com/terraform/language/providers#how-to-find-providers">Terraform documentation&lt;/a>.&lt;/td>
+&lt;td>Built-in&lt;/td>
+&lt;td>Use provisioning providers built-in to Terraform.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> At least one &lt;a href="http://hobbyfarm.github.io/docs/configuration/environments">Environment&lt;/a> &lt;strong>&lt;em>must&lt;/em>&lt;/strong> be created before a provisioner can be used in HobbyFarm.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="upcoming-provisioners">Upcoming Provisioners&lt;/h2>
+&lt;p>The HobbyFarm development team is working on a new provisioning method which will be released in a future version of HobbyFarm. These new provisioners will be easier to use and will provide a more consistent experience in the HobbyFarm Admin-UI.&lt;/p>
+&lt;h2 id="terraform-provisioning">Terraform Provisioning&lt;/h2>
+&lt;p>⚠️⚠️⚠️ &lt;strong>DEPRECATED&lt;/strong> ⚠️⚠️⚠️&lt;/p>
+&lt;p>Older versions of HobbyFarm used Terraform as the means of provisioning virtual machines in cloud environments. However, this feature was deprecated and is no longer supported due to compatibility, stability, and performance issues.&lt;/p></description></item><item><title>Docs: Roles</title><link>http://hobbyfarm.github.io/docs/configuration/roles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/roles/</guid><description>
+&lt;p>In Kubernetes, a &lt;a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole">Role&lt;/a> is a set of permissions that can be assigned to a user or group of users. A &lt;code>Role&lt;/code> can be assigned to a user or group of HobbyFarm users via a &lt;code>RoleBinding&lt;/code>. HobbyFarm provides an interface for creating and managing HobbyFarm specific &lt;code>Roles&lt;/code> via the Admin-UI.&lt;/p>
+&lt;p>To access the Roles page, log into the HobbyFarm Admin-UI and click the &lt;code>Configuration&lt;/code> option in the top navigation menu. In the left navigation menu, click the &lt;code>Roles&lt;/code> option.&lt;/p>
+&lt;h2 id="creating-a-role">Creating a Role&lt;/h2>
+&lt;p>To create a new &lt;code>Role&lt;/code>, click on the &lt;code>+NEW&lt;/code> button in the top left corner of the page under the &lt;code>Roles&lt;/code> heading. A popup will appear with a form to fill out the details of the new &lt;code>Role&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-role-create.png" alt="Role - Basic Information">&lt;/p>
+&lt;h4 id="variables">&lt;code>Variables&lt;/code>&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Required&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Role Name&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>The name of the &lt;code>Role&lt;/code>. This name will be used to identify the &lt;code>Role&lt;/code> in the HobbyFarm Admin-UI and API.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>API Groups&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>The API groups to which the &lt;code>Role&lt;/code> applies. Two API groups are available: &lt;code>hobbyfarm.io&lt;/code> and &lt;code>rbac.authorization.k8s.io&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Resources&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>The resources to which the &lt;code>Role&lt;/code> applies. Examples are &lt;code>virtualmachines&lt;/code>, &lt;code>environments&lt;/code>, &lt;code>users&lt;/code>, and &lt;code>scheduledevents&lt;/code>. Each of these are resources available in Kubernetes via the HobbyFarm deployment.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Verbs&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>Yes&lt;/td>
+&lt;td>The verbs to which the selected Resources applies. Examples are &lt;code>get&lt;/code>, &lt;code>list&lt;/code>, &lt;code>create&lt;/code>, &lt;code>update&lt;/code>, and &lt;code>delete&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Once the information has been entered, click the &lt;code>SAVE&lt;/code> button in the lower right corner to create the &lt;code>Role&lt;/code>.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Roles must be applied using RoleBindings before they will take effect. The use of RoleBindings is outside the scope of this document. Please visit the &lt;a href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/">Kubernetes Role-Based Access Control (RBAC)&lt;/a> documentation for more information on RoleBindings.&lt;/p>
+&lt;/blockquote></description></item></channel></rss>

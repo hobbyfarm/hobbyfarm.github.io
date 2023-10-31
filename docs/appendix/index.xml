@@ -1,8 +1,526 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Appendix on HobbyFarm</title><link>http://hobbyfarm.github.io/docs/appendix/</link><description>Recent content in Appendix on HobbyFarm</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/appendix/index.xml" rel="self" type="application/rss+xml"/><item><title>Deprecated &amp; Removed Features</title><link>http://hobbyfarm.github.io/docs/appendix/deprecated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/deprecated/</guid><description>Deprecated Features The following features have been deprecated in HobbyFarm and will be removed in a future release.
-Feature Deprecation Date Reason for Deprecation Terraform Provisioning October 2022 Compatibility, instability and performance issues Removed Features The following features have been completely removed from HobbyFarm.
-Feature Removal Date Pull Request Reason RancherVM September 2023 #394 No longer maintained.</description></item><item><title>Helm Options</title><link>http://hobbyfarm.github.io/docs/appendix/helm_options/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/helm_options/</guid><description>This page contains a reference of the options available in the HobbyFarm Helm chart. Please visit the values.yaml file in the HobbyFarm repository for the most up-to-date list of options.
-General Key Default Purpose insecure false Use insecure protocols. Useful for local development. Admin UI Options Key Default Purpose admin.image hobbyfarm/admin-ui:[version] Image used for admin-ui. admin.configMapName admin-config ConfigMap used to configure admin ui. admin.config.title HobbyFarm Administration Title of admin ui as seen in browser.</description></item><item><title>Provider Images</title><link>http://hobbyfarm.github.io/docs/appendix/provider_images/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/provider_images/</guid><description>A provider image is a virtual machine image which exists on a 3rd party cloud provider, such as DigitalOcean or AWS. These images are used by HobbyFarm to deploy virtual machines per cloud environment. The provider image is used to determine the operating system, software, and configuration of the virtual machine deployed and managed by HobbyFarm.
-Image Examples Provider Image Image Type AMI URL DigitalOcean ubuntu-20-04-x64 Ubuntu 20.04 LTS x64 DO Available Images AWS ami-0a6e38961e6e621b0 Ubuntu 20.</description></item><item><title>Special Markdown Syntax</title><link>http://hobbyfarm.github.io/docs/appendix/markdown_syntax/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/markdown_syntax/</guid><description>This page contains a reference of the special markdown syntax available in the scenario contents.
-Code Syntax Highlighting You can enable syntax highlighting by providing a language to the codeblock. Providing the optional filename will display it together with the content
-```&amp;lt;language&amp;gt;:&amp;lt;optional filename&amp;gt; code ``` For example
-```md # Content ``` ```yaml:myfile.yaml yaml: highlight this #comment ``` Click-To-File Beginning with HobbyFarm 2.0.6 you can also enable users to create files directly with one click using the folowing syntax:</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm – Appendix</title><link>http://hobbyfarm.github.io/docs/appendix/</link><description>Recent content in Appendix on HobbyFarm</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/appendix/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Deprecated &amp; Removed Features</title><link>http://hobbyfarm.github.io/docs/appendix/deprecated/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/deprecated/</guid><description>
+&lt;h2 id="deprecated-features">Deprecated Features&lt;/h2>
+&lt;p>The following features have been deprecated in HobbyFarm and will be removed in a future release.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>Deprecation Date&lt;/th>
+&lt;th>Reason for Deprecation&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a href="http://hobbyfarm.github.io/docs/configuration/provisioners">Terraform Provisioning&lt;/a>&lt;/td>
+&lt;td>October 2022&lt;/td>
+&lt;td>Compatibility, instability and performance issues&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="removed-features">Removed Features&lt;/h2>
+&lt;p>The following features have been completely removed from HobbyFarm.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Feature&lt;/th>
+&lt;th>Removal Date&lt;/th>
+&lt;th>Pull Request&lt;/th>
+&lt;th>Reason&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>RancherVM&lt;/td>
+&lt;td>September 2023&lt;/td>
+&lt;td>&lt;a href="https://github.com/hobbyfarm/hobbyfarm/pull/349">#394&lt;/a>&lt;/td>
+&lt;td>No longer maintained.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>Docs: Helm Options</title><link>http://hobbyfarm.github.io/docs/appendix/helm_options/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/helm_options/</guid><description>
+&lt;p>This page contains a reference of the options available in the HobbyFarm Helm chart. Please &lt;a href="https://github.com/hobbyfarm/hobbyfarm/blob/master/charts/hobbyfarm/values.yaml">visit the values.yaml&lt;/a> file in the HobbyFarm repository for the most up-to-date list of options.&lt;/p>
+&lt;h2 id="general">General&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>insecure&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Use insecure protocols. Useful for local development.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="admin-ui-options">Admin UI Options&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>admin.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/admin-ui:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for admin-ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.configMapName&lt;/code>&lt;/td>
+&lt;td>&lt;code>admin-config&lt;/code>&lt;/td>
+&lt;td>ConfigMap used to configure admin ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.title&lt;/code>&lt;/td>
+&lt;td>HobbyFarm Administration&lt;/td>
+&lt;td>Title of admin ui as seen in browser.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.favicon&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/favicon.png&lt;/code>&lt;/td>
+&lt;td>Path to the favicon to use for admin ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/rancher-labs-stacked-color.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo image as seen on admin ui login page.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.customlogo&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>A Secret containing an SVG as a file.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.login.background&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/vault.jpg&lt;/code>&lt;/td>
+&lt;td>Path to large background image as seen on admin ui login page.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>admin.config.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/logo.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo as seen in upper right corner of admin ui.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="ui-options">UI Options&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ui.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/ui:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.configMapName&lt;/code>&lt;/td>
+&lt;td>&lt;code>ui-config&lt;/code>&lt;/td>
+&lt;td>ConfigMap used to configure ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.title&lt;/code>&lt;/td>
+&lt;td>&lt;code>HobbyFarm Learn&lt;/code>&lt;/td>
+&lt;td>Title of ui as seen in browser.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.favicon&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/favicon.png&lt;/code>&lt;/td>
+&lt;td>Path to the favicon to use for ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.login.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/rancher-labs-stacked-color.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo image as seen on ui login page.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.login.background&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/login_container_farm.svg&lt;/code>&lt;/td>
+&lt;td>Path to large background image as seen on ui login page.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.logo&lt;/code>&lt;/td>
+&lt;td>&lt;code>/assets/default/logo.svg&lt;/code>&lt;/td>
+&lt;td>Path to logo as seen in upper right corner of ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.about.title&lt;/code>&lt;/td>
+&lt;td>&lt;code>About HobbyFarm&lt;/code>&lt;/td>
+&lt;td>Title of the about dropdown in ui.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.about.body&lt;/code>&lt;/td>
+&lt;td>&lt;code>HobbyFarm is a browser-based technology training tool developed at github.com/hobbyfarm&lt;/code>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.about.buttons&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>See the &lt;a href="#uiconfigaboutbuttons">button section&lt;/a> below for more information.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ui.config.custom&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>See the &lt;a href="#uiconfigcustom">custom section&lt;/a> below for more information.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="uiconfigaboutbuttons">&lt;code>ui.config.about.buttons&lt;/code>&lt;/h3>
+&lt;p>This list allows for specification of custom buttons in the About modal of the HobbyFarm UI.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ui&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">about&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">buttons&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Example Title&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://github.com/hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">title&lt;/span>: &lt;span style="color:#ae81ff">Example Title 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">url&lt;/span>: &lt;span style="color:#ae81ff">https://github.com/hobbyfarm/hobbyfarm&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="uiconfigcustom">&lt;code>ui.config.custom&lt;/code>&lt;/h3>
+&lt;p>This heredoc allows for specification of custom CSS to be applied to the UI.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ui&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">config&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">custom&lt;/span>: |&lt;span style="color:#e6db74">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> .custom-css {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> background: none;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#e6db74"> }&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="gargantua">Gargantua&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>gargantua.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/gargantua:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for the Gargantua backend.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.logLevel&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;0&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Log level of Gargantua.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.dynamicBaseNamePrefix&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;dynamic&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Name prefix for VMs provisioned using dynamic method.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.scheduledBaseNamePrefix&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;scheduled&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Name prefix for VMs provisioned ahead of time (scheduled).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.apiPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>80&lt;/code>&lt;/td>
+&lt;td>The port on which Gargantua&amp;rsquo;s API should be served.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.webhook.containerPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>444&lt;/code>&lt;/td>
+&lt;td>Container port for CRD conversion webhook.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gargantua.webhook.servicePort&lt;/code>&lt;/td>
+&lt;td>&lt;code>443&lt;/code>&lt;/td>
+&lt;td>Service port for CRD conversion webhook. ⚠️&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>⚠️⚠️ The &lt;code>gargantua.webhook.servicePort&lt;/code> port should remain 443. See &lt;a href="https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definition-versioning/#deploy-the-conversion-webhook-service">this link&lt;/a> for more information. ⚠️⚠️&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="guacamole">Guacamole&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>guac.image&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Image used when deploying &lt;a href="https://guacamole.apache.org">Guacamole server&lt;/a> for Windows RDP.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="shell">Shell&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>shell.replicas&lt;/code>&lt;/td>
+&lt;td>&lt;code>1&lt;/code>&lt;/td>
+&lt;td>Number of replicas of the shell service to run.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="ingress">Ingress&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>ingress.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Enable ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.annotations&lt;/code>&lt;/td>
+&lt;td>&lt;code>{}&lt;/code>&lt;/td>
+&lt;td>Additional annotations for ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>true&lt;/code>&lt;/td>
+&lt;td>Enable TLS on ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.backend&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>TLS secret for backend ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.admin&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>TLS secret for admin ui ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.ui&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>TLS secret for ui ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.tls.secrets.shell&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>TLS secret for shell ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.hostnames.ui&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Hostname for ui ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.hostnames.admin&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Hostname for admin ui ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.hostnames.backend&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Hostname for backend ingress.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>ingress.hostnames.shell&lt;/code>&lt;/td>
+&lt;td>undefined&lt;/td>
+&lt;td>Hostname for shell ingress.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="users">Users&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>users.admin.enabled&lt;/code>&lt;/td>
+&lt;td>&lt;code>false&lt;/code>&lt;/td>
+&lt;td>Creates the user, &lt;code>admin&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>users.admin.password&lt;/code>&lt;/td>
+&lt;td>&lt;code>$2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe&lt;/code>&lt;/td>
+&lt;td>Bcrypt hashed password for the &lt;code>admin&lt;/code> user. Default value is &lt;code>Sup3r@dmin&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="adding-users">Adding Users&lt;/h3>
+&lt;p>Additional users can be added by adding a new entry to the &lt;code>users&lt;/code> list. The following example shows how to add a user named &lt;code>user1&lt;/code> with the password &lt;code>password1&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">users&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">$2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">user1&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">$2a$12$DNBNq4TZarIdx.IaGjcdSOjKhubC0A4CpD5asd7dajgGJwjPROIlu&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="terraform">Terraform&lt;/h2>
+&lt;blockquote>
+&lt;p>⚠️⚠️⚠️ Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.&lt;/p>
+&lt;/blockquote>
+&lt;p>The options are not documented here as it is strongly inadvisable to use Terraform. Please instead use a &lt;a href="http://hobbyfarm.github.io/docs/configuration/provisioners">provider-specific operator&lt;/a> for VM provisioning.&lt;/p></description></item><item><title>Docs: Provider Images</title><link>http://hobbyfarm.github.io/docs/appendix/provider_images/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/provider_images/</guid><description>
+&lt;p>A provider image is a virtual machine image which exists on a 3rd party cloud provider, such as &lt;a href="https://www.digitalocean.com/">DigitalOcean&lt;/a> or &lt;a href="https://aws.amazon.com/">AWS&lt;/a>. These images are used by HobbyFarm to deploy virtual machines per cloud environment. The provider image is used to determine the operating system, software, and configuration of the virtual machine deployed and managed by HobbyFarm.&lt;/p>
+&lt;h2 id="image-examples">Image Examples&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Provider&lt;/th>
+&lt;th>Image&lt;/th>
+&lt;th>Image Type&lt;/th>
+&lt;th>AMI URL&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>DigitalOcean&lt;/td>
+&lt;td>ubuntu-20-04-x64&lt;/td>
+&lt;td>Ubuntu 20.04 LTS x64&lt;/td>
+&lt;td>&lt;a href="https://do-community.github.io/available-images/">DO Available Images&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AWS&lt;/td>
+&lt;td>ami-0a6e38961e6e621b0&lt;/td>
+&lt;td>Ubuntu 20.04 LTS x64&lt;/td>
+&lt;td>&lt;a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html">Find a Linux AMI&lt;/a>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="custom-images">Custom Images&lt;/h2>
+&lt;p>HobbyFarm supports the use of custom cloud images. For example, using &lt;a href="https://www.packer.io">Hashicorp&amp;rsquo;s Packer tool&lt;/a>, it is possible to create a &lt;a href="https://developer.hashicorp.com/packer/integrations/hashicorp/amazon">custom built AWS AMI&lt;/a> for use with HobbyFarm.&lt;/p>
+&lt;h3 id="using-custom-images">Using Custom Images&lt;/h3>
+&lt;p>To use a custom image, the image must be built, pushed to the respective cloud platform, and accessible by &lt;a href="http://hobbyfarm.github.io/docs/configuration/provisioners">the provisioner&lt;/a> used by HobbyFarm. The name of the custom image can then be used when defining a &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/virtualmachinetemplate">VirtualMachineTemplate&lt;/a> and/or &lt;a href="http://hobbyfarm.github.io/docs/architecture/resources/environment">Environment&lt;/a>.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Container images are not supported at this time.&lt;/p>
+&lt;/blockquote></description></item><item><title>Docs: Special Markdown Syntax</title><link>http://hobbyfarm.github.io/docs/appendix/markdown_syntax/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/appendix/markdown_syntax/</guid><description>
+&lt;p>This page contains a reference of the special markdown syntax available in the scenario contents.&lt;/p>
+&lt;h2 id="code">Code&lt;/h2>
+&lt;h3 id="syntax-highlighting">Syntax Highlighting&lt;/h3>
+&lt;p>You can enable syntax highlighting by providing a language to the codeblock. Providing the optional filename will display it together with the content&lt;/p>
+&lt;pre tabindex="0">&lt;code>```&amp;lt;language&amp;gt;:&amp;lt;optional filename&amp;gt;
+code
+```
+&lt;/code>&lt;/pre>&lt;p>For example&lt;/p>
+&lt;pre tabindex="0">&lt;code>```md
+# Content
+```
+```yaml:myfile.yaml
+yaml: highlight this #comment
+```
+&lt;/code>&lt;/pre>&lt;h3 id="click-to-file">Click-To-File&lt;/h3>
+&lt;p>Beginning with HobbyFarm 2.0.6 you can also enable users to create files directly with one click using the folowing syntax:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```file:&amp;lt;language&amp;gt;:&amp;lt;filepath&amp;gt;:&amp;lt;target&amp;gt;
+content
+```
+&lt;/code>&lt;/pre>&lt;p>For example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```file:yaml:/var/myfile.yaml:node1
+content: yaml content
+```
+&lt;/code>&lt;/pre>&lt;h3 id="click-to-run">Click-To-Run&lt;/h3>
+&lt;p>Click-to-run is enabled by passing a special language argument to a markdown code block. Use the syntax &lt;code>ctr:&amp;lt;vmname&amp;gt;[:&amp;lt;limit&amp;gt;]&lt;/code> as the language argument where vmname is the name of one of the VMs in the scenario. and limit is the maximum number of times the CTR can be pressed to be executed. Limit can be omitted which defaults to unlimited executions.&lt;/p>
+&lt;p>Examples:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```ctr:cluster01
+cat example.txt
+```
+```ctr:cluster01
+echo This CTR has no limit
+```
+```ctr:cluster01:2
+echo This CTR limits to 2 clicks
+```
+&lt;/code>&lt;/pre>&lt;h2 id="virtual-machine-information">Virtual Machine Information&lt;/h2>
+&lt;p>The listed variables are available. To use, specify within a ${} block using the following syntax:&lt;/p>
+&lt;p>&lt;code>${vminfo:[vmname]:[variable]}&lt;/code> where vminfo is a static string, vmname is the name of one of the VMs in the scenario, and variable is an item from the list on the right.&lt;/p>
+&lt;p>Example: &lt;code>${vminfo:cluster01:public_ip}&lt;/code>&lt;/p>
+&lt;h3 id="available-options">Available Options&lt;/h3>
+&lt;p>all fields that are provided by virtual machines&lt;/p>
+&lt;ul>
+&lt;li>id&lt;/li>
+&lt;li>vm_template_id&lt;/li>
+&lt;li>keypair_name&lt;/li>
+&lt;li>vm_claim_id&lt;/li>
+&lt;li>user&lt;/li>
+&lt;li>status&lt;/li>
+&lt;li>allocated&lt;/li>
+&lt;li>tainted&lt;/li>
+&lt;li>public_ip&lt;/li>
+&lt;li>private_ip&lt;/li>
+&lt;li>environment_id&lt;/li>
+&lt;li>hostname&lt;/li>
+&lt;li>tfstate&lt;/li>
+&lt;li>ws_endpoint&lt;/li>
+&lt;li>vm_set_id&lt;/li>
+&lt;li>protocol&lt;/li>
+&lt;/ul>
+&lt;h2 id="session-information">Session Information&lt;/h2>
+&lt;p>Display the session id by using &lt;code>${session}&lt;/code>.&lt;/p>
+&lt;h2 id="summary--hidden--solution-text-element">Summary / Hidden / Solution Text Element&lt;/h2>
+&lt;p>To create a hidden text element, pass the special language argument hidden to a markdown code block.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```hidden:Hidden Text Summary
+This is the hidden Text that opens and closes after a click on the summary
+```
+&lt;/code>&lt;/pre>&lt;h2 id="glossary">Glossary&lt;/h2>
+&lt;p>To create a glossary element, pass the special language argument &lt;code>glossary:&amp;lt;name&amp;gt;&lt;/code> to a markdown code block. The text inside the code block will be displayed when a user hovers over the provided name&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```glossary:Kubernetes
+Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of containerized applications.
+```
+&lt;/code>&lt;/pre>&lt;h2 id="nested-elements">Nested Elements&lt;/h2>
+&lt;p>Nested elements can be applied inside blocks or hidden elements. To define a nested block, replace backticks by tildes.&lt;/p>
+&lt;p>Example:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```
+Some text
+~~~python
+# This program prints Hello, world!
+print(&amp;#39;Hello, world!&amp;#39;)
+~~~
+Some more text
+```
+&lt;/code>&lt;/pre>&lt;h2 id="note">Note&lt;/h2>
+&lt;p>as of HobbyFarm 2.0.6 Notes can be used to highlight parts of the text with a special box.&lt;/p>
+&lt;pre tabindex="0">&lt;code>```note:&amp;lt;type&amp;gt;:&amp;lt;optional title&amp;gt;
+Content
+```
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```note:info:More info
+Note that is suitable for additional `information`
+```
+```note:task
+Check the nodes.
+~~~ctr:node1
+kubectl get nodes
+~~~
+```
+```note:other
+Unknown note type. Can be used for general boxes
+```
+&lt;/code>&lt;/pre>&lt;h3 id="types">Types&lt;/h3>
+&lt;ul>
+&lt;li>info (Blue)&lt;/li>
+&lt;li>warn (Orange)&lt;/li>
+&lt;li>caution (Red)&lt;/li>
+&lt;li>task (Green)
+all other values than the types state above will result in a grey highlighted box&lt;/li>
+&lt;/ul></description></item></channel></rss>

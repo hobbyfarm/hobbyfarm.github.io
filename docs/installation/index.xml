@@ -1,8 +1,256 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Installation on HobbyFarm</title><link>http://hobbyfarm.github.io/docs/installation/</link><description>Recent content in Installation on HobbyFarm</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/installation/index.xml" rel="self" type="application/rss+xml"/><item><title>Prerequisites</title><link>http://hobbyfarm.github.io/docs/installation/prerequisites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/prerequisites/</guid><description>The following prerequisites are required for installing HobbyFarm. Please ensure that all prerequisites are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.
-Helm Helm v3 is required for deploying HobbyFarm. Please refer to the Helm documentation for instructions on installing Helm.
-Kubernetes HobbyFarm is a Kubernetes-native application, using custom resources and controllers to manage the application. To run HobbyFarm, a Kubernetes cluster with an installed ingress controller is required.</description></item><item><title>Deployment</title><link>http://hobbyfarm.github.io/docs/installation/deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/deployment/</guid><description>The following steps will guide you through the deployment of HobbyFarm in a Kubernetes environment using Helm. Please ensure that all prerequisites are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.
-Step 1: Add Helm Repository Using Helm, add the HobbyFarm repository and generate a values.yaml file for customization.
-## Add the required Helm repository helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm ## Update your local Helm repository cache helm repo update ## List available versions of HobbyFarm helm search repo hobbyfarm/hobbyfarm ## Get the values.</description></item><item><title>Admin Account</title><link>http://hobbyfarm.github.io/docs/installation/initial_admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/initial_admin/</guid><description>Once you have installed HobbyFarm, an initial administrator account must be created. This account will be used to manage the HobbyFarm platform.
-Step 1: Register a User Visit the newly deployed HobbyFarm UI at https://learn.{domain}.com and register a new user.
-NOTE: If a different URL for the end-user learning interface was used, visit that URL instead.
-Step 2: Verify the User As part of the deployment of HobbyFarm, new API resources are created in the cluster.</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HobbyFarm – Installation</title><link>http://hobbyfarm.github.io/docs/installation/</link><description>Recent content in Installation on HobbyFarm</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hobbyfarm.github.io/docs/installation/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: Prerequisites</title><link>http://hobbyfarm.github.io/docs/installation/prerequisites/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/prerequisites/</guid><description>
+&lt;p>The following prerequisites are required for installing HobbyFarm. Please ensure that all prerequisites are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.&lt;/p>
+&lt;h2 id="helm">Helm&lt;/h2>
+&lt;p>Helm v3 is required for deploying HobbyFarm. Please refer to the &lt;a href="https://helm.sh/docs/intro/install/">Helm documentation&lt;/a> for instructions on installing Helm.&lt;/p>
+&lt;h2 id="kubernetes">Kubernetes&lt;/h2>
+&lt;p>HobbyFarm is a Kubernetes-native application, using &lt;a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">custom resources&lt;/a> and controllers to manage the application. To run HobbyFarm, a Kubernetes cluster with an installed ingress controller is required. The following list shows the supported Kubernetes versions for each HobbyFarm version.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:left">HobbyFarm Release&lt;/th>
+&lt;th style="text-align:left">Release Date&lt;/th>
+&lt;th style="text-align:left">K8s Version (up to)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:left">&lt;a href="https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-3.0.1">hobbyfarm-3.0.1&lt;/a>&lt;/td>
+&lt;td style="text-align:left">July 2023&lt;/td>
+&lt;td style="text-align:left">v1.25.x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;a href="https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-2.0.9">hobbyfarm-2.0.9&lt;/a>&lt;/td>
+&lt;td style="text-align:left">June 2023&lt;/td>
+&lt;td style="text-align:left">v1.24.x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:left">&lt;a href="https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-1.0.0">hobbyfarm-1.0.0&lt;/a>&lt;/td>
+&lt;td style="text-align:left">January 2022&lt;/td>
+&lt;td style="text-align:left">v1.23.x&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="role-based-access-control-rbac">&lt;code>Role-Based Access Control (RBAC)&lt;/code>&lt;/h3>
+&lt;p>HobbyFarm requires an account with the following permissions for installation. For simplicity, the use of an account with &lt;code>cluster-admin&lt;/code> role binding is recommended.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>API Group&lt;/th>
+&lt;th>Resource&lt;/th>
+&lt;th>Verbs&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>apiextensions.k8s.io&lt;/td>
+&lt;td>CustomResourceDefinitions&lt;/td>
+&lt;td>Get, Create, Update&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>apps&lt;/td>
+&lt;td>Deployments&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>core&lt;/td>
+&lt;td>ConfigMaps, Secrets, Services&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>networking.k8s.io&lt;/td>
+&lt;td>Ingresses&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>rbac.authorization.k8s.io&lt;/td>
+&lt;td>ClusterRoles, ClusterRoleBindings, Roles, RoleBindings&lt;/td>
+&lt;td>Get, Create, Update, Delete&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="clusterrole-manifest">&lt;code>ClusterRole Manifest&lt;/code>&lt;/h3>
+&lt;p>If an account is not available with full cluster access, or a &lt;code>cluster-admin&lt;/code> role does not exist, the following &lt;code>ClusterRole&lt;/code> manifest can be created and bound to an account.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> The following manifest maps to the permissions listed in the table above.&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">ClusterRole&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-install&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">rules&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;apiextensions.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;customresourcedefinitions&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;apps&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;deployments&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;configmaps&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;secrets&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;services&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;networking.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;ingresses&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">apiGroups&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;rbac.authorization.k8s.io&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;clusterroles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;clusterrolebindings&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;roles&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;rolebindings&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">verbs&lt;/span>: [&lt;span style="color:#e6db74">&amp;#34;get&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;create&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;update&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;delete&amp;#34;&lt;/span>]
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docs: Deployment</title><link>http://hobbyfarm.github.io/docs/installation/deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/deployment/</guid><description>
+&lt;p>The following steps will guide you through the deployment of HobbyFarm in a Kubernetes environment using Helm. Please ensure that all &lt;a href="http://hobbyfarm.github.io/docs/setup/prerequisites">prerequisites&lt;/a> are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.&lt;/p>
+&lt;h2 id="step-1-add-helm-repository">Step 1: Add Helm Repository&lt;/h2>
+&lt;p>Using Helm, add the HobbyFarm repository and generate a values.yaml file for customization.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Add the required Helm repository&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo add hobbyfarm https://hobbyfarm.github.io/hobbyfarm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Update your local Helm repository cache&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm repo update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## List available versions of HobbyFarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm search repo hobbyfarm/hobbyfarm
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Get the values.yaml for HobbyFarm&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm show values hobbyfarm/hobbyfarm &amp;gt; values.yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="step-2-customize-the-values-file">Step 2: Customize the Values File&lt;/h2>
+&lt;p>There are several options available in the &lt;code>values.yaml&lt;/code> file. Please refer to the &lt;a href="http://hobbyfarm.github.io/docs/appendix/helm_options">Helm options&lt;/a> documentation for a full reference of these values. Additionally, the &lt;a href="https://github.com/hobbyfarm/hobbyfarm/blob/master/charts/hobbyfarm/values.yaml">HobbyFarm Helm Chart values.yaml&lt;/a> file is available for review and contains additional comments and examples.&lt;/p>
+&lt;h3 id="hostname-configuration">&lt;code>Hostname Configuration&lt;/code>&lt;/h3>
+&lt;p>HobbyFarm requires four domains to serve its traffic. Prior to installation of HobbyFarm, these domains &lt;strong>&lt;em>must exist&lt;/em>&lt;/strong> in a DNS server and must point to either a load balancer or a Kubernetes Node. Documentation of DNS configuration is outside the scope of this documentation.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Domain&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;th>HobbyFarm Service&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>api.{domain}.com&lt;/td>
+&lt;td>API &amp;amp; Controller Hosting&lt;/td>
+&lt;td>Gargantua Backend&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>admin.{domain}.com&lt;/td>
+&lt;td>Administrative Interface&lt;/td>
+&lt;td>Admin-UI Frontend&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>learn.{domain}.com&lt;/td>
+&lt;td>End-User Learning Interface&lt;/td>
+&lt;td>UI Frontend&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>shell.{domain}.com&lt;/td>
+&lt;td>Shell Endpoint for UI&lt;/td>
+&lt;td>Gargantua Shell&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> The documentation assumes the above domain prefixes are used for deployment of HobbyFarm. It is &lt;strong>&lt;em>not required&lt;/em>&lt;/strong> to adhere to the prefixes shown in the examples above (e.g. api, admin). Users may choose any desired prefix.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>⚠️ HobbyFarm may work using sub-paths (e.g. {domain}.com/api) but this is not currently a tested configuration.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="tls-configuration">&lt;code>TLS Configuration&lt;/code>&lt;/h3>
+&lt;p>HobbyFarm uses &lt;a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">Kubernetes Ingress&lt;/a> for Web traffic and routing. If TLS is enabled, HobbyFarm will make use of certificates referenced via the Ingress resource. &lt;a href="https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets">Kubernetes TLS Secrets&lt;/a> can be created containing the key and certificate for each domain, and referenced in the &lt;code>values.yaml&lt;/code> file.&lt;/p>
+&lt;p>Example Kubernetes Secrets TLS manifest:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Create a Secret containing the TLS certificate and key for the backend domain, api.{domain}.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">backend-tls-secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system &lt;/span> &lt;span style="color:#75715e">## The Secret must be created in the HobbyFarm namespace&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">type&lt;/span>: &lt;span style="color:#ae81ff">kubernetes.io/tls&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">data&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tls.crt&lt;/span>: &lt;span style="color:#ae81ff">&amp;lt;base64 encoded certificate&amp;gt; &lt;/span> &lt;span style="color:#75715e">## Replace with a valid base64 encoded certificate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tls.key&lt;/span>: &lt;span style="color:#ae81ff">&amp;lt;base64 encoded key&amp;gt; &lt;/span> &lt;span style="color:#75715e">## Replace with a valid base64 encoded key&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> The creation of certificates is outside the scope of this documentation. Cert-manager can be used to automate the creation of TLS certificates. Please refer to the &lt;a href="https://cert-manager.io/docs/">cert-manager documentation&lt;/a> for more information.&lt;/p>
+&lt;/blockquote>
+&lt;p>The following example shows the configuration for TLS in the &lt;code>values.yaml&lt;/code> file:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">ingress&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">tls&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">secrets&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">backend-tls-secret &lt;/span> &lt;span style="color:#75715e">## References the Secret created above&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin-tls-secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">ui-tls-secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">shell-tls-secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">hostnames&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">backend&lt;/span>: &lt;span style="color:#ae81ff">api.{domain}.com &lt;/span> &lt;span style="color:#75715e">## Hostname for the backend, used in the above Secret&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>: &lt;span style="color:#ae81ff">admin.{domain}.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">shell&lt;/span>: &lt;span style="color:#ae81ff">shell.{domain}.com&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">ui&lt;/span>: &lt;span style="color:#ae81ff">learn.{domain}.com&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If unique certificates per hostname are required, a unique Secret per hostname must be created and associated with the hostname in the &lt;code>values.yaml&lt;/code> file. Ensure each certificate stored in a Secret corresponds to the correct hostname, otherwise traffic will not be routed correctly.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Wildcard certificates &lt;strong>&lt;em>are&lt;/em>&lt;/strong> acceptable.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="step-3-create-a-namespace">Step 3: Create a Namespace&lt;/h2>
+&lt;p>Create a namespace to install HobbyFarm. For example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl create namespace hobbyfarm-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> The namespace name is arbitrary and can be changed to suit your needs. However, be sure to use the same namespace name throughout the installation process.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="step-4-install-hobbyfarm-via-helm">Step 4: Install HobbyFarm via Helm&lt;/h2>
+&lt;p>Install HobbyFarm using a values file that you have created, or by specifying your chosen options using Helm&amp;rsquo;s &lt;code>--set&lt;/code> flags.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Install HobbyFarm using a values file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm upgrade &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --install hobbyfarm hobbyfarm/hobbyfarm &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace hobbyfarm-system &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --values values.yaml
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Install HobbyFarm using --set flags&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm upgrade &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --install hobbyfarm hobbyfarm/hobbyfarm &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --namespace hobbyfarm-system &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> --set ingress.tls.enabled&lt;span style="color:#f92672">=&lt;/span>true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Using the &lt;code>upgrade --install&lt;/code> command will install HobbyFarm if it does not exist, or upgrade it if it does exist.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="step-5-verify-installation">Step 5: Verify Installation&lt;/h2>
+&lt;p>Verify that HobbyFarm has been installed successfully by checking the status of the HobbyFarm pods.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Use the watch command to monitor the status of the HobbyFarm pods&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>watch -n1 kubectl get pods -n hobbyfarm-system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Use the watch commadn to monitor the deployments until all are in a Ready state&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>watch -n1 kubectl get deployment -n hobbyfarm-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="step-6-setup-an-admin-user">Step 6: Setup an Admin User&lt;/h2>
+&lt;p>Once installation has been verified, proceed to the &lt;a href="http://hobbyfarm.github.io/docs/setup/initial_admin">Admin Account&lt;/a> documentation to create an initial administrator account.&lt;/p></description></item><item><title>Docs: Admin Account</title><link>http://hobbyfarm.github.io/docs/installation/initial_admin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/initial_admin/</guid><description>
+&lt;p>Once you have &lt;a href="http://hobbyfarm.github.io/docs/setup/installation">installed HobbyFarm&lt;/a>, an initial administrator account must be created. This account will be used to manage the HobbyFarm platform.&lt;/p>
+&lt;h2 id="step-1-register-a-user">Step 1: Register a User&lt;/h2>
+&lt;p>Visit the newly deployed HobbyFarm UI at &lt;code>https://learn.{domain}.com&lt;/code> and register a new user.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> If a different URL for the end-user learning interface was used, visit that URL instead.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="step-2-verify-the-user">Step 2: Verify the User&lt;/h2>
+&lt;p>As part of the deployment of HobbyFarm, new API resources are created in the cluster. One of these resources is the &lt;code>User&lt;/code> resource. This resource is used to authenticate users to the HobbyFarm platform.&lt;/p>
+&lt;p>Verify the user has been created in the Kubernetes &lt;code>User&lt;/code> resource.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get users -n hobbyfarm-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Make note of the dynamically generated &lt;code>NAME&lt;/code> of the user, as it will be used in the next step.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="step-3-bind-the-user">Step 3: Bind the User&lt;/h2>
+&lt;p>By default, a Role named &lt;code>hobbyfarm-admin&lt;/code> is created, granting access to all HobbyFarm resources. Review this role by running the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>kubectl get role hobbyfarm-admin -n hobbyfarm-system -o yaml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Bind your user to this Role by creating the following RoleBinding, updating the &lt;code>name&lt;/code> field with the dynamically generated &lt;code>NAME&lt;/code> from Step 2:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">RoleBinding&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-admin-rolebinding&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">subjects&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>- &lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">User&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">u-xxxxxxxxxx &lt;/span> &lt;span style="color:#75715e">## Use the dynamically generated NAME from Step 2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">apiGroup&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">roleRef&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Role&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-admin&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">apiGroup&lt;/span>: &lt;span style="color:#ae81ff">rbac.authorization.k8s.io&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> The RoleBinding makes use of the role name &lt;code>hobbyfarm-admin&lt;/code> which is created when HobbyFarm is deployed.&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Multiple users can be added to this RoleBinding by adding additional &lt;code>subjects&lt;/code>.&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="step-4-login-to-the-admin-ui">Step 4: Login to the Admin UI&lt;/h2>
+&lt;p>Visit the HobbyFarm Admin UI at &lt;code>https://admin.{domain}.com&lt;/code> and login with the user created in Step 1. If configured correctly, the user should be logged in and have access to the HobbyFarm Admin UI and see the following page:&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-home.png" alt="HobbyFarm Admin Homepage">&lt;/p></description></item></channel></rss>
