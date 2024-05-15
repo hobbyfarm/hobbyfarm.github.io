@@ -14,6 +14,7 @@ HobbyFarm enables developers and engineers to execute hands-on training without 
 
 | Current Release | Release Date | Supported K8s Version |
 | :--- | :--- | :--- |
+| [hobbyfarm-3.1.0](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-3.1.0) | November 2023 | v1.28.x |
 | [hobbyfarm-3.0.1](https://github.com/hobbyfarm/hobbyfarm/releases/tag/hobbyfarm-3.0.1) | July 2023 | v1.25.x |
 
 ## Origin
