@@ -181,8 +181,8 @@ Unknown note type. Can be used for general boxes
 
 ## Quiz
 
-Users can take a quiz so check if they know it all or if they still lack some knowledge.
-The answeres are currently not stored and only checked in the frontend.
+Users can take a quiz to verify their knowledge.
+The answeres are currently not stored anywhere and only validated by the frontend.
 
 ```
 ~~~quiz:<title>:<retakes>
