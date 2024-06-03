@@ -525,8 +525,8 @@ Unknown note type. Can be used for general boxes
 all other values than the types state above will result in a grey highlighted box&lt;/li>
 &lt;/ul>
 &lt;h2 id="quiz">Quiz&lt;/h2>
-&lt;p>Users can take a quiz so check if they know it all or if they still lack some knowledge.
-The answeres are currently not stored and only checked in the frontend.&lt;/p>
+&lt;p>Users can take a quiz to verify their knowledge.
+The answeres are currently not stored anywhere and only validated by the frontend.&lt;/p>
 &lt;pre tabindex="0">&lt;code>~~~quiz:&amp;lt;title&amp;gt;:&amp;lt;retakes&amp;gt;
 -$title-: &amp;lt;title of question 1&amp;gt;
 -$info-: helper text (optional)
