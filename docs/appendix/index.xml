@@ -523,4 +523,86 @@ Unknown note type. Can be used for general boxes
 &lt;li>caution (Red)&lt;/li>
 &lt;li>task (Green)
 all other values than the types state above will result in a grey highlighted box&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;/ul>
+&lt;h2 id="quiz">Quiz&lt;/h2>
+&lt;p>Users can take a quiz so check if they know it all or if they still lack some knowledge.
+The answeres are currently not stored and only checked in the frontend.&lt;/p>
+&lt;pre tabindex="0">&lt;code>~~~quiz:&amp;lt;title&amp;gt;:&amp;lt;retakes&amp;gt;
+-$title-: &amp;lt;title of question 1&amp;gt;
+-$info-: helper text (optional)
+-$type-: &amp;lt;radio | checkbox (default)&amp;gt;
+-$validation-: &amp;lt;none | standard (default) | detailed&amp;gt;
+-$successMsg-: &amp;lt;msg (optional)&amp;gt;
+-$errorMsg-: &amp;lt;msg (optional)&amp;gt;
+- Answer that is correct!:(x)
+- Wrong Answer1!:()
+- Wrong Answer 2:()
+- Wrong Answer 3:()
+- [more here]
+---
+-$title-: &amp;lt;title of question 2&amp;gt;
+-$info-: helper text (optional)
+-$type-: checkbox
+-$validation-: &amp;lt;none | standard (default) | detailed&amp;gt;
+-$successMsg-: &amp;lt;msg (optional)&amp;gt;
+-$errorMsg-: &amp;lt;msg (optional)&amp;gt;
+- Answer that is correct!:(x)
+- Wrong Answer1!:()
+- Answer that is also correct!:(x)
+- [more here]
+---
+[more questions]
+~~~
+&lt;/code>&lt;/pre>&lt;p>Examples:
+The following quiz named &amp;ldquo;this is a quiz&amp;rdquo; has 3 retakes that the user can take&lt;/p>
+&lt;pre tabindex="0">&lt;code>```quiz:This is a quiz!:3
+-$title-: What is this?
+-$type-: radio
+-$validation-: standard
+- A Video!:()
+- A quiz!:(x)
+- C :()
+- D :()
+---
+-$title-: Multiple are correct here
+-$validation-: detailed
+- I am correct:(x)
+- Also Correct:(x)
+- Wrong!:()
+- Also wrong!:()
+- Right again:(x)
+- Also right:(x)
+---
+-$title-: Do you use hobbyfarm?
+-$info-: Wether you are already using hobbyfarm.
+-$type-: radio
+-$validation-: detailed
+-$successMsg-: Perfect!
+-$errorMsg-: What is standing in your way to do so? Message us!
+- Yes!:(x)
+- No!:()
+---
+-$title-: No Validation
+-$info-: You will not see the correct answer
+-$validation-: none
+- Yes!:(x)
+- No!:()
+```
+&lt;/code>&lt;/pre>&lt;h3 id="types-1">Types&lt;/h3>
+&lt;p>&lt;code>radio&lt;/code>: The user can check one answer&lt;/p>
+&lt;p>&lt;code>checkbox&lt;/code>: The user can check multiple answeres, even if only one is supposed to be correct. This is the default.&lt;/p>
+&lt;h3 id="validation">Validation&lt;/h3>
+&lt;p>&lt;code>none&lt;/code>: The user will not see if he answered correct or not.&lt;/p>
+&lt;p>&lt;code>standard&lt;/code>: The user will see if he answered correct or not after submitting. This is the default&lt;/p>
+&lt;p>&lt;code>detailed&lt;/code> the user will see the correct answeres after submitting.&lt;/p>
+&lt;h2 id="tasks">Tasks&lt;/h2>
+&lt;p>Tasks need to be defined in the scenario.
+To display the task inside the markdown content you can use the following syntax:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```verifyTask:&amp;lt;vm&amp;gt;:&amp;lt;name of task&amp;gt;
+```
+&lt;/code>&lt;/pre>&lt;p>Examples:&lt;/p>
+&lt;pre tabindex="0">&lt;code>```verifyTask:node1:Create a file
+```
+```verifyTask:node2:Delete the file
+```
+&lt;/code>&lt;/pre></description></item></channel></rss>
