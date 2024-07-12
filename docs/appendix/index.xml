@@ -367,16 +367,7 @@
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
-&lt;h3 id="adding-users">Adding Users&lt;/h3>
-&lt;p>Additional users can be added by adding a new entry to the &lt;code>users&lt;/code> list. The following example shows how to add a user named &lt;code>user1&lt;/code> with the password &lt;code>password1&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">users&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">admin&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">$2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">user1&lt;/span>:
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">enabled&lt;/span>: &lt;span style="color:#66d9ef">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">password&lt;/span>: &lt;span style="color:#ae81ff">$2a$12$DNBNq4TZarIdx.IaGjcdSOjKhubC0A4CpD5asd7dajgGJwjPROIlu&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="terraform">Terraform&lt;/h2>
+&lt;h2 id="terraform">Terraform&lt;/h2>
 &lt;blockquote>
 &lt;p>⚠️⚠️⚠️ Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.&lt;/p>
 &lt;/blockquote>
