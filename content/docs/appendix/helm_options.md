@@ -119,19 +119,6 @@ ui:
 | `users.admin.enabled` | `false` | Creates the user, `admin`. |
 | `users.admin.password` | `$2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe` | Bcrypt hashed password for the `admin` user. Default value is `Sup3r@dmin`. |
 
-### Adding Users
-Additional users can be added by adding a new entry to the `users` list. The following example shows how to add a user named `user1` with the password `password1`.
-
-```yaml
-users:
-  admin:
-    enabled: true
-    password: $2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe
-  user1:
-    enabled: true
-    password: $2a$12$DNBNq4TZarIdx.IaGjcdSOjKhubC0A4CpD5asd7dajgGJwjPROIlu
-```
-
 ## Terraform
 
 > :warning::warning::warning: Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.
