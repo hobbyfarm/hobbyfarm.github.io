@@ -227,7 +227,7 @@
 &lt;/tr>
 &lt;tr>
 &lt;td>&lt;a href="https://github.com/hobbyfarm/hf-provisioner-ec2">hf-provisioner-ec2&lt;/a>&lt;/td>
-&lt;td>&lt;code>aws&lt;/code>&lt;/td>
+&lt;td>&lt;code>aws-ec2&lt;/code>&lt;/td>
 &lt;td>WIP&lt;/td>
 &lt;td>A provisioner for AWS.&lt;/td>
 &lt;/tr>
