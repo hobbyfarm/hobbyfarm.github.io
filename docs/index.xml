@@ -166,7 +166,50 @@
 &lt;td>The amount of time, in hours, that a scheduled event will be retained in the Gargantua database. After this time, the scheduled event will be deleted from the database.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
-&lt;/table></description></item><item><title>Docs: Deployment</title><link>http://hobbyfarm.github.io/docs/installation/deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/deployment/</guid><description>
+&lt;/table></description></item><item><title>Docs: Costs</title><link>http://hobbyfarm.github.io/docs/configuration/costs/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/configuration/costs/</guid><description>
+&lt;p>HobbyFarm allows cost tracking for a group of resources, known as a cost group. By default, costs are tracked for Virtual Machines and can be defined for VM Templates in the Admin-UI, as explained in the &lt;a href="docs/configuration/vmtemplates">VM Template section&lt;/a>.&lt;/p>
+&lt;p>Cost tracking works natively for default Kubernetes resource, but it is also possible to track costs for other resources.&lt;/p>
+&lt;h2 id="track-costs-for-other-resources">Track costs for other resources&lt;/h2>
+&lt;p>To track costs for resources, the following rules must be followed:&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Rule:&lt;/strong> Cost tracking is only supported for resources within the same namespace where HobbyFarm is deployed.&lt;/p>
+&lt;p>&lt;strong>Rule:&lt;/strong> Cost tracking for a resource begins at its creation and ends upon its deletion.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="enable-cost-tracking-or-non-default-kubernetes-resources">Enable cost tracking or non default Kubernetes resources&lt;/h3>
+&lt;p>Adapt the &lt;code>values.yaml&lt;/code> in the helm chart and add your custom resource in the &lt;code>cost.trackableResources&lt;/code> list. Then deploy the helm chart.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>NOTE:&lt;/strong> Please visit the &lt;a href="http://hobbyfarm.github.io/docs/appendix/helm_options">Helm Options&lt;/a> page for more information.&lt;/p>
+&lt;/blockquote>
+&lt;p>Cost tracking works natively for default Kubernetes resources.&lt;/p>
+&lt;h3 id="tracking-costs-for-resources">Tracking costs for resources&lt;/h3>
+&lt;p>The tracking works by adding the following labels to your resource&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Label Name&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Example&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>hobbyfarm.io/cost-group&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The name of the cost group.&lt;/td>
+&lt;td>&lt;code>my-cost-group&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>hobbyfarm.io/cost-base-price&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The base price for the resource. The base price must be a valid floating-point number.&lt;/td>
+&lt;td>&lt;code>0.00324&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>hobbyfarm.io/cost-time-unit&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The optional time unit for the cost tracking. The time unit must be seconds, minutes or hours.&lt;/td>
+&lt;td>&lt;code>seconds&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>When a resource with the required labels is created, a corresponding Cost resource is generated, including the &lt;code>creation_unix_timestamp&lt;/code> property. Upon deletion of the resource, the Cost resource is updated to include the &lt;code>deletion_unix_timestamp&lt;/code> property.&lt;/p></description></item><item><title>Docs: Deployment</title><link>http://hobbyfarm.github.io/docs/installation/deployment/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/installation/deployment/</guid><description>
 &lt;p>The following steps will guide you through the deployment of HobbyFarm in a Kubernetes environment using Helm. Please ensure that all &lt;a href="http://hobbyfarm.github.io/docs/setup/prerequisites">prerequisites&lt;/a> are met before proceeding with the installation. Failure to do so may result in an unsuccessful installation.&lt;/p>
 &lt;h2 id="step-1-add-helm-repository">Step 1: Add Helm Repository&lt;/h2>
 &lt;p>Using Helm, add the HobbyFarm repository and generate a values.yaml file for customization.&lt;/p>
@@ -317,6 +360,28 @@
 &lt;blockquote>
 &lt;p>&lt;strong>NOTE:&lt;/strong> Please visit the &lt;a href="http://hobbyfarm.github.io/docs/appendix/provider_images">Provider Images&lt;/a> page for more information on provider images and how to find an image for a specific provider.&lt;/p>
 &lt;/blockquote>
+&lt;h3 id="cost">&lt;code>Cost&lt;/code>&lt;/h3>
+&lt;p>The &lt;code>Cost&lt;/code> section of the form is used to enable cost tracking for the VM Template.&lt;/p>
+&lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-vmtemplate-cost.png" alt="VM Template - Cost">&lt;/p>
+&lt;h4 id="variables-1">Variables&lt;/h4>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Setting&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Base Price&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The optional base price of the VM Template. The base price must be a valid floating-point number.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>&lt;em>Image&lt;/em>&lt;/strong>&lt;/td>
+&lt;td>The optional time unit for the cost tracking. The time unit must be seconds, minutes or hours.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
 &lt;h3 id="config-map">&lt;code>Config Map&lt;/code>&lt;/h3>
 &lt;p>The &lt;code>Config Map&lt;/code> section of the form is used to provide configuration information for the VM Template. Variables are passed in a key/value format, where the key is the name of the variable and the value is the value of the variable.&lt;/p>
 &lt;p>&lt;img src="http://hobbyfarm.github.io/images/hobbyfarm-admin-vmtemplate-configmap.png" alt="VM Template - Config Map">&lt;/p>
@@ -601,7 +666,66 @@
 &lt;li>Mounts the external volumes for &lt;a href="https://kubernetes.io/docs/concepts/security/service-accounts/">Kubernetes Service Account&lt;/a> credentials called &lt;code>hobbyfarm-kube-sa&lt;/code>.&lt;/li>
 &lt;li>Calls &lt;code>docker-compose up&lt;/code> which starts the &lt;code>hf-garg&lt;/code> container, listening on &lt;code>localhost:16210&lt;/code>.&lt;/li>
 &lt;li>The &lt;code>hf-garg&lt;/code> container runs a watch loop on Golang files, rebuilds on detected changes.&lt;/li>
-&lt;/ul></description></item><item><title>Docs: Course</title><link>http://hobbyfarm.github.io/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/course/</guid><description>
+&lt;/ul></description></item><item><title>Docs: Cost</title><link>http://hobbyfarm.github.io/docs/architecture/resources/cost/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/cost/</guid><description>
+&lt;p>The &lt;code>Cost&lt;/code> resource in HobbyFarm tracks resource cost for one or more kubernetes resources. A single entity represents a cost group.&lt;/p>
+&lt;h2 id="kubernetes-commands">Kubernetes Commands&lt;/h2>
+&lt;p>The following commands are useful for managing Cost resources in Kubernetes.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Get a list of all Costs&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl get costs -n hobbyfarm-system
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">## Delete a Cost&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>kubectl delete cost &lt;span style="color:#f92672">{&lt;/span>costName&lt;span style="color:#f92672">}&lt;/span> -n hobbyfarm-system
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="example-cost-manifest">Example Cost Manifest&lt;/h2>
+&lt;p>The following is an example of a Cost resource in Kubernetes.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Cost group with one resource which is still running.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Cost&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">test-cost-group&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cost_group&lt;/span>: &lt;span style="color:#ae81ff">test-cost-group&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">base_price&lt;/span>: &lt;span style="color:#ae81ff">0.001&lt;/span> &lt;span style="color:#75715e"># float64&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">creation_unix_timestamp&lt;/span>: &lt;span style="color:#ae81ff">1735899136&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">vm-neuc2clllz&lt;/span> &lt;span style="color:#75715e"># references the resource ID&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">VirtualMachine&lt;/span> &lt;span style="color:#75715e"># references the resource kind&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">time_unit&lt;/span>: &lt;span style="color:#ae81ff">hours&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># Cost group with one resource which is terminated.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">apiVersion&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm.io/v1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">Cost&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">metadata&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">name&lt;/span>: &lt;span style="color:#ae81ff">test-cost-group&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">namespace&lt;/span>: &lt;span style="color:#ae81ff">hobbyfarm-system&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">spec&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">cost_group&lt;/span>: &lt;span style="color:#ae81ff">test-cost-group&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">resources&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> - &lt;span style="color:#f92672">base_price&lt;/span>: &lt;span style="color:#ae81ff">0.001&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">creation_unix_timestamp&lt;/span>: &lt;span style="color:#ae81ff">1735899136&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">deletion_unix_timestamp&lt;/span>: &lt;span style="color:#ae81ff">1735899999&lt;/span> &lt;span style="color:#75715e"># deletion timestamp set&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">id&lt;/span>: &lt;span style="color:#ae81ff">vm-neuc2clllz&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">kind&lt;/span>: &lt;span style="color:#ae81ff">VirtualMachine&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">time_unit&lt;/span>: &lt;span style="color:#ae81ff">hours&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="configuration">Configuration&lt;/h2>
+&lt;h3 id="cost_group">&lt;code>cost_group&lt;/code>&lt;/h3>
+&lt;p>Represents the unique identifier for a cost group.&lt;/p>
+&lt;h3 id="resources">&lt;code>resources&lt;/code>&lt;/h3>
+&lt;p>A list of resources that are incurring or will incur costs within this cost group.&lt;/p>
+&lt;h4 id="base_price">&lt;code>base_price&lt;/code>&lt;/h4>
+&lt;p>A floating-point value representing the base cost of a resource. This cost is applied for each defined time_unit.&lt;/p>
+&lt;h4 id="creation_unix_timestamp">&lt;code>creation_unix_timestamp&lt;/code>&lt;/h4>
+&lt;p>Records the creation time of a resource as a unix timestamp.&lt;/p>
+&lt;h4 id="deletion_unix_timestamp">&lt;code>deletion_unix_timestamp&lt;/code>&lt;/h4>
+&lt;p>Indicates the deletion time of a resource as a Unix timestamp. If not provided, the resource is considered running.&lt;/p>
+&lt;h4 id="id">&lt;code>id&lt;/code>&lt;/h4>
+&lt;p>A unique identifier for the tracked resource.&lt;/p>
+&lt;h4 id="kind">&lt;code>kind&lt;/code>&lt;/h4>
+&lt;p>Specifies the kind of the tracked resource.&lt;/p>
+&lt;h4 id="time_unit">&lt;code>time_unit&lt;/code>&lt;/h4>
+&lt;p>Defines the unit of time (seconds, minutes, or hours) used for cost calculation. The base_price is applied at each interval of the specified time_unit.&lt;/p></description></item><item><title>Docs: Course</title><link>http://hobbyfarm.github.io/docs/architecture/resources/course/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hobbyfarm.github.io/docs/architecture/resources/course/</guid><description>
 &lt;p>A &lt;code>Course&lt;/code> is useful in situations where a trainer wants to group related learnings together or provide a day&amp;rsquo;s worth of curriculum to students who can retain their VMs from scenario to scenario.&lt;/p>
 &lt;p>The Course resource is used to populate content in the HobbyFarm Admin-UI Content Management &amp;gt; Courses page. Modifying a Course resource in Kubernetes will modify the information in the Admin-UI.&lt;/p>
 &lt;h2 id="kubernetes-commands">Kubernetes Commands&lt;/h2>
@@ -1189,6 +1313,38 @@
 &lt;td>&lt;code>users.admin.password&lt;/code>&lt;/td>
 &lt;td>&lt;code>$2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe&lt;/code>&lt;/td>
 &lt;td>Bcrypt hashed password for the &lt;code>admin&lt;/code> user. Default value is &lt;code>Sup3r@dmin&lt;/code>.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="cost">Cost&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Key&lt;/th>
+&lt;th>Default&lt;/th>
+&lt;th>Purpose&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;code>cost.image&lt;/code>&lt;/td>
+&lt;td>&lt;code>hobbyfarm/cost-service:[version]&lt;/code>&lt;/td>
+&lt;td>Image used for the cost service.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>cost.logLevel&lt;/code>&lt;/td>
+&lt;td>&lt;code>&amp;quot;0&amp;quot;&lt;/code>&lt;/td>
+&lt;td>Log level of the cost service.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>cost.apiPort&lt;/code>&lt;/td>
+&lt;td>&lt;code>80&lt;/code>&lt;/td>
+&lt;td>The port on which Cost API should be served.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>cost.trackableResources&lt;/code>&lt;/td>
+&lt;td>&lt;code>virtualmachines.hobbyfarm.io&lt;/code>&lt;/td>
+&lt;td>List of all non default kubernetes resources for cost tracking.&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
