@@ -27,6 +27,19 @@ The `Basic Information` section of the form is used to provide basic information
 
 > **NOTE:** Please visit the [Provider Images](/docs/appendix/provider_images) page for more information on provider images and how to find an image for a specific provider.
 
+### `Cost`
+
+The `Cost` section of the form is used to enable cost tracking for the VM Template.
+
+![VM Template - Cost](/images/hobbyfarm-admin-vmtemplate-cost.png)
+
+#### Variables
+
+| Setting          | Description                                                                                       |
+|------------------|---------------------------------------------------------------------------------------------------|
+| **_Base Price_** | The optional base price of the VM Template. The base price must be a valid floating-point number. |
+| **_Image_**      | The optional time unit for the cost tracking. The time unit must be seconds, minutes or hours.    |
+
 ### `Config Map`
 
 The `Config Map` section of the form is used to provide configuration information for the VM Template. Variables are passed in a key/value format, where the key is the name of the variable and the value is the value of the variable.

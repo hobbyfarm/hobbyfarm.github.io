@@ -119,6 +119,15 @@ ui:
 | `users.admin.enabled` | `false` | Creates the user, `admin`. |
 | `users.admin.password` | `$2a$10$9ToKMT37Z7K70xbCVnW9KOzEuPq0JyW/rA06gsukD4U9YfKFjMXTe` | Bcrypt hashed password for the `admin` user. Default value is `Sup3r@dmin`. |
 
+## Cost
+
+| Key                       | Default                            | Purpose                                                         |
+|---------------------------|------------------------------------|-----------------------------------------------------------------|
+| `cost.image`              | `hobbyfarm/cost-service:[version]` | Image used for the cost service.                                |
+| `cost.logLevel`           | `"0"`                              | Log level of the cost service.                                  |
+| `cost.apiPort`            | `80`                               | The port on which Cost API should be served.                    |
+| `cost.trackableResources` | `virtualmachines.hobbyfarm.io`     | List of all non default kubernetes resources for cost tracking. |
+
 ## Terraform
 
 > :warning::warning::warning: Terraform will be removed in a future version. It is NOT recommended to use Terraform as there are compatibility, instability and performance issues.
